@@ -1,0 +1,661 @@
+= Kurrier User Stories: Dependencies & Implementation Sequencing
+:toc:
+:toclevels: 3
+:sectnums:
+:doctype: article
+:icons: font
+
+<<<
+== Overview
+
+This document maps dependencies between user stories and defines the logical implementation sequence for the Kurrier interactive demo. Understanding these dependencies is critical for:
+
+* **Sprint planning:** Knowing which stories must be completed before others
+* **Parallel development:** Identifying stories that can be built simultaneously
+* **Integration testing:** Understanding critical handoff points between features
+* **Risk management:** Spotting long-pole dependencies early
+
+<<<
+== Dependency Types
+
+=== Hard Dependencies (Blockers)
+
+Story B **cannot be implemented** until Story A is complete.
+
+**Example:** C-E2-03 (Enter dimensions) → C-E3-01 (View quotes)
+
+The quote generation requires dimension data, so quotes cannot be shown until parcel details are entered.
+
+=== Soft Dependencies (Logical Flow)
+
+Stories work better when implemented in sequence, but no technical blocker exists.
+
+**Example:** C-E2-03 (Manual dimensions) → C-E2-05 (AR measurement)
+
+AR measurement is enhanced if manual entry exists as fallback, but could theoretically be built independently.
+
+=== Cross-Actor Dependencies
+
+Consumer story requires corresponding Driver story (or vice versa).
+
+**Example:** C-E4-03 (Booking confirmed) → D-E8-02 (Job appears in driver list)
+
+Consumer booking creates driver job opportunity - these must integrate.
+
+=== Data Dependencies
+
+Story requires data/state created by another story.
+
+**Example:** C-E6-02 (View invoice) → D-E9-05 (Job completed)
+
+Invoice can only be generated after job completion triggers the invoice creation process.
+
+<<<
+== Implementation Layers
+
+Stories are organized into 6 dependency layers that define the logical build sequence:
+
+=== Layer 1: Foundation (No Dependencies)
+
+**Description:** Authentication, onboarding, and basic navigation. Entry points to both apps.
+
+**Characteristics:**
+- Can be developed first
+- No dependencies on other stories
+- Consumer and Driver flows can be built in parallel
+- Essential for accessing any other features
+
+**Consumer Stories:**
+- C-E1-01: Sign in with Phone/Email + OTP
+- C-E1-02: Location permission request
+
+**Driver Stories:**
+- D-E7-01: Driver sign in with OTP
+
+**Total:** 3 stories
+
+**Implementation Notes:**
+- Start here in Sprint 1
+- Both consumer and driver auth can be built simultaneously by different developers
+- Use shared authentication service/pattern for consistency
+
+---
+
+=== Layer 2: Data Entry (Depends on Layer 1)
+
+**Description:** Form inputs and data collection that create core entities.
+
+**Characteristics:**
+- Requires authentication (Layer 1) to access
+- Creates data needed by business logic (Layer 3)
+- Mostly independent within this layer
+- Can be built in parallel
+
+**Consumer Stories:**
+- C-E1-03: Profile setup (soft dependency on C-E1-01)
+- C-E2-01: Enter pickup address (requires C-E1-01, optionally C-E1-02)
+- C-E2-02: Enter recipient address (requires C-E2-01)
+- C-E2-03: Enter parcel dimensions (requires C-E2-02)
+- C-E2-04: Enter parcel weight (requires C-E2-03)
+- C-E2-06: Add pickup notes (optional, requires C-E2-01)
+
+**Driver Stories:**
+- D-E7-02: Upload verification documents (requires D-E7-01)
+- D-E8-01: Go online/offline toggle (requires D-E7-01)
+
+**Total:** 8 stories
+
+**Implementation Notes:**
+- Build address entry (C-E2-01, C-E2-02) early - critical path
+- Parcel details (C-E2-03, C-E2-04) must precede quote generation
+- Driver onboarding (D-E7-02) can be stubbed or skipped for demo
+
+---
+
+=== Layer 3: Business Logic (Depends on Layer 2)
+
+**Description:** Processing, calculation, matching, and selection logic.
+
+**Characteristics:**
+- Requires data from Layer 2
+- Performs calculations and decision-making
+- Prepares options for user selection
+- Contains core value proposition
+
+**Consumer Stories:**
+- C-E3-01: View multi-carrier service options (requires C-E2-01, C-E2-02, C-E2-03, C-E2-04)
+- C-E3-02: View price breakdown (requires C-E3-01)
+- C-E3-04: Add insurance (optional, requires C-E3-01)
+
+**Driver Stories:**
+- D-E8-02: View available jobs list (requires D-E8-01, C-E4-03)
+- D-E8-03: View job details (requires D-E8-02)
+
+**Total:** 5 stories
+
+**Implementation Notes:**
+- **Quote generation (C-E3-01) is the "wow" moment** - prioritize quality here
+- Driver job matching (D-E8-02) requires consumer bookings (C-E4-03) to exist first
+- Job matching algorithm is key integration point
+
+---
+
+=== Layer 4: Transactions (Depends on Layer 3)
+
+**Description:** Commitment actions that trigger downstream effects and state changes.
+
+**Characteristics:**
+- Requires selections from Layer 3
+- Creates permanent records (bookings, job assignments)
+- Triggers notifications and integrations
+- Point of no return (commitment made)
+
+**Consumer Stories:**
+- C-E3-03: Select service (requires C-E3-01)
+- C-E4-01: Select payment method (requires C-E3-03)
+- C-E4-02: Complete payment transaction (requires C-E4-01)
+- C-E4-03: View booking confirmation (requires C-E4-02)
+
+**Driver Stories:**
+- D-E8-04: Accept job (requires D-E8-03)
+
+**Total:** 5 stories
+
+**Implementation Notes:**
+- **C-E4-03 (Booking confirmed) → D-E8-02 (Job created) is CRITICAL INTEGRATION**
+- **D-E8-04 (Job accepted) → C-E5-02 (Driver location visible) is CRITICAL INTEGRATION**
+- Payment processing must create booking record atomically
+- Job acceptance must update both consumer and driver apps in real-time
+
+---
+
+=== Layer 5: Fulfillment (Depends on Layer 4)
+
+**Description:** Real-time tracking, navigation, and physical execution of the service.
+
+**Characteristics:**
+- Requires committed transactions (Layer 4)
+- Heavy real-time updates and location tracking
+- Most visible integration between consumer and driver apps
+- Defines user experience quality
+
+**Consumer Stories:**
+- C-E5-01: View shipment timeline with status (requires C-E4-03)
+- C-E5-02: View live driver location on map (requires D-E8-04, C-E1-02)
+- C-E5-03: View driver card with details (requires D-E8-04)
+- C-E5-04: Contact driver (masked) (requires C-E5-03)
+
+**Driver Stories:**
+- D-E9-01: Navigate to pickup location (requires D-E8-04)
+- D-E9-02: Mark arrived at pickup (requires D-E9-01)
+- D-E9-03: Scan Kurrier ID at pickup (requires D-E9-02)
+- D-E9-04: Navigate to hub (requires D-E9-03)
+- D-E9-05: Scan at hub and mark complete (requires D-E9-04)
+- D-E9-06: Capture pickup and drop-off photos (optional, requires D-E9-03 or D-E9-04)
+
+**Total:** 10 stories
+
+**Implementation Notes:**
+- **This layer has the most cross-actor integrations**
+- Every driver action (D-E9-02, D-E9-03, D-E9-05) updates consumer timeline (C-E5-01)
+- Real-time location streaming from driver (D-E9-01) to consumer (C-E5-02)
+- Must implement robust state management and event handling
+- **Plan Sprint 4 entirely around this layer - it's integration-heavy**
+
+---
+
+=== Layer 6: Post-Transaction (Depends on Layer 5)
+
+**Description:** History, receipts, reporting, and retrospective features.
+
+**Characteristics:**
+- Requires completed transactions/jobs
+- Read-only views of historical data
+- Not blocking for core flow
+- Important for user retention and accounting
+
+**Consumer Stories:**
+- C-E4-04: Generate shipping label (requires C-E4-03)
+- C-E6-01: View past shipments list (requires at least one completed C-E4-03)
+- C-E6-02: View and download invoice (requires D-E9-05)
+- C-E6-03: View rewards balance (optional, requires completed shipments)
+
+**Driver Stories:**
+- D-E10-01: View earnings dashboard (requires D-E9-05)
+- D-E10-02: View quality metrics and ratings (requires multiple completed D-E9-05)
+
+**Total:** 6 stories
+
+**Implementation Notes:**
+- All stories in this layer are enhancement (Should Have or Could Have)
+- Can be deferred to Sprint 5 or later
+- Invoice generation (C-E6-02) may be prioritized for business users
+
+<<<
+== Critical Integration Points
+
+These are the key handoffs where consumer and driver apps must synchronize:
+
+=== Integration Point #1: Booking → Job Creation
+
+**Consumer Side:** C-E4-03 (View booking confirmation)
+
+**Driver Side:** D-E8-02 (Job appears in available jobs list)
+
+**System Behavior:**
+1. Consumer completes payment (C-E4-02)
+2. System creates booking record with Kurrier ID
+3. System creates job record in driver pool
+4. Job appears in all online drivers' job lists (D-E8-02)
+5. Consumer sees booking confirmation (C-E4-03)
+
+**Data Flow:**
+```
+Consumer Payment → Booking Record → Job Record → Driver Job List
+```
+
+**Implementation Requirements:**
+- Atomic transaction: booking and job creation must both succeed or both fail
+- Job matching algorithm: location-based driver pool selection
+- Real-time job list updates for drivers
+
+**Testing:**
+- Book shipment → verify job appears in driver app
+- Multiple drivers online → all see the job
+- Job disappears when one driver accepts
+
+---
+
+=== Integration Point #2: Job Acceptance → Driver Assignment
+
+**Driver Side:** D-E8-04 (Accept job)
+
+**Consumer Side:** C-E5-02 (Driver location visible), C-E5-03 (Driver card shown)
+
+**System Behavior:**
+1. Driver taps "Accept Job" (D-E8-04)
+2. System assigns job to driver (first-come, first-served)
+3. Job removed from other drivers' lists
+4. Driver location sharing begins
+5. Consumer sees driver assigned notification
+6. Consumer tracking screen updates with driver info (C-E5-03) and live map (C-E5-02)
+7. Consumer timeline updates (C-E5-01): "Driver assigned"
+
+**Data Flow:**
+```
+Driver Accept → Job Assignment → Location Sharing Start → Consumer Tracking Update
+```
+
+**Implementation Requirements:**
+- Race condition handling (two drivers accept simultaneously)
+- Driver location stream initialization
+- Consumer real-time notification
+- Driver profile data fetch for driver card
+
+**Testing:**
+- Accept job → verify immediate assignment
+- Two drivers attempt accept → only one succeeds
+- Consumer sees driver info within 2 seconds
+- Live location starts updating on consumer map
+
+---
+
+=== Integration Point #3: Pickup Scan → Timeline Update
+
+**Driver Side:** D-E9-03 (Scan Kurrier ID)
+
+**Consumer Side:** C-E5-01 (Timeline: "Picked up")
+
+**System Behavior:**
+1. Driver scans parcel QR code (D-E9-03)
+2. System verifies Kurrier ID matches assigned job
+3. Shipment status changes to "Picked up"
+4. Optional: Photo captured (D-E9-06)
+5. Consumer timeline updates (C-E5-01): "Your parcel has been picked up" with timestamp and photo
+6. Consumer receives push notification
+
+**Data Flow:**
+```
+Driver Scan → Status Update → Consumer Timeline Event → Push Notification
+```
+
+**Implementation Requirements:**
+- QR code scanning and verification
+- Status state machine transition
+- Real-time timeline event creation
+- Photo upload and attachment (if included)
+
+**Testing:**
+- Scan parcel → consumer timeline updates immediately
+- Wrong Kurrier ID scanned → error shown to driver
+- Photo appears in consumer timeline if captured
+
+---
+
+=== Integration Point #4: Hub Drop-off → Completion
+
+**Driver Side:** D-E9-05 (Scan at hub and mark complete)
+
+**Consumer Side:** C-E5-01 (Timeline: "At Hub"), C-E6-02 (Invoice generated)
+
+**System Behavior:**
+1. Driver scans hub intake code (D-E9-05)
+2. System verifies correct hub for selected carrier
+3. Job marked complete, shipment status → "At Hub"
+4. Driver earnings credited (D-E10-01 updates)
+5. Invoice generated for consumer (C-E6-02)
+6. Consumer timeline updates (C-E5-01): "At Hub - Handed to [Carrier]"
+7. Consumer receives completion notification
+8. Optional: Drop-off photo attached
+
+**Data Flow:**
+```
+Hub Scan → Job Complete → Earnings Credit + Invoice Generation → Consumer Final Status
+```
+
+**Implementation Requirements:**
+- Hub code verification
+- Job completion triggers multiple downstream actions
+- Invoice PDF generation
+- Earnings calculation and crediting
+
+**Testing:**
+- Complete hub scan → job marked complete
+- Consumer invoice immediately available
+- Driver earnings updated
+- Final timeline event with carrier handoff message
+
+<<<
+== Implementation Sequence Recommendations
+
+=== Sprint 1: Foundation (Week 1)
+
+**Goal:** Establish authentication, navigation, and basic data entry
+
+**Stories:**
+- Layer 1: C-E1-01, C-E1-02, D-E7-01 (3 stories)
+- Layer 2 (partial): C-E2-01, C-E2-02 (2 stories)
+
+**Deliverable:** Users can sign in to both apps, grant permissions, enter addresses
+
+**Total:** 5 stories (all Must Have)
+
+---
+
+=== Sprint 2: Core Flow - Consumer Booking (Week 2)
+
+**Goal:** Complete consumer booking journey end-to-end
+
+**Stories:**
+- Layer 2 (remaining): C-E2-03, C-E2-04 (2 stories)
+- Layer 3: C-E3-01, C-E3-02 (2 stories)
+- Layer 4: C-E3-03, C-E4-01, C-E4-02, C-E4-03 (4 stories)
+
+**Deliverable:** Consumer can create booking, get quotes, pay, receive confirmation
+
+**Total:** 8 stories (all Must Have)
+
+---
+
+=== Sprint 3: Core Flow - Driver Fulfillment (Week 3)
+
+**Goal:** Complete driver job acceptance and fulfillment journey
+
+**Stories:**
+- Layer 2: D-E8-01 (1 story)
+- Layer 3: D-E8-02, D-E8-03 (2 stories)
+- Layer 4: D-E8-04 (1 story)
+- Layer 5: D-E9-01, D-E9-02, D-E9-03, D-E9-04, D-E9-05 (5 stories)
+
+**Deliverable:** Driver can accept job, navigate, scan parcel, complete hub drop-off
+
+**Total:** 9 stories (all Must Have)
+
+---
+
+=== Sprint 4: Integration & Tracking (Week 4)
+
+**Goal:** Connect both apps with real-time updates and complete Golden Path
+
+**Stories:**
+- Layer 5: C-E5-01, C-E5-02, C-E5-03 (3 stories)
+- Integration work: Connect all 4 critical integration points
+- Demo orchestration and state synchronization
+
+**Deliverable:** Complete Golden Path demo works end-to-end with real-time integration
+
+**Total:** 3 stories + integration testing
+
+**Critical:** This sprint is integration-heavy. Plan extra time for debugging cross-app communication.
+
+---
+
+=== Sprint 5: Polish & Enhancement (Week 5)
+
+**Goal:** Add Should-Have features for realistic, polished demo
+
+**Stories:**
+- Should Have features from all epics:
+  - C-E1-03: Profile setup
+  - C-E2-05: AR measurement
+  - C-E2-06: Pickup notes
+  - C-E3-04: Insurance toggle
+  - C-E4-04: Label generation
+  - C-E5-04: Contact driver
+  - C-E6-01, C-E6-02: History and invoices
+  - D-E7-02: Document upload
+  - D-E9-06: Photo capture
+  - D-E10-01: Earnings dashboard
+
+**Deliverable:** Enhanced demo (Phase 2) with 37 total stories
+
+**Total:** 12 Should-Have stories
+
+<<<
+== Parallel Development Opportunities
+
+=== Consumer vs. Driver Flows (Sprints 1-3)
+
+**Parallel Track A:** Consumer booking flow (Layers 1-4, Consumer side)
+
+**Parallel Track B:** Driver fulfillment flow (Layers 1-4, Driver side)
+
+These can be developed simultaneously until Sprint 4 integration.
+
+**Coordination Points:**
+- Shared authentication pattern (Layer 1)
+- Booking record schema (integration point #1)
+- Job record schema (integration point #1)
+
+---
+
+=== Within Consumer Flow
+
+Can be built in parallel:
+
+**Team A:**
+- Address entry (C-E2-01, C-E2-02)
+- Parcel details (C-E2-03, C-E2-04)
+
+**Team B:**
+- Quote display (C-E3-01, C-E3-02)
+- Payment flow (C-E4-01, C-E4-02, C-E4-03)
+
+---
+
+=== Within Driver Flow
+
+Can be built in parallel:
+
+**Team A:**
+- Job discovery (D-E8-01, D-E8-02, D-E8-03, D-E8-04)
+
+**Team B:**
+- Navigation and fulfillment screens (D-E9-01, D-E9-02, D-E9-03, D-E9-04, D-E9-05)
+
+Note: Integration must happen before testing.
+
+<<<
+== Risk Management
+
+=== Long-Pole Dependencies
+
+**Risk:** Some stories have long dependency chains that could delay completion.
+
+**Example Chain:**
+C-E1-01 → C-E2-01 → C-E2-02 → C-E2-03 → C-E2-04 → C-E3-01 → C-E3-03 → C-E4-01 → C-E4-02 → C-E4-03 → D-E8-02
+
+This is 11 stories in sequence just to create a driver job!
+
+**Mitigation:**
+- Start consumer booking flow earliest (Sprint 1-2)
+- Use mocked data to unblock downstream development
+- Create API contracts early so teams can develop against mocks
+
+---
+
+=== Integration Complexity
+
+**Risk:** Integration points (#1-4) are complex and could have bugs.
+
+**Mitigation:**
+- Dedicate entire Sprint 4 to integration
+- Create integration test scenarios for each point
+- Use API seams to test consumer/driver independently before integration
+- Build manual testing scripts for each integration point
+
+---
+
+=== Real-Time Updates
+
+**Risk:** Real-time location and status updates may not work smoothly.
+
+**Mitigation:**
+- For demo, consider pre-choreographed updates instead of fully real-time
+- Use polling as fallback if websockets fail
+- Test on actual devices, not just simulators
+- Have fallback demo mode with manual triggers for status updates
+
+<<<
+== Dependency Visualization
+
+=== Consumer Booking Flow Dependencies
+
+```
+C-E1-01 (Sign in)
+    ↓
+C-E1-02 (Location permission)
+    ↓
+C-E2-01 (Pickup address) ← - - - C-E1-03 (Profile - saved address)
+    ↓
+C-E2-02 (Recipient address)
+    ↓
+C-E2-03 (Dimensions) ← - - - C-E2-05 (AR measurement alternative)
+    ↓
+C-E2-04 (Weight)
+    ↓
+C-E3-01 (View quotes)
+    ↓
+C-E3-02 (Price breakdown)
+    ↓
+C-E3-03 (Select service) ← - - - C-E3-04 (Insurance optional)
+    ↓
+C-E4-01 (Payment method)
+    ↓
+C-E4-02 (Process payment)
+    ↓
+C-E4-03 (Confirmation) ━━━━━━━━━> D-E8-02 (Job created)
+    ↓
+C-E5-01 (Timeline)
+C-E5-02 (Live map) ← ← ← ← D-E8-04 (Driver accepts)
+C-E5-03 (Driver card)
+```
+
+---
+
+=== Driver Fulfillment Flow Dependencies
+
+```
+D-E7-01 (Sign in)
+    ↓
+D-E7-02 (Docs upload - optional)
+    ↓
+D-E8-01 (Go online)
+    ↓
+D-E8-02 (View jobs) ← ← ← ← C-E4-03 (Consumer booking)
+    ↓
+D-E8-03 (Job details)
+    ↓
+D-E8-04 (Accept job) ━━━━━━━━━> C-E5-02, C-E5-03 (Consumer sees driver)
+    ↓
+D-E9-01 (Navigate to pickup)
+    ↓
+D-E9-02 (Mark arrived) ━━━━━━━━━> C-E5-01 (Timeline update)
+    ↓
+D-E9-03 (Scan parcel) ━━━━━━━━━> C-E5-01 (Timeline update)
+    ↓
+D-E9-04 (Navigate to hub)
+    ↓
+D-E9-05 (Complete) ━━━━━━━━━> C-E5-01, C-E6-02 (Final status, invoice)
+    ↓
+D-E10-01 (Earnings)
+```
+
+Legend:
+- `↓` = Hard dependency (must be sequential)
+- `← - - -` = Soft dependency (optional enhancement)
+- `━━━>` = Cross-actor integration point
+
+<<<
+== Appendix: Complete Dependency Matrix
+
+.Story Dependencies Reference Table
+[%header, cols="^2,<3,<5"]
+|===
+^| Story ID ^| Story Name ^| Dependencies (Requires)
+
+| C-E1-01 | Sign in with OTP | None (entry point)
+| C-E1-02 | Location permission | C-E1-01
+| C-E1-03 | Profile setup | C-E1-01
+| C-E1-04 | Business profile toggle | C-E1-03 or settings
+| C-E2-01 | Enter pickup address | C-E1-01 (auth), optional C-E1-02 (location)
+| C-E2-02 | Enter recipient address | C-E2-01
+| C-E2-03 | Enter dimensions (manual) | C-E2-02
+| C-E2-04 | Enter weight | C-E2-03
+| C-E2-05 | AR measurement | C-E2-02, Camera permission
+| C-E2-06 | Add pickup notes | C-E2-01
+| C-E2-07 | Capture parcel photos | C-E2-03/C-E2-04, Camera permission
+| C-E2-08 | Select delivery type | C-E2-02
+| C-E3-01 | View multi-carrier quotes | C-E2-01, C-E2-02, C-E2-03, C-E2-04
+| C-E3-02 | View price breakdown | C-E3-01
+| C-E3-03 | Select service | C-E3-01
+| C-E3-04 | Add insurance | C-E3-01
+| C-E3-05 | Filter/sort quotes | C-E3-01
+| C-E4-01 | Select payment method | C-E3-03
+| C-E4-02 | Complete payment | C-E4-01
+| C-E4-03 | View booking confirmation | C-E4-02
+| C-E4-04 | Generate label | C-E4-03
+| C-E5-01 | View shipment timeline | C-E4-03
+| C-E5-02 | View live driver location | D-E8-04, C-E1-02
+| C-E5-03 | View driver card | D-E8-04
+| C-E5-04 | Contact driver | C-E5-03
+| C-E5-05 | Refresh tracking | C-E5-01
+| C-E6-01 | View past shipments | At least one C-E4-03 completed
+| C-E6-02 | View/download invoice | D-E9-05 (job complete)
+| C-E6-03 | View rewards balance | User account, completed shipments
+| D-E7-01 | Driver sign in | None (entry point)
+| D-E7-02 | Upload documents | D-E7-01
+| D-E7-03 | View background check status | D-E7-01
+| D-E8-01 | Go online/offline | D-E7-01 (approved driver)
+| D-E8-02 | View available jobs | D-E8-01 (online), C-E4-03 (jobs exist)
+| D-E8-03 | View job details | D-E8-02
+| D-E8-04 | Accept job | D-E8-03
+| D-E9-01 | Navigate to pickup | D-E8-04
+| D-E9-02 | Mark arrived | D-E9-01
+| D-E9-03 | Scan parcel | D-E9-02
+| D-E9-04 | Navigate to hub | D-E9-03
+| D-E9-05 | Hub scan and complete | D-E9-04
+| D-E9-06 | Capture photos | D-E9-03 (pickup) or D-E9-04 (hub)
+| D-E10-01 | View earnings | D-E9-05 (completed jobs)
+| D-E10-02 | View quality metrics | Multiple D-E9-05 completed
+|===

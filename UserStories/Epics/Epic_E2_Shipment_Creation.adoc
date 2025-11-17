@@ -1,0 +1,408 @@
+= Epic E2: Shipment Creation & Booking
+:toc:
+:toclevels: 2
+:sectnums:
+:doctype: article
+:icons: font
+:numbered:
+:pagenums:
+:reproducible:
+
+<<<
+== Epic Overview
+
+**Epic ID:** E2 +
+**Epic Name:** Shipment Creation & Booking +
+**Actor:** Consumer +
+**Brief Reference:** Section 4.1.2 (Create Shipment) +
+**Priority:** Must Have (core booking flow) +
+**Story Count:** 8 (M: 4, S: 2, C: 2)
+
+**Epic Goal:**
+
+Enable consumers to create a shipment by specifying pickup and delivery addresses, providing parcel dimensions and weight, so that the system can generate accurate shipping quotes from multiple carriers.
+
+**Value Proposition:**
+
+This epic represents the core value proposition of Kurrier - making it easy to book a parcel pickup with accurate information. The address entry, parcel measurement, and data validation must be intuitive and fast, as this is where most users will spend time during the booking process. The demo must show both the ease of basic data entry and the innovative AR measurement feature.
+
+**Success Criteria:**
+
+- [ ] Consumer can specify pickup address with autocomplete and map confirmation
+- [ ] Consumer can specify recipient address with delivery type options
+- [ ] Consumer can provide parcel dimensions either manually or via AR measurement
+- [ ] Consumer can provide parcel weight with appropriate unit conversion
+- [ ] All inputs have clear validation and error messaging
+- [ ] The flow feels quick and natural, not cumbersome
+- [ ] Optional features (photos, special notes) don't create friction for basic use
+
+<<<
+== Stories
+
+=== Story C-E2-01: Enter Pickup Address
+
+**Story ID:** C-E2-01 +
+**Priority:** Must Have (M) +
+**Size:** Medium (M) +
+**Actor:** Consumer
+
+**User Story:**
+
+As a consumer,
+I want to enter my pickup address with autocomplete suggestions and map confirmation
+so that I can quickly specify where my parcel is located without typing the full address manually.
+
+**Acceptance Criteria:**
+
+- [ ] Given I am on the pickup address screen, when I type at least 3 characters, then I see address suggestions from geocoding API (simulated)
+- [ ] Given I select an address from suggestions, when I tap to confirm, then I see the address displayed on a map for visual verification
+- [ ] Given the address is displayed on map, when I confirm it's correct, then I can proceed to recipient address entry
+- [ ] I can edit or change the selected address before proceeding
+- [ ] I can use my current location (if location permission granted) as pickup address
+- [ ] I can select from saved addresses in my profile (if C-E1-03 implemented)
+- [ ] The map shows a pin at the exact pickup location for verification
+- [ ] Address validation flags incomplete or ambiguous addresses
+
+**Notes:**
+
+- **Brief Reference:** Section 4.1.2 - "Pickup Address: auto-suggest + map confirmation"
+- **Technical:** Uses Google Maps/Mapbox API (simulated for demo). Geocoding returns structured address data
+- **UX:** Show map confirmation as per brief requirement. Support both manual entry and selection from suggestions. Auto-detect current location if permission granted
+- **Dependencies:**
+  * Requires: C-E1-01 (Authenticated), C-E1-02 (Location permission helpful but not required)
+  * Enables: C-E2-02 (Recipient address), C-E3-01 (Quote generation needs both addresses)
+  * Integrates with: C-E1-03 (Saved addresses if profile exists)
+- **Screen Count:** 2 screens (Address search/entry + Map confirmation)
+
+**Demo Notes:**
+
+Use a pre-configured pickup address for the main demo flow to keep it moving. Show autocomplete with 2-3 suggestions appearing as user types. Map confirmation should load instantly (simulated).
+
+---
+
+=== Story C-E2-02: Enter Recipient Address
+
+**Story ID:** C-E2-02 +
+**Priority:** Must Have (M) +
+**Size:** Medium (M) +
+**Actor:** Consumer
+
+**User Story:**
+
+As a consumer,
+I want to enter the recipient's delivery address with autocomplete, country detection, and delivery type options
+so that the carrier knows exactly where to deliver my parcel and can provide accurate quotes.
+
+**Acceptance Criteria:**
+
+- [ ] Given I am on the recipient address screen, when I type at least 3 characters, then I see address suggestions with country detection
+- [ ] Given I select a recipient address, when I confirm on the map, then I see delivery type options (home/business/locker where available)
+- [ ] Given I select a delivery type, when I proceed, then the delivery type is saved with the shipment for quote generation
+- [ ] I can edit or change the recipient address before proceeding
+- [ ] The system detects if the recipient address is in a different country and adjusts available carriers accordingly
+- [ ] I can select from my address book or recent recipients (future enhancement)
+- [ ] Remote or rural addresses show a notification about potential surcharges
+
+**Notes:**
+
+- **Brief Reference:** Section 4.1.2 - "Recipient Address: auto-suggest + map; country detection; delivery type (home/business/locker where available)"
+- **Technical:** Uses same geocoding API as pickup. Country detection triggers different carrier availability. Locker option only shown in specific regions (simulated)
+- **UX:** Similar flow to pickup address but with additional delivery type selector. Show visual icons for home/business/locker options
+- **Dependencies:**
+  * Requires: C-E2-01 (Pickup address entered)
+  * Enables: C-E2-03 (Parcel dimensions), C-E3-01 (Quote generation)
+  * Integrates with: Address validation and geocoding services
+- **Screen Count:** 2-3 screens (Address search + Map confirmation + Delivery type selection)
+
+**Demo Notes:**
+
+For demo, use a recipient address in the same country as pickup to keep flow simple. Show one delivery type selection (e.g., "Home delivery"). Optionally mention international shipping capability.
+
+---
+
+=== Story C-E2-03: Enter Parcel Dimensions (Manual)
+
+**Story ID:** C-E2-03 +
+**Priority:** Must Have (M) +
+**Size:** Medium (M) +
+**Actor:** Consumer
+
+**User Story:**
+
+As a consumer,
+I want to manually enter my parcel dimensions (length, width, height)
+so that carriers can provide accurate quotes based on the actual package size.
+
+**Acceptance Criteria:**
+
+- [ ] Given I am on the parcel details screen, when I select manual dimension entry, then I see input fields for length, width, and height
+- [ ] Given I enter dimensions, when I use the unit selector, then I can toggle between cm/inches
+- [ ] Given I enter invalid dimensions (e.g., 0 or negative values), when I try to proceed, then I see validation errors
+- [ ] Given I enter unusually large or small dimensions, when I proceed, then I see a confirmation prompt to verify the measurements
+- [ ] The system shows a visual reference (e.g., "Shoebox size: 35×25×15cm") to help users estimate
+- [ ] Dimension limits are validated (e.g., max 150cm per side for standard service)
+- [ ] I can tap a button to switch to AR measurement mode (if C-E2-05 implemented)
+
+**Notes:**
+
+- **Brief Reference:** Section 4.1.2 - "Parcel Capture: AR Dimension Measure (simulated): guided camera; returns L×W×H"
+- **Technical:** Dimensions are used for volumetric weight calculation and quote generation. Store in cm internally, convert for display
+- **UX:** Default to the user's region standard (cm for most countries, inches for US). Provide helpful size references. Clear field labels (L×W×H)
+- **Dependencies:**
+  * Requires: C-E2-02 (Addresses entered)
+  * Enables: C-E2-04 (Weight entry), C-E3-01 (Quote generation needs dimensions)
+  * Integrates with: C-E2-05 (AR measurement alternative)
+- **Screen Count:** 1 screen (Dimension input form)
+
+**Demo Notes:**
+
+Manual entry is the fallback method and must always work reliably. Pre-fill example dimensions for demo (e.g., 30×20×15 cm) to keep flow moving. Show unit conversion if time permits.
+
+---
+
+=== Story C-E2-04: Enter Parcel Weight
+
+**Story ID:** C-E2-04 +
+**Priority:** Must Have (M) +
+**Size:** Small (S) +
+**Actor:** Consumer
+
+**User Story:**
+
+As a consumer,
+I want to enter my parcel weight with unit selection (kg/lbs)
+so that carriers can calculate accurate shipping costs and ensure proper handling.
+
+**Acceptance Criteria:**
+
+- [ ] Given I am on the parcel details screen, when I enter weight, then I see a numeric input field with unit selector (kg/lbs)
+- [ ] Given I enter weight, when I toggle units, then the value converts automatically (1 kg = 2.205 lbs)
+- [ ] Given I enter invalid weight (0, negative, or exceeding carrier limits), when I try to proceed, then I see validation errors
+- [ ] The system shows weight limits for different service tiers (e.g., "Express: up to 30kg")
+- [ ] I can use decimal values for precision (e.g., 2.5 kg)
+- [ ] The weight combines with dimensions for volumetric weight calculation (if applicable)
+
+**Notes:**
+
+- **Brief Reference:** Section 4.1.2 - "Weight: manual entry with unit switch; validation ranges"
+- **Technical:** Weight is required for all shipments. Store in kg internally. Volumetric weight = (L×W×H)/5000 for comparison
+- **UX:** Default to user's region standard (kg for most, lbs for US). Show helpful references (e.g., "1kg ≈ bag of sugar")
+- **Dependencies:**
+  * Requires: C-E2-03 (Dimensions entered)
+  * Enables: C-E3-01 (Quote generation - final required input)
+  * Integrates with: Volumetric weight calculation logic
+- **Screen Count:** 1 screen (same as dimensions, or separate weight screen)
+
+**Demo Notes:**
+
+Pre-fill weight (e.g., 2.5 kg) for smooth demo flow. Show the weight validation briefly if demonstrating error handling. This completes the minimum required parcel information.
+
+---
+
+=== Story C-E2-05: AR Dimension Measurement
+
+**Story ID:** C-E2-05 +
+**Priority:** Should Have (S) +
+**Size:** Large (L) +
+**Actor:** Consumer
+
+**User Story:**
+
+As a consumer,
+I want to use my phone's camera to measure parcel dimensions automatically using AR
+so that I can get accurate measurements without needing a ruler or tape measure.
+
+**Acceptance Criteria:**
+
+- [ ] Given I am on the dimension entry screen, when I tap "Measure with Camera", then I see AR measurement interface with guided instructions
+- [ ] Given the AR measurement is active, when I follow the on-screen guide to frame the parcel, then the system detects edges and displays L×W×H measurements
+- [ ] Given measurements are captured, when I confirm, then the dimensions auto-fill in the parcel details form
+- [ ] Given AR measurement fails or is unavailable, when I tap the AR button, then I see a helpful error and can fall back to manual entry
+- [ ] The AR interface shows real-time edge detection overlay on the camera view
+- [ ] I can retake measurements if the first attempt looks incorrect
+- [ ] The system validates that AR-measured dimensions are within reasonable ranges
+
+**Notes:**
+
+- **Brief Reference:** Section 4.1.2 - "AR Dimension Measure (simulated): guided camera; returns L×W×H"
+- **Technical:** For demo, simulate AR with animated walkthrough or pre-recorded video showing measurement process. Actual AR requires ARKit (iOS) or ARCore (Android)
+- **UX:** Provide clear step-by-step guidance. Show visual overlay of detected box edges. Celebrate successful measurement with animation
+- **Dependencies:**
+  * Requires: C-E2-02 (Addresses entered), Camera permission (new)
+  * Enables: C-E2-04 (Weight - dimensions complete), C-E3-01 (Quote generation)
+  * Integrates with: C-E2-03 (Manual dimension entry as fallback)
+- **Screen Count:** 2-3 screens (AR intro + Camera view with overlay + Confirmation)
+
+**Demo Notes:**
+
+This is a "Should Have" because it's a differentiating feature but not required for Golden Path. Use a simulated AR experience - show a pre-recorded animation or video of the measurement process, then auto-fill dimensions. This is impressive for investors but adds development complexity.
+
+---
+
+=== Story C-E2-06: Add Pickup Notes
+
+**Story ID:** C-E2-06 +
+**Priority:** Should Have (S) +
+**Size:** Small (S) +
+**Actor:** Consumer
+
+**User Story:**
+
+As a consumer,
+I want to add special instructions for the driver (gate codes, reception hours, parking notes)
+so that the driver can successfully access my pickup location without delays or confusion.
+
+**Acceptance Criteria:**
+
+- [ ] Given I am on the pickup address screen, when I tap "Add pickup notes" (optional), then I see a text input field
+- [ ] Given I enter pickup notes, when I save them, then they are attached to the shipment and visible to the assigned driver
+- [ ] The text field has a character limit (e.g., 200 characters) with counter
+- [ ] Common examples are shown as quick-select chips (e.g., "Ring bell", "Reception desk", "Gate code: ____")
+- [ ] Pickup notes are optional and can be skipped
+- [ ] I can edit pickup notes before booking is confirmed
+
+**Notes:**
+
+- **Brief Reference:** Section 4.1.2 - "optional pickup notes (gate codes, reception hours)"
+- **Technical:** Pickup notes are free text stored with shipment. Displayed to driver in job details (D-E8-03)
+- **UX:** Keep this optional and unobtrusive. Use expandable section or separate optional screen. Provide helpful examples
+- **Dependencies:**
+  * Requires: C-E2-01 (Pickup address entered)
+  * Enables: D-E8-03 (Driver sees notes in job details)
+  * Integrates with: Pickup address data
+- **Screen Count:** 0-1 screen (expandable section or modal)
+
+**Demo Notes:**
+
+"Should Have" feature that improves real-world usability but isn't critical for Golden Path. Include in Phase 2 demo to show thoughtfulness about driver experience. Use example like "Gate code: 1234" or "Leave with reception".
+
+---
+
+=== Story C-E2-07: Capture Parcel Photos
+
+**Story ID:** C-E2-07 +
+**Priority:** Could Have (C) +
+**Size:** Medium (M) +
+**Actor:** Consumer
+
+**User Story:**
+
+As a consumer,
+I want to take 1-3 photos of my parcel before pickup
+so that I have proof of the parcel's condition for insurance purposes and to help the driver identify it.
+
+**Acceptance Criteria:**
+
+- [ ] Given I am on the parcel details screen, when I tap "Add photos" (optional), then I see camera interface
+- [ ] Given I take a photo, when I confirm it, then I can take up to 2 more photos (max 3 total)
+- [ ] Given I have photos, when I review them, then I can delete individual photos or retake them
+- [ ] Photos are compressed and optimized for storage (simulated - no actual upload needed for demo)
+- [ ] I can skip photo capture entirely - it's fully optional
+- [ ] Photos are displayed in shipment details and timeline for reference
+
+**Notes:**
+
+- **Brief Reference:** Section 4.1.2 - "Photos (optional): 1–3 images for proof/insurance"
+- **Technical:** For demo, use camera simulator or allow selection from photo library. Images stored with shipment record
+- **UX:** Make this clearly optional. Show small photo thumbnails in booking summary. Helpful for high-value items
+- **Dependencies:**
+  * Requires: C-E2-03, C-E2-04 (Parcel details entered), Camera permission
+  * Enables: Enhanced insurance claim process (out of scope for demo)
+  * Integrates with: C-E6-01 (Photos shown in shipment history)
+- **Screen Count:** 1-2 screens (Camera + Photo review)
+
+**Demo Notes:**
+
+"Could Have" feature - nice for completeness but adds complexity. Only include in Phase 3 if time permits. Brief mentions this is "optional to limit scale" - can be shown as a button but not implemented in early demos.
+
+---
+
+=== Story C-E2-08: Select Delivery Type
+
+**Story ID:** C-E2-08 +
+**Priority:** Could Have (C) +
+**Size:** Small (S) +
+**Actor:** Consumer
+
+**User Story:**
+
+As a consumer,
+I want to specify the delivery type (home/business/parcel locker)
+so that the carrier delivers to the most appropriate location and I get accurate service options.
+
+**Acceptance Criteria:**
+
+- [ ] Given I have entered a recipient address, when I see delivery type options, then I can select from Home, Business, or Parcel Locker (where available)
+- [ ] Given I select "Business", when the address is during business hours, then I see a note about business delivery requirements
+- [ ] Given I select "Parcel Locker", when lockers are available in the recipient's area, then I see a list of nearby locker locations
+- [ ] Given lockers are not available, when I view delivery types, then the locker option is greyed out with explanation
+- [ ] The selected delivery type affects quote generation (business delivery may have different rates)
+- [ ] I can see a brief explanation of each delivery type before selecting
+
+**Notes:**
+
+- **Brief Reference:** Section 4.1.2 - "delivery type (home/business/locker where available)"
+- **Technical:** Locker availability depends on geocoding data (simulated). Business delivery may require recipient contact during business hours
+- **UX:** Use visual icons for each delivery type. Show "Recommended" tag for most common option based on address type
+- **Dependencies:**
+  * Requires: C-E2-02 (Recipient address entered)
+  * Enables: C-E3-01 (Delivery type affects quote options)
+  * Integrates with: Address validation and carrier service availability
+- **Screen Count:** 1 screen (Delivery type selector, can be part of address flow)
+
+**Demo Notes:**
+
+"Could Have" - mentioned in brief but not critical for MVP demo. Can be shown as a simple selector on recipient address screen in Phase 3. For Phase 1-2, default to "Home" delivery without explicit selection.
+
+---
+
+<<<
+== Epic Summary
+
+**Golden Path Coverage:**
+
+Stories C-E2-01 through C-E2-04 are essential for the Golden Path demo. These provide the minimum information needed to generate shipping quotes: pickup address, delivery address, parcel dimensions, and weight.
+
+**Implementation Notes:**
+
+* Address entry (C-E2-01, C-E2-02) must feel fast and smart with autocomplete
+* Dimension and weight entry (C-E2-03, C-E2-04) should have sensible defaults and clear validation
+* AR measurement (C-E2-05) is a differentiator but complex - implement in Phase 2
+* Optional features (C-E2-06, C-E2-07, C-E2-08) add polish but can be deferred
+
+**Integration Points:**
+
+* All stories in this epic feed data into the quote generation engine (Epic E3)
+* Pickup notes (C-E2-06) integrate with driver job details (Epic E8)
+* Addresses are used throughout tracking and fulfillment flows
+
+**Development Sequence:**
+
+Sprint 1 (Foundation):
+
+1. C-E2-01: Pickup address (required for quote)
+2. C-E2-02: Recipient address (required for quote)
+3. C-E2-03: Manual dimensions (required for quote)
+4. C-E2-04: Weight entry (required for quote)
+
+Sprint 5 (Enhancement):
+
+1. C-E2-05: AR measurement (differentiator)
+2. C-E2-06: Pickup notes (usability)
+
+Phase 3 (Optional):
+
+1. C-E2-07: Parcel photos (nice to have)
+2. C-E2-08: Delivery type selector (can default to Home)
+
+**Demo Timing:**
+
+The shipment creation flow should take 2-3 minutes in demo:
+
+- 30s: Pickup address (autocomplete + map)
+- 30s: Recipient address (autocomplete + map)
+- 30s: Dimensions (pre-filled or quick entry)
+- 15s: Weight (pre-filled or quick entry)
+- Optional 30s: AR measurement demonstration (Phase 2)
+
+Total core flow: ~2 minutes before moving to quote selection.

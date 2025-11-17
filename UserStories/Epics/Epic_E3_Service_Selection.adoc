@@ -1,0 +1,292 @@
+= Epic E3: Service Selection & Quotation
+:toc:
+:toclevels: 2
+:sectnums:
+:doctype: article
+:icons: font
+:numbered:
+:pagenums:
+:reproducible:
+
+<<<
+== Epic Overview
+
+**Epic ID:** E3 +
+**Epic Name:** Service Selection & Quotation +
+**Actor:** Consumer +
+**Brief Reference:** Section 4.1.3 (Service Selection), 4.1.3 (Quotation & Price Breakdown) +
+**Priority:** Must Have (core value proposition) +
+**Story Count:** 5 (M: 3, S: 1, C: 1)
+
+**Epic Goal:**
+
+Enable consumers to view multi-carrier shipping quotes, compare service options by price and delivery time, and select their preferred carrier and service tier so they can make informed decisions before booking.
+
+**Value Proposition:**
+
+This epic showcases Kurrier's core differentiator - instant multi-carrier quotes with transparent pricing. The demo must clearly show multiple carrier options (FedEx, UPS, DHL, etc.) with different service tiers, making the value proposition obvious: one booking request, multiple competitive quotes. Price transparency and comparison tools are critical for building trust.
+
+**Success Criteria:**
+
+- [ ] Consumer sees quotes from multiple carriers (at least 3) simultaneously
+- [ ] Each quote shows carrier logo, service tier, price, and estimated delivery time
+- [ ] Price breakdown is transparent (base rate, surcharges, insurance)
+- [ ] Consumer can sort and filter quotes by price, ETA, or carrier preference
+- [ ] The selected service option is clearly highlighted before proceeding to payment
+- [ ] Quote generation feels instant (<2 seconds in demo)
+
+<<<
+== Stories
+
+=== Story C-E3-01: View Multi-Carrier Service Options
+
+**Story ID:** C-E3-01 +
+**Priority:** Must Have (M) +
+**Size:** Medium (M) +
+**Actor:** Consumer
+
+**User Story:**
+
+As a consumer,
+I want to see shipping quotes from multiple carriers (FedEx, UPS, DHL, etc.) with different service tiers
+so that I can choose the best option based on price, delivery speed, and my preferred carrier.
+
+**Acceptance Criteria:**
+
+- [ ] Given I have entered shipment details, when quote generation completes, then I see at least 3 carrier options (simulated: FedEx, UPS, DHL)
+- [ ] Given I view the quote list, when I see each option, then I see carrier logo, service tier name (Express/Economy/Ground), price, and estimated delivery ETA
+- [ ] Given quotes are displayed, when I scroll through options, then each quote card shows key information at a glance
+- [ ] Given a quote is selected, when I tap it, then it expands to show more details (price breakdown, terms)
+- [ ] The quotes are sorted by default (e.g., fastest delivery first or lowest price first)
+- [ ] Loading state is shown during quote generation (<2 seconds simulated)
+- [ ] If no quotes are available (e.g., unsupported route), I see a helpful error message
+
+**Notes:**
+
+- **Brief Reference:** Section 4.1.3 - "Available Providers: show FedEx, UPS, DHL, TNT/DPD/Parcelforce (stubbed by geo)"
+- **Technical:** Quote API is simulated. Generate 3-5 mock quotes based on parcel details. Quotes include base rate calculated from distance + weight/dimensions
+- **UX:** Use carrier brand colors and logos for recognition. Clear visual hierarchy - price prominent, ETA secondary, carrier logo for branding
+- **Dependencies:**
+  * Requires: C-E2-01, C-E2-02 (Addresses), C-E2-03, C-E2-04 (Dimensions & weight)
+  * Enables: C-E3-02 (Price breakdown), C-E3-03 (Service selection)
+  * Integrates with: Quote generation engine (simulated)
+- **Screen Count:** 1 screen (Quote list view)
+
+**Demo Notes:**
+
+This is the "wow" moment - showing multiple carrier quotes side-by-side. Pre-generate quotes instantly (simulate <2s load). Show variety: FedEx Express ($25, 1 day), UPS Ground ($15, 3 days), DHL Economy ($18, 2 days). Make price differences obvious to show value of comparison shopping.
+
+---
+
+=== Story C-E3-02: View Price Breakdown
+
+**Story ID:** C-E3-02 +
+**Priority:** Must Have (M) +
+**Size:** Small (S) +
+**Actor:** Consumer
+
+**User Story:**
+
+As a consumer,
+I want to see a detailed breakdown of shipping costs (base rate, fuel surcharge, remote area fees, insurance)
+so that I understand exactly what I'm paying for and can trust the pricing is fair.
+
+**Acceptance Criteria:**
+
+- [ ] Given I have selected or expanded a quote, when I view the price details, then I see a breakdown of all cost components
+- [ ] The breakdown includes: Base shipping rate, Fuel surcharge (%), Remote area fee (if applicable), Insurance (if selected), Total price
+- [ ] Given I see a surcharge, when I tap the info icon, then I see an explanation of why it's applied
+- [ ] Given I select insurance (C-E3-04), when the price updates, then I see the insurance cost as a separate line item
+- [ ] All prices are displayed in the user's local currency with proper formatting
+- [ ] Tax/VAT is shown separately if applicable (region-dependent)
+
+**Notes:**
+
+- **Brief Reference:** Section 4.1.3 - "Display live quote options (simulated API) with fare breakdown: base, fuel surcharge, remote area (if any), insurance add-on"
+- **Technical:** Price calculation formula: Base + (Base × FuelSurcharge%) + RemoteAreaFee + Insurance. Simulated values based on route and carrier
+- **UX:** Use expandable/collapsible breakdown to avoid overwhelming users initially. Show subtotal and total clearly
+- **Dependencies:**
+  * Requires: C-E3-01 (Quote displayed)
+  * Enables: C-E3-03 (Informed service selection), C-E4-02 (Payment shows same breakdown)
+  * Integrates with: C-E3-04 (Insurance toggle updates breakdown)
+- **Screen Count:** 0-1 screen (expandable detail within quote)
+
+**Demo Notes:**
+
+Show breakdown for one selected quote. Example: "Base: $20.00, Fuel surcharge (8%): $1.60, Insurance: $2.00, Total: $23.60". Brief mentions surcharges - include at least one to show transparency.
+
+---
+
+=== Story C-E3-03: Select Service
+
+**Story ID:** C-E3-03 +
+**Priority:** Must Have (M) +
+**Size:** Small (S) +
+**Actor:** Consumer
+
+**User Story:**
+
+As a consumer,
+I want to select my preferred carrier and service tier from the quote options
+so that I can proceed to payment with my chosen shipping method.
+
+**Acceptance Criteria:**
+
+- [ ] Given I am viewing quote options, when I tap on a quote card, then it becomes highlighted/selected
+- [ ] Given I have selected a quote, when I tap "Continue" or "Book This Service", then I proceed to payment screen with the selected service
+- [ ] Given I change my selection, when I tap a different quote, then the new quote becomes selected and previous selection is cleared
+- [ ] The selected quote is visually distinct (checkmark, border highlight, color change)
+- [ ] The "Continue" button is disabled until a quote is selected
+- [ ] I can tap "Back" to modify shipment details if quotes don't meet my needs
+
+**Notes:**
+
+- **Brief Reference:** Section 4.1.3 - "Service Selection: Express / Economy / Ground (examples) with ETA, price, carrier logo, terms"
+- **Technical:** Selected quote data (carrier, service tier, price, tracking ID) is passed to payment flow and booking confirmation
+- **UX:** Clear selected state. Consider floating "Continue" button that appears after selection. Show selected service summary before payment
+- **Dependencies:**
+  * Requires: C-E3-01 (Quotes available)
+  * Enables: C-E4-01 (Payment with selected service), C-E4-03 (Booking confirmation)
+  * Integrates with: Quote selection state management
+- **Screen Count:** 0 screens (interaction within quote list)
+
+**Demo Notes:**
+
+Pre-select a mid-range option (e.g., UPS Ground) to show default selection, then have presenter tap a different option (FedEx Express) to show selection change. This demonstrates interactivity clearly.
+
+---
+
+=== Story C-E3-04: Add Insurance
+
+**Story ID:** C-E3-04 +
+**Priority:** Should Have (S) +
+**Size:** Small (S) +
+**Actor:** Consumer
+
+**User Story:**
+
+As a consumer,
+I want to purchase additional shipping insurance for my high-value parcel
+so that I have financial protection in case of loss or damage during transit.
+
+**Acceptance Criteria:**
+
+- [ ] Given I am viewing quote options, when I see the insurance toggle or option, then I can enable additional insurance coverage
+- [ ] Given I enable insurance, when the price updates, then I see the insurance cost added to the total and shown in the breakdown
+- [ ] Given I enable insurance, when I tap the info icon, then I see a brief summary of coverage limits and terms
+- [ ] Given I select a different quote, when insurance is enabled, then it remains enabled and applies to the new quote
+- [ ] I can disable insurance at any time before payment
+- [ ] Insurance cost is calculated as a percentage of declared parcel value or a flat fee (simulated)
+
+**Notes:**
+
+- **Brief Reference:** Section 4.1.4 - "Extras & Insurance: Toggle to purchase additional insurance; brief coverage summary; show updated price"
+- **Technical:** Insurance is optional add-on. For demo, use simple calculation (e.g., $2 per $100 declared value, min $2, max $50)
+- **UX:** Use toggle switch for easy enable/disable. Show "Recommended for valuable items" hint. Link to full terms (modal or external)
+- **Dependencies:**
+  * Requires: C-E3-01 (Quote available)
+  * Enables: C-E3-02 (Insurance line item in breakdown), C-E4-03 (Insurance status in confirmation)
+  * Integrates with: Price calculation and booking record
+- **Screen Count:** 0 screens (toggle/option within quote screen)
+
+**Demo Notes:**
+
+"Should Have" because it adds realism and shows monetization opportunity, but not required for basic Golden Path. Include in Phase 2 demo. Show insurance toggle enabled for a high-value parcel (e.g., "Declared value: $500, Insurance: $5").
+
+---
+
+=== Story C-E3-05: Filter and Sort Quotes
+
+**Story ID:** C-E3-05 +
+**Priority:** Could Have (C) +
+**Size:** Medium (M) +
+**Actor:** Consumer
+
+**User Story:**
+
+As a consumer,
+I want to filter and sort shipping quotes by price, delivery time, or carrier preference
+so that I can quickly find the best option that meets my specific needs.
+
+**Acceptance Criteria:**
+
+- [ ] Given I am viewing quote options, when I tap the "Sort" or "Filter" button, then I see sort and filter options
+- [ ] Given I select "Sort by Price" (low to high), when I apply it, then quotes reorder from cheapest to most expensive
+- [ ] Given I select "Sort by Delivery Time" (fastest), when I apply it, then quotes reorder from fastest to slowest
+- [ ] Given I select "Filter by Carrier" (e.g., show only FedEx), when I apply it, then only matching quotes are displayed
+- [ ] I can clear filters to return to the full quote list
+- [ ] The current sort/filter selection is visually indicated
+- [ ] Quote count updates when filters are applied (e.g., "Showing 2 of 5 options")
+
+**Notes:**
+
+- **Brief Reference:** Section 4.1.3 - "Filters/Sort: price, ETA, carrier; info modals for surcharges, volumetric weight"
+- **Technical:** Client-side filtering and sorting of quote list. No additional API calls needed
+- **UX:** Use bottom sheet or modal for filter/sort controls. Show chips for active filters. Default sort should be most relevant (e.g., best value)
+- **Dependencies:**
+  * Requires: C-E3-01 (Multiple quotes available)
+  * Enables: Enhanced quote discovery and comparison
+  * Integrates with: Quote list rendering
+- **Screen Count:** 1 screen (Filter/Sort modal or bottom sheet)
+
+**Demo Notes:**
+
+"Could Have" - nice feature but not essential for Golden Path. Include in Phase 3 if time permits. Brief mentions filters - can be shown as a button in Phase 1-2 without full implementation.
+
+---
+
+<<<
+== Epic Summary
+
+**Golden Path Coverage:**
+
+Stories C-E3-01, C-E3-02, and C-E3-03 are essential for the Golden Path. These show the core value proposition: multiple carrier quotes, price transparency, and service selection.
+
+**Implementation Notes:**
+
+* Quote display (C-E3-01) is the centerpiece - must look polished and professional
+* Price breakdown (C-E3-02) builds trust through transparency
+* Service selection (C-E3-03) is a simple interaction but critical for flow
+* Insurance (C-E3-04) demonstrates additional revenue and risk mitigation
+* Filters (C-E3-05) are nice-to-have but add complexity
+
+**Integration Points:**
+
+* Selected quote data flows into payment (Epic E4) and booking confirmation
+* Quote API integrates with parcel details from Epic E2
+* Insurance selection affects final booking price
+
+**Development Sequence:**
+
+Sprint 2 (Core Flow - Consumer):
+
+1. C-E3-01: Multi-carrier quote display (critical differentiation)
+2. C-E3-02: Price breakdown (transparency)
+3. C-E3-03: Service selection (required for booking)
+
+Sprint 5 (Enhancement):
+
+1. C-E3-04: Insurance toggle (monetization)
+
+Phase 3 (Optional):
+
+1. C-E3-05: Filter and sort (power user feature)
+
+**Demo Timing:**
+
+Quote selection should take 1-2 minutes in demo:
+
+- 15s: Quotes load and display (instant feel)
+- 30s: Review 2-3 options (price, ETA, carrier)
+- 15s: Expand one quote to show breakdown
+- 15s: Select preferred quote
+- Optional 15s: Toggle insurance (Phase 2)
+
+Total: ~1.5 minutes before proceeding to payment.
+
+**Key Demo Talking Points:**
+
+* "Single request, multiple competitive quotes"
+* "Complete price transparency - no hidden fees"
+* "Choose based on your priority: speed, cost, or preferred carrier"
+* "Optional insurance for peace of mind"

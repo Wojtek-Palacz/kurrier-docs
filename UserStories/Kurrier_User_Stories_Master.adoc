@@ -1,0 +1,403 @@
+= Kurrier User Stories: Interactive Demo Backlog
+:doctype: book
+:toc:
+:toclevels: 3
+:sectnums:
+:sectnumlevels: 3
+:author: Kurrier Inc.
+:revdate: 2025-10-29
+:source-highlighter: rouge
+:numbered:
+:pagenums:
+
+<<<
+== Executive Summary
+
+This document provides the complete user story backlog for the Kurrier interactive demo, systematically derived from the UX/PRD Brief (`docs/Brief/Kurrier_Inc_-_brief.adoc`).
+
+**Purpose:** Enable phased development of interactive demo showcasing Kurrier's dual-app platform
+
+**Scope:** Consumer Mobile App, Driver Mobile App, Web Admin Dashboard (limited)
+
+**Total Story Count:** 44 user stories organized into 10 epics
+
+**Prioritization:**
+
+* **Must Have (M):** 25 stories - Golden Path demo (Phase 1)
+* **Should Have (S):** 12 stories - Enhanced demo (Phase 2)
+* **Could Have (C):** 7 stories - Complete demo (Phase 3)
+* **Won't Have (W):** Documented but deferred features
+
+**Approach:** Hybrid journey-priority model combining epic-based narrative structure with MoSCoW prioritization
+
+**Key Artifacts:**
+
+* 10 Epic detail documents (`Epics/` directory)
+* Demo Golden Path script
+* Story Dependencies map
+* Prioritization Summary
+* Traceability Matrix
+
+<<<
+== Demo Phases
+
+=== Phase 1: MVP Demo (Golden Path Only)
+
+**Scope:** Must-have stories only (25 stories)
+
+**Narrative:** Complete Golden Path end-to-end
+
+**Characteristics:** Believable but minimal
+
+**Use Case:** Initial stakeholder validation
+
+**Epics Included:** Full E1-E5, E7-E9; Partial E6, E10
+
+**Duration:** 10 minutes demo time
+
+**Development Effort:** 4 weeks (Sprints 1-4)
+
+=== Phase 2: Enhanced Demo (Polished & Realistic)
+
+**Scope:** Must + Should stories (37 stories)
+
+**Narrative:** Golden Path with depth and polish
+
+**Characteristics:** Production-quality mockup
+
+**Use Case:** Investor demos, usability testing
+
+**Epics Included:** All epics with Must and Should stories
+
+**Development Effort:** +1 week (Sprint 5)
+
+=== Phase 3: Complete Demo (Comprehensive Feature Showcase)
+
+**Scope:** All in-scope stories (44 stories)
+
+**Narrative:** Full feature set including alternatives
+
+**Characteristics:** Demonstrates scalability and edge cases
+
+**Use Case:** Developer handoff, comprehensive validation
+
+**Epics Included:** All 10 epics fully implemented
+
+**Development Effort:** As needed for optional features
+
+<<<
+== Epic Overview
+
+=== Consumer Epics (6 epics, 29 stories)
+
+.Consumer Epics Summary
+[%header, cols="^1,<3,^1,^1,^1,^1,<2"]
+|===
+^| ID ^| Epic Name ^| Total ^| M ^| S ^| C ^| Brief Ref
+
+| E1
+| Consumer Onboarding & Authentication
+| 4
+| 2
+| 1
+| 1
+| 4.1.1, 14.2.1
+
+| E2
+| Shipment Creation & Booking
+| 8
+| 4
+| 2
+| 2
+| 4.1.2, 14.2.2
+
+| E3
+| Service Selection & Quotation
+| 5
+| 3
+| 1
+| 1
+| 4.1.3, 14.2.3
+
+| E4
+| Payment & Confirmation
+| 4
+| 3
+| 1
+| 0
+| 4.1.5, 14.2.5
+
+| E5
+| Live Tracking & Driver Interaction
+| 5
+| 3
+| 2
+| 0
+| 4.1.6-7, 14.2.7
+
+| E6
+| Shipment Management & History
+| 3
+| 0
+| 2
+| 1
+| 4.1.8, 14.2.9-10
+|===
+
+=== Driver Epics (4 epics, 15 stories)
+
+.Driver Epics Summary
+[%header, cols="^1,<3,^1,^1,^1,^1,<2"]
+|===
+^| ID ^| Epic Name ^| Total ^| M ^| S ^| C ^| Brief Ref
+
+| E7
+| Driver Onboarding & Verification
+| 3
+| 1
+| 1
+| 1
+| 4.2.1, 15.2.1
+
+| E8
+| Job Discovery & Acceptance
+| 4
+| 4
+| 0
+| 0
+| 4.2.2, 15.2.2-3
+
+| E9
+| Pickup & Hub Fulfillment
+| 6
+| 5
+| 1
+| 0
+| 4.2.3-4, 15.2.4-6
+
+| E10
+| Driver Earnings & Performance
+| 2
+| 0
+| 1
+| 1
+| 4.2.5, 15.2.7
+|===
+
+=== Summary Totals
+
+.Overall Story Count by Priority
+[%header, cols="<3,^1,^1,^1,^1"]
+|===
+^| Category ^| Must ^| Should ^| Could ^| Total
+
+| Consumer Stories
+| 15
+| 9
+| 5
+| 29
+
+| Driver Stories
+| 10
+| 3
+| 2
+| 15
+
+| **TOTAL**
+| **25**
+| **12**
+| **7**
+| **44**
+|===
+
+<<<
+== Actor Summary
+
+=== Consumer (Sender)
+
+**Description:** Person or business shipping parcels
+
+**App:** Consumer Mobile App (iOS/Android)
+
+**Primary Journeys:**
+
+1. Onboarding & Authentication
+2. Create shipment booking
+3. Select service and pay
+4. Track shipment in real-time
+5. View history and invoices
+
+**Story Count:** 29 stories across 6 epics
+
+**Brief References:** Sections 4.1, 14.2
+
+=== Driver
+
+**Description:** Independent contractor handling pickups
+
+**App:** Driver Mobile App (iOS/Android)
+
+**Primary Journeys:**
+
+1. Onboarding & verification
+2. Go online and view available jobs
+3. Accept job and navigate to pickup
+4. Scan parcel and complete pickup
+5. Navigate to hub and complete drop-off
+6. View earnings
+
+**Story Count:** 15 stories across 4 epics
+
+**Brief References:** Sections 4.2, 15.2
+
+=== Operations Admin (Deferred)
+
+**Description:** Staff managing system operations
+
+**App:** Web Admin Dashboard
+
+**Status:** Low priority for initial demo, documented in Epic E11 (Won't Have)
+
+**Brief References:** Section 16
+
+<<<
+== Quick Reference
+
+=== Story ID Convention
+
+**Format:** `[Actor]-E[Epic]-[Number]`
+
+**Actor Codes:**
+
+* `C` = Consumer
+* `D` = Driver
+* `A` = Admin
+
+**Examples:**
+
+* `C-E1-01` = Consumer, Epic 1, Story 1 (Consumer sign-in)
+* `C-E2-04` = Consumer, Epic 2, Story 4 (Enter parcel weight)
+* `D-E8-04` = Driver, Epic 8, Story 4 (Accept job)
+
+**Benefits:**
+
+* Unique and sortable
+* Actor immediately visible
+* Epic grouping clear
+* Sequence within epic obvious
+* Brief for verbal communication
+
+=== Priority Definitions (MoSCoW)
+
+**MUST HAVE (M) - Demo Blockers**
+
+* Required for Golden Path narrative completion
+* Without these, the demo story doesn't make sense
+* Core value proposition is invisible without them
+
+**SHOULD HAVE (S) - Demo Enhancers**
+
+* Significantly improve demo believability
+* Show important features but not Golden Path critical
+* Add depth to user experience understanding
+
+**COULD HAVE (C) - Nice-to-Have Features**
+
+* Further enhancements if time permits
+* Secondary features that add realism
+* Features that demonstrate scalability
+
+**WON'T HAVE (W) - Explicitly Deferred**
+
+* Out of scope for initial demo
+* May be included in enhanced demo v2
+* Documented for future reference
+
+=== Size Definitions
+
+.Story Size Guidelines
+[%header, cols="^1,<3,<3"]
+|===
+^| Size ^| Complexity ^| Example
+
+| S (Small)
+| Single simple screen
+| Text input, static list view
+
+| M (Medium)
+| Screen with interactions
+| Search + map + confirmation
+
+| L (Large)
+| Complex multi-screen flow
+| AR measurement walkthrough
+|===
+
+=== INVEST Criteria
+
+Every user story should meet these criteria:
+
+* **I** - Independent: Can be developed without strong dependencies
+* **N** - Negotiable: Details can be refined during implementation
+* **V** - Valuable: Clear value statement in "so that" clause
+* **E** - Estimable: Team can estimate effort (aided by size indicator)
+* **S** - Small: Appropriate scope for demo mockup
+* **T** - Testable: Acceptance criteria are verifiable
+
+<<<
+== Epic Documents
+
+Access individual epic documents for detailed user stories:
+
+=== Consumer Epics
+
+* link:Epics/Epic_E1_Consumer_Onboarding.adoc[Epic E1: Consumer Onboarding & Authentication]
+* link:Epics/Epic_E2_Shipment_Creation.adoc[Epic E2: Shipment Creation & Booking]
+* link:Epics/Epic_E3_Service_Selection.adoc[Epic E3: Service Selection & Quotation]
+* link:Epics/Epic_E4_Payment_Confirmation.adoc[Epic E4: Payment & Confirmation]
+* link:Epics/Epic_E5_Live_Tracking.adoc[Epic E5: Live Tracking & Driver Interaction]
+* link:Epics/Epic_E6_History_Rewards.adoc[Epic E6: Shipment Management & History]
+
+=== Driver Epics
+
+* link:Epics/Epic_E7_Driver_Onboarding.adoc[Epic E7: Driver Onboarding & Verification]
+* link:Epics/Epic_E8_Job_Discovery.adoc[Epic E8: Job Discovery & Acceptance]
+* link:Epics/Epic_E9_Pickup_Fulfillment.adoc[Epic E9: Pickup & Hub Fulfillment]
+* link:Epics/Epic_E10_Driver_Earnings.adoc[Epic E10: Driver Earnings & Performance]
+
+<<<
+== Additional Resources
+
+=== Supporting Documents
+
+* link:Demo_Golden_Path.adoc[Demo Golden Path Script] - Complete demo narrative and walkthrough
+* link:Story_Dependencies.adoc[Story Dependencies] - Dependency map and sequencing
+* link:Story_Prioritization_Summary.adoc[Prioritization Summary] - Detailed MoSCoW tables
+* link:Traceability_Matrix.adoc[Traceability Matrix] - Story-to-Brief mapping
+
+=== Templates
+
+* link:Templates/Epic_Template.adoc[Epic Template] - Template for new epics
+* link:Templates/Story_Quality_Checklist.adoc[Story Quality Checklist] - INVEST validation
+
+=== Source Documents
+
+* **Primary Brief:** `docs/Brief/Kurrier_Inc_-_brief.adoc`
+* **User Story Guidelines:** `docs/Reference/UserStoryCharacteristics.adoc`
+* **Planning Document:** `docs/Planning/User_Story_Creation_Plan.adoc`
+
+<<<
+== Document Version History
+
+.Version History
+[%header, cols="^1,^1,<5"]
+|====
+^| Date
+^| Version
+^| Description
+
+| 2025-10-29
+| 0.1
+| Initial master document structure created
+
+|====

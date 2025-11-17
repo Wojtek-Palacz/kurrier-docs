@@ -1,0 +1,705 @@
+= Kurrier User Stories: Traceability Matrix
+:toc:
+:toclevels: 2
+:sectnums:
+:doctype: article
+:icons: font
+
+<<<
+== Overview
+
+This document provides complete traceability from user stories back to the source UX/PRD Brief (`docs/Brief/Kurrier_Inc_-_brief.adoc`). Every story references specific sections of the brief, ensuring:
+
+* **Complete Coverage:** All brief requirements are captured in stories
+* **No Orphans:** No stories exist without brief justification
+* **Audit Trail:** Changes to brief can be mapped to affected stories
+* **Validation:** Stakeholders can verify stories match their requirements
+
+<<<
+== Traceability Summary
+
+=== Coverage Statistics
+
+**Total Stories:** 44
+
+**Brief Sections Referenced:**
+- Section 4.1 (Consumer App Flows): 29 stories
+- Section 4.2 (Driver App Flows): 15 stories
+
+**Complete Traceability:** 100% of stories reference specific brief sections
+
+=== Verification Checklist
+
+**Forward Traceability (Brief → Stories):**
+- [x] Section 4.1.1 (Consumer Onboarding) → E1 stories (4 stories)
+- [x] Section 4.1.2 (Create Shipment) → E2 stories (8 stories)
+- [x] Section 4.1.3 (Service Selection & Quotation) → E3 stories (5 stories)
+- [x] Section 4.1.4 (Extras & Insurance) → E3 stories (1 story)
+- [x] Section 4.1.5 (Payment & Booking) → E4 stories (4 stories)
+- [x] Section 4.1.6 (Pickup ETA & Live Map) → E5 stories (3 stories)
+- [x] Section 4.1.7 (Handover & Tracking) → E5 stories (2 stories)
+- [x] Section 4.1.8 (Invoice & History) → E6 stories (3 stories)
+- [x] Section 4.2.1 (Driver Onboarding) → E7 stories (3 stories)
+- [x] Section 4.2.2 (Availability & Job Intake) → E8 stories (4 stories)
+- [x] Section 4.2.3 (Navigation & Pickup) → E9 stories (4 stories)
+- [x] Section 4.2.4 (Hub Drop-off) → E9 stories (2 stories)
+- [x] Section 4.2.5 (Earnings & Quality) → E10 stories (2 stories)
+
+**Backward Traceability (Stories → Brief):**
+- [x] All 44 stories have "Brief Reference" in Notes section
+- [x] No orphan stories without brief justification
+
+<<<
+== Complete Traceability Matrix
+
+=== Consumer Stories (29 stories)
+
+.Consumer Stories Traceability
+[%header, cols="^2,<3,^1,^1,^1,<3"]
+|===
+^| Story ID ^| Story Name ^| Epic ^| Priority ^| Size ^| Brief Section Reference
+
+| C-E1-01
+| Sign in with Phone/Email + OTP
+| E1
+| M
+| S
+| 4.1.1 (Onboarding & Sign-in): "Methods: Phone or Email + OTP"
+
+| C-E1-02
+| Location permission request
+| E1
+| M
+| S
+| 4.1.1: "Location permission prompt (contextual)"
+
+| C-E1-03
+| Profile setup
+| E1
+| S
+| S
+| 4.1.1: "Profile: name, phone/email, default pickup address"
+
+| C-E1-04
+| Business profile toggle
+| E1
+| C
+| S
+| 4.1.1: "toggle for business profile (company, tax ID)"
+
+| C-E2-01
+| Enter pickup address
+| E2
+| M
+| M
+| 4.1.2 (Create Shipment): "Pickup Address: auto-suggest + map confirmation"
+
+| C-E2-02
+| Enter recipient address
+| E2
+| M
+| M
+| 4.1.2: "Recipient Address: auto-suggest + map; country detection; delivery type"
+
+| C-E2-03
+| Enter parcel dimensions (manual)
+| E2
+| M
+| M
+| 4.1.2: "Parcel Capture: AR Dimension Measure (simulated): guided camera; returns L×W×H"
+
+| C-E2-04
+| Enter parcel weight
+| E2
+| M
+| S
+| 4.1.2: "Weight: manual entry with unit switch; validation ranges"
+
+| C-E2-05
+| AR dimension measurement
+| E2
+| S
+| L
+| 4.1.2: "AR Dimension Measure (simulated): guided camera"
+
+| C-E2-06
+| Add pickup notes
+| E2
+| S
+| S
+| 4.1.2: "optional pickup notes (gate codes, reception hours)"
+
+| C-E2-07
+| Capture parcel photos
+| E2
+| C
+| M
+| 4.1.2: "Photos (optional): 1–3 images for proof/insurance"
+
+| C-E2-08
+| Select delivery type
+| E2
+| C
+| S
+| 4.1.2: "delivery type (home/business/locker where available)"
+
+| C-E3-01
+| View multi-carrier service options
+| E3
+| M
+| M
+| 4.1.3 (Service Selection): "Available Providers: show FedEx, UPS, DHL, TNT/DPD/Parcelforce"
+
+| C-E3-02
+| View price breakdown
+| E3
+| M
+| S
+| 4.1.3 (Quotation): "Display live quote options with fare breakdown: base, fuel surcharge, remote area"
+
+| C-E3-03
+| Select service
+| E3
+| M
+| S
+| 4.1.3: "Service Tiers: Express / Economy / Ground with ETA, price, carrier logo"
+
+| C-E3-04
+| Add insurance toggle
+| E3
+| S
+| S
+| 4.1.4 (Extras & Insurance): "Toggle to purchase additional insurance; brief coverage summary"
+
+| C-E3-05
+| Filter and sort quotes
+| E3
+| C
+| M
+| 4.1.3: "Filters/Sort: price, ETA, carrier; info modals"
+
+| C-E4-01
+| Select payment method
+| E4
+| M
+| S
+| 4.1.5 (Payment & Booking): "Methods: Card / Apple Pay / Google Pay (simulated)"
+
+| C-E4-02
+| Complete payment transaction
+| E4
+| M
+| M
+| 4.1.5: "Success, 3-D Secure, and failure states"
+
+| C-E4-03
+| View booking confirmation
+| E4
+| M
+| M
+| 4.1.5: "generate Kurrier ID and display assigned carrier tracking number"
+
+| C-E4-04
+| Generate shipping label
+| E4
+| S
+| M
+| 4.1.5: "Label Option: printable PDF (4×6" or A4) with QR/Code128 containing Kurrier ID"
+
+| C-E5-01
+| View shipment timeline with status
+| E5
+| M
+| M
+| 4.1.7 (Handover & Tracking): "Timeline view shows events: Booked → Driver en route → Picked up → At Hub"
+
+| C-E5-02
+| View live driver location on map
+| E5
+| M
+| M
+| 4.1.6 (Pickup ETA & Live Map): "Live driver pin with status chips (Driver assigned → En route → Arriving → Waiting → Picked up)"
+
+| C-E5-03
+| View driver card with details
+| E5
+| M
+| S
+| 4.1.6: "Driver card (name, photo, vehicle, plate, rating) + contact"
+
+| C-E5-04
+| Contact driver (masked)
+| E5
+| S
+| S
+| 4.1.6: "contact (masked call or chat stub)"
+
+| C-E5-05
+| Refresh tracking status
+| E5
+| S
+| S
+| Implied by live tracking functionality (user control)
+
+| C-E6-01
+| View past shipments list
+| E6
+| S
+| M
+| 4.1.8 (Invoice & History): "saved in Past Shipments"
+
+| C-E6-02
+| View and download invoice
+| E6
+| S
+| M
+| 4.1.8: "Auto-issued invoice/receipt (PDF) with line-items; Business profile: tax ID on invoice"
+
+| C-E6-03
+| View rewards balance
+| E6
+| C
+| S
+| 4.1.8: Brief mentions "rewards" in passing as optional feature
+|===
+
+---
+
+=== Driver Stories (15 stories)
+
+.Driver Stories Traceability
+[%header, cols="^2,<3,^1,^1,^1,<3"]
+|===
+^| Story ID ^| Story Name ^| Epic ^| Priority ^| Size ^| Brief Section Reference
+
+| D-E7-01
+| Driver sign in with OTP
+| E7
+| M
+| S
+| 4.2.1 (Onboarding & Verification): "Phone + OTP"
+
+| D-E7-02
+| Upload verification documents
+| E7
+| S
+| M
+| 4.2.1: "upload license, vehicle, insurance (simulated)"
+
+| D-E7-03
+| View background check status
+| E7
+| C
+| S
+| 4.2.1: "background check status (simulated)"
+
+| D-E8-01
+| Go online/offline toggle
+| E8
+| M
+| S
+| 4.2.2 (Availability & Job Intake): "Go Online/Offline; heatmap for peak zones"
+
+| D-E8-02
+| View available jobs list
+| E8
+| M
+| M
+| 4.2.2: "Jobs List: proximity, payout, pickup ETA, parcel size/weight, special notes"
+
+| D-E8-03
+| View job details
+| E8
+| M
+| M
+| 4.2.2: "Job Detail: pickup address + map, customer contact (masked), parcel specs, carrier/service, assigned hub"
+
+| D-E8-04
+| Accept job
+| E8
+| M
+| S
+| Implied by job intake flow (commit action)
+
+| D-E9-01
+| Navigate to pickup location
+| E9
+| M
+| M
+| 4.2.3 (Navigation & Pickup): "In-app route preview; handoff steps checklist"
+
+| D-E9-02
+| Mark arrived at pickup
+| E9
+| M
+| S
+| 4.2.3: "Arrival: mark 'Arrived'"
+
+| D-E9-03
+| Scan Kurrier ID at pickup
+| E9
+| M
+| M
+| 4.2.3: "start Pickup: (a) scan Kurrier ID (or manual entry)"
+
+| D-E9-04
+| Navigate to hub
+| E9
+| M
+| S
+| 4.2.4 (Hub Drop-off): "Route to pre-assigned hub (FedEx/UPS/DHL, simulated)"
+
+| D-E9-05
+| Scan at hub and mark complete
+| E9
+| M
+| M
+| 4.2.4: "upon arrival, scan hub intake code; mark Complete"
+
+| D-E9-06
+| Capture pickup/drop-off photos
+| E9
+| S
+| S
+| 4.2.3: "(b) optional photo(s) of the parcel"; 4.2.4: "optional drop-off photo"
+
+| D-E10-01
+| View earnings dashboard
+| E10
+| S
+| M
+| 4.2.5 (Earnings & Quality): "Daily/weekly totals, next payout schedule (simulated)"
+
+| D-E10-02
+| View quality metrics and ratings
+| E10
+| C
+| M
+| 4.2.5: "Ratings, quality tips (e.g., photo clarity, ID match, safe handling)"
+|===
+
+<<<
+== Brief Section Coverage Analysis
+
+=== Section 4.1: Consumer App Flows
+
+.Section 4.1 Coverage
+[%header, cols="^1,<3,<5"]
+|===
+^| Section ^| Brief Requirement ^| Covered by Stories
+
+| 4.1.1
+| Onboarding & Sign-in
+| C-E1-01 (OTP), C-E1-02 (Location), C-E1-03 (Profile), C-E1-04 (Business)
+
+| 4.1.2
+| Create Shipment
+| C-E2-01 (Pickup addr), C-E2-02 (Recipient), C-E2-03 (Dimensions), C-E2-04 (Weight), C-E2-05 (AR), C-E2-06 (Notes), C-E2-07 (Photos), C-E2-08 (Delivery type)
+
+| 4.1.3
+| Service Selection & Quotation
+| C-E3-01 (Multi-carrier quotes), C-E3-02 (Price breakdown), C-E3-03 (Select service), C-E3-05 (Filter/sort)
+
+| 4.1.4
+| Extras & Insurance
+| C-E3-04 (Insurance toggle)
+
+| 4.1.5
+| Payment & Booking
+| C-E4-01 (Payment method), C-E4-02 (Process payment), C-E4-03 (Confirmation), C-E4-04 (Label)
+
+| 4.1.6
+| Pickup ETA & Live Map
+| C-E5-02 (Live map), C-E5-03 (Driver card), C-E5-04 (Contact)
+
+| 4.1.7
+| Handover & Tracking
+| C-E5-01 (Timeline), C-E5-05 (Refresh)
+
+| 4.1.8
+| Invoice & History
+| C-E6-01 (Past shipments), C-E6-02 (Invoice), C-E6-03 (Rewards)
+
+| 4.1.9
+| Issues & Support
+| _(Not in scope for demo - marked as Won't Have)_
+|===
+
+**Coverage:** 29 stories cover all in-scope consumer requirements from brief sections 4.1.1-4.1.8
+
+---
+
+=== Section 4.2: Driver App Flows
+
+.Section 4.2 Coverage
+[%header, cols="^1,<3,<5"]
+|===
+^| Section ^| Brief Requirement ^| Covered by Stories
+
+| 4.2.1
+| Onboarding & Verification
+| D-E7-01 (Sign in), D-E7-02 (Documents), D-E7-03 (Background check status)
+
+| 4.2.2
+| Availability & Job Intake
+| D-E8-01 (Go online), D-E8-02 (Jobs list), D-E8-03 (Job details), D-E8-04 (Accept)
+
+| 4.2.3
+| Navigation & Pickup
+| D-E9-01 (Navigate), D-E9-02 (Arrived), D-E9-03 (Scan), D-E9-06 (Photo)
+
+| 4.2.4
+| Hub Drop-off
+| D-E9-04 (Navigate to hub), D-E9-05 (Hub scan/complete), D-E9-06 (Drop-off photo)
+
+| 4.2.5
+| Earnings & Quality
+| D-E10-01 (Earnings), D-E10-02 (Quality metrics)
+|===
+
+**Coverage:** 15 stories cover all in-scope driver requirements from brief sections 4.2.1-4.2.5
+
+<<<
+== Gap Analysis
+
+=== Coverage Gaps (Intentionally Deferred)
+
+The following brief requirements are NOT covered by stories because they are explicitly out of scope for the mockup phase:
+
+**Consumer App:**
+
+.Consumer Coverage Gaps
+[%header, cols="<3,<4"]
+|===
+^| Brief Requirement ^| Reason for Exclusion
+
+| Change/cancel rules (4.1.9)
+| Complex edge case, Won't Have for demo
+
+| Surcharge handling for oversized/overweight
+| Edge case, Won't Have for demo
+
+| Help center (FAQ + chat)
+| Content creation out of scope
+
+| Consumer web dashboard
+| Secondary channel, Won't Have for demo
+|===
+
+**Driver App:**
+
+.Driver Coverage Gaps
+[%header, cols="<3,<4"]
+|===
+^| Brief Requirement ^| Reason for Exclusion
+
+| Incident reporting
+| Edge case, Won't Have for demo
+
+| Support/safety hub (detailed)
+| Content out of scope, can show placeholder
+|===
+
+**Admin Dashboard (Section 16):**
+
+.Admin Dashboard Coverage
+[%header, cols="<3,<4"]
+|===
+^| Brief Requirement ^| Reason for Exclusion
+
+| Operations monitoring
+| Not customer-facing, Won't Have for demo
+
+| Driver management
+| Admin functionality, Won't Have for demo
+
+| Support tools
+| Admin functionality, Won't Have for demo
+|===
+
+All gaps are documented and justified. No unintentional omissions exist.
+
+---
+
+=== Additional Features (Not in Brief)
+
+The following stories ADD features beyond the brief requirements:
+
+.Additional Features
+[%header, cols="^2,<3,<4"]
+|===
+^| Story ID ^| Story Name ^| Justification
+
+| C-E5-05
+| Refresh tracking status
+| Standard UX pattern for mobile apps, implied by real-time tracking
+
+| D-E8-04
+| Accept job
+| Commitment action implied by job discovery flow, not explicitly detailed in brief
+
+| _(None other)_
+| _All stories trace to brief_
+| _No orphan features_
+|===
+
+All added features are minor UX enhancements that complete flows implied by the brief.
+
+<<<
+== Change Impact Analysis
+
+Use this section to track how changes to the brief affect user stories:
+
+=== If Brief Section Changes
+
+**Example: Section 4.1.3 (Quotation) changes to show only 2 carriers instead of 3+**
+
+**Affected Stories:**
+- C-E3-01 (View multi-carrier quotes) - update acceptance criteria
+- Demo script - update to show 2 carriers instead of 3
+
+**Impact:** Low - implementation and demo easily adjustable
+
+---
+
+**Example: Section 4.2.3 (Pickup) removes QR scanning requirement**
+
+**Affected Stories:**
+- D-E9-03 (Scan parcel) - major change, might become manual ID entry
+- C-E5-01 (Timeline) - less verification confidence
+- C-E4-04 (Label) - might not need QR code generation
+
+**Impact:** Medium - affects verification strategy and label design
+
+---
+
+**Example: Section 4.1.5 (Payment) adds cryptocurrency payment option**
+
+**Affected Stories:**
+- C-E4-01 (Payment method) - add new option
+- C-E4-02 (Process payment) - add crypto processing flow
+
+**Impact:** Low - additive change, existing stories remain valid
+
+---
+
+=== If Stories Change
+
+When stories are modified, update:
+1. Epic document with story details
+2. This traceability matrix
+3. Dependencies document (if dependencies change)
+4. Prioritization summary (if priority changes)
+5. Demo script (if demo flow changes)
+
+<<<
+== Validation Checklist
+
+Use this checklist to verify traceability is maintained:
+
+**Forward Traceability:**
+- [ ] Every brief requirement (4.1.1-4.1.8, 4.2.1-4.2.5) has at least one story
+- [ ] Out-of-scope requirements are documented in "Coverage Gaps" section
+- [ ] Brief sections with no stories have documented justification
+
+**Backward Traceability:**
+- [ ] Every story has "Brief Reference" field in Notes section
+- [ ] All 44 stories appear in this traceability matrix
+- [ ] No orphan stories without brief justification
+- [ ] Additional features (beyond brief) are documented and justified
+
+**Consistency:**
+- [ ] Epic summaries reference correct brief sections
+- [ ] Story acceptance criteria align with brief requirements
+- [ ] Demo script demonstrates features described in brief
+- [ ] Technical notes reference appropriate brief sections (e.g., API notes)
+
+**Currency:**
+- [ ] Traceability matrix updated when brief changes
+- [ ] Traceability matrix updated when stories change
+- [ ] Change impact documented for major updates
+- [ ] Version control tracks changes to both brief and stories
+
+<<<
+== Appendix: Brief Structure Reference
+
+For quick reference, the relevant brief sections are:
+
+**Section 4: Primary User Journeys**
+
+* 4.1: Consumer App – Detailed Flows
+  - 4.1.1: Onboarding & Sign-in
+  - 4.1.2: Create Shipment
+  - 4.1.3: Service Selection & Quotation
+  - 4.1.4: Extras & Insurance
+  - 4.1.5: Payment & Booking
+  - 4.1.6: Pickup ETA & Live Map
+  - 4.1.7: Handover & Tracking
+  - 4.1.8: Invoice & History
+  - 4.1.9: Issues & Support (out of scope)
+
+* 4.2: Driver App – Detailed Flows
+  - 4.2.1: Onboarding & Verification
+  - 4.2.2: Availability & Job Intake
+  - 4.2.3: Navigation & Pickup
+  - 4.2.4: Hub Drop-off
+  - 4.2.5: Earnings & Quality
+
+**Section 14:** Consumer Mobile App (Screen Specifications)
+**Section 15:** Driver Mobile App (Screen Specifications)
+**Section 16:** Web Admin Dashboard (deferred)
+**Section 17:** Consumer Web Dashboard (deferred)
+
+<<<
+== Appendix: Story ID Quick Lookup
+
+.Quick Story ID Reference
+[%header, cols="^2,<4"]
+|===
+^| Story ID ^| Story Name
+
+| C-E1-01 | Sign in with Phone/Email + OTP
+| C-E1-02 | Location permission request
+| C-E1-03 | Profile setup
+| C-E1-04 | Business profile toggle
+| C-E2-01 | Enter pickup address
+| C-E2-02 | Enter recipient address
+| C-E2-03 | Enter parcel dimensions (manual)
+| C-E2-04 | Enter parcel weight
+| C-E2-05 | AR dimension measurement
+| C-E2-06 | Add pickup notes
+| C-E2-07 | Capture parcel photos
+| C-E2-08 | Select delivery type
+| C-E3-01 | View multi-carrier service options
+| C-E3-02 | View price breakdown
+| C-E3-03 | Select service
+| C-E3-04 | Add insurance toggle
+| C-E3-05 | Filter and sort quotes
+| C-E4-01 | Select payment method
+| C-E4-02 | Complete payment transaction
+| C-E4-03 | View booking confirmation
+| C-E4-04 | Generate shipping label
+| C-E5-01 | View shipment timeline with status
+| C-E5-02 | View live driver location on map
+| C-E5-03 | View driver card with details
+| C-E5-04 | Contact driver (masked)
+| C-E5-05 | Refresh tracking status
+| C-E6-01 | View past shipments list
+| C-E6-02 | View and download invoice
+| C-E6-03 | View rewards balance
+| D-E7-01 | Driver sign in with OTP
+| D-E7-02 | Upload verification documents
+| D-E7-03 | View background check status
+| D-E8-01 | Go online/offline toggle
+| D-E8-02 | View available jobs list
+| D-E8-03 | View job details
+| D-E8-04 | Accept job
+| D-E9-01 | Navigate to pickup location
+| D-E9-02 | Mark arrived at pickup
+| D-E9-03 | Scan Kurrier ID at pickup
+| D-E9-04 | Navigate to hub
+| D-E9-05 | Scan at hub and mark complete
+| D-E9-06 | Capture pickup/drop-off photos
+| D-E10-01 | View earnings dashboard
+| D-E10-02 | View quality metrics and ratings
+|===

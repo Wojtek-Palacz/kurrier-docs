@@ -1,0 +1,71 @@
+= Epic EX: [Epic Name]
+:toc:
+:toclevels: 2
+:sectnums:
+:doctype: article
+:icons: font
+
+<<<
+== Epic Overview
+
+**Epic ID:** EX +
+**Epic Name:** [Name] +
+**Actor:** [Consumer/Driver/Admin] +
+**Brief Reference:** Section X.X +
+**Priority:** [Overall priority - M/S/C] +
+**Story Count:** [Total] (M: [#], S: [#], C: [#])
+
+**Epic Goal:**
+
+[1-2 sentences describing what this epic achieves from user perspective]
+
+**Value Proposition:**
+
+[Why this epic matters for the demo - what capability it demonstrates]
+
+**Success Criteria:**
+
+- [ ] [Criterion 1]
+- [ ] [Criterion 2]
+- [ ] [Criterion 3]
+
+<<<
+== Stories
+
+=== Story [ID]: [Story Title]
+
+**Story ID:** [Actor]-E[Epic]-[Number] +
+**Priority:** [M/S/C/W] +
+**Size:** [S/M/L] +
+**Actor:** [Consumer/Driver/Admin]
+
+**User Story:**
+
+As a [actor],
+I want to [goal]
+so that [value].
+
+**Acceptance Criteria:**
+
+- [ ] Given [context], when [action], then [outcome]
+- [ ] [Additional criteria]
+- [ ] [Edge case criteria]
+
+**Notes:**
+
+- **Brief Reference:** Section X.X, Screen: [screen name]
+- **Technical:** [API/mock notes]
+- **UX:** [Interaction notes]
+- **Dependencies:**
+  * Requires: [Story IDs that must be complete first]
+  * Enables: [Story IDs that this story unblocks]
+  * Integrates with: [Story IDs that work in concert]
+- **Screen Count:** [number]
+
+**Demo Notes:**
+
+[Any specific notes for demo implementation]
+
+---
+
+[Repeat for each story in epic]

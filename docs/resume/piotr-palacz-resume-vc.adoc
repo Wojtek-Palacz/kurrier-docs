@@ -1,0 +1,100 @@
+= Piotr Palacz
+:description: Executive Resume for Venture Capital
+// :author: Piotr Palacz
+// :email: piotr@palacz.com
+// :revdate: 2025-08-09
+:doctype: article
+:icons: font
+
+[.lead]
+*Senior IT Architect* | *Early AI Adopter* _(Symbolic and Generative)_
+
+*Chandler, AZ* | (480) 295-6909 | mailto:piotr@palacz.com[piotr@palacz.com]
+
+== Executive Summary
+
+Senior architect with 30+ years experience in digital transformation and AI adoption at enterprise scale. Early adopter of AI technologies—from Symbolic AI systems in financial services (early 90s) through modern Generative AI platforms (2018+). Track record leading $100M+ technology transformation programs, architecting solutions serving 10,000+ users, and delivering measurable outcomes including 50% performance improvements and 85%+ AI confidence rates in production systems.
+
+Expertise in Enterprise Architecture, Business Process Re-engineering, SDLC methodologies and large legacy systems modernization. Currently developing agentic platforms that apply GenAI across the full Software Development Life Cycle—from GenAI-assisted requirements specification and business process analysis, through AI-assisted coding and architecture design, to test generation and validation.
+
+Experience bridging business strategy with technical execution across state agencies, healthcare systems, insurance, and financial services organizations in Australia (1990-97) and the United States (since 1997).
+
+== Core Value Proposition
+
+*AI & Innovation*:: Early adopter in Symbolic AI ('90s) and Generative AI with production deployments since 2018. Developer and daily user of GenAI tooling across full SDLC.
+
+*Enterprise Scale Delivery*:: Experience leading $100M+ transformation programs, delivering complex systems serving thousands of concurrent users with documented operational cost reductions of 50%.
+
+*Technology Modernization*:: Experience in legacy-to-modern migrations, architecting transitions from mainframe systems to cloud-native microservices architectures.
+
+*Cross-Functional Leadership*:: Experience building and leading technical teams across multiple locations, establishing architectural standards, and mentoring teams in modern development practices.
+
+== Key Technical Capabilities
+
+*AI/ML & GenAI*:: Production experience with OpenAI, Anthropic, Google, Mistral, and other LLM platforms. RAG-based hybrid search, MCP agents, IBM Watson platform (Assistant, Discovery, Knowledge Studio), NLP, conversational AI, local clustered LLM deployments.
+
+*Modern Development Stack*:: Python, Rust, Java, Scala, Smalltalk | FastAPI, Actix, Spring Boot | Docker, Azure, IBM Cloud | SOA, RESTful APIs, Microservices
+
+*Enterprise Architecture*:: TOGAF, ArchiMate, Cloud-Native Architectures, SOA Patterns, API-First Design, Event-Driven Architectures
+
+*Data & Analytics*:: Data Warehousing, ETL, Business Intelligence, Relational and NoSQL databases
+
+== Professional Highlights
+
+=== AI Platform Adoption Lead | 2018 – Present
+
+*Impact: AI transformation initiatives serving 10,000+ users across multiple enterprise deployments*
+
+*AI/GenAI Innovation*
+
+* Architected and deployed enterprise GenAI platform using IBM Watson, achieving 85%+ confidence scoring on production intents with 10,000+ active users
+* Developed NLP training corpus: 1,000+ intents, 150+ entities, 8,000+ training examples
+* Built RAG-based agentic platform for documentation analysis, model transformations, and workflow automation
+* Implemented hybrid search solutions combining multiple AI models to improve accuracy
+
+*Enterprise Transformation*
+
+* Technical Lead for multiple large-scale digital transformation programs (DMV, Public Health, Justice, Financial Protection)
+* Modernized legacy applications using cloud-native architectures (Spring Boot, Angular, Azure, Okta), reducing processing time by 50%
+* Architected ServiceNow-based enterprise management platforms for Configuration, Service, and Change Management
+* Led Business Process Re-engineering initiatives improving operational efficiency across multiple departments
+
+=== Enterprise Technical Architect | 2013 – 2018
+
+*Impact: Contributed to state-wide architectural standards and conducted audits for billion-dollar systems*
+
+* Co-authored California Enterprise Architecture Framework (CEAF 2.0), establishing eGovernment Reference Architecture adopted state-wide
+* Conducted technical assessments and audits for large-scale financial systems (Fi$Cal, CalSTRS) with budgets approaching $1B
+// * Architected data migration and ETL platforms serving 500+ users across multiple departments
+* Contributed to governance frameworks and architectural standards for state technology initiatives
+
+=== Solution Architect – Legacy Transformation | 2008 – 2013
+
+*Impact: $100M+ legacy modernization program, transitioning mainframe systems to modern architecture*
+
+* Solution Architect for DMV Legacy-to-SOA Migration, a large-scale state technology transformation program
+* Designed and implemented architectural framework with declarative business process engine supporting thousands of concurrent users
+* Contributed to adoption of enterprise BI/DW platform supporting 200+ production reports and dashboards
+* Established CI/CD pipelines and automated testing frameworks to reduce defect rates and accelerate delivery
+* Mentored cross-functional teams in SOA patterns, agile practices, and modern development methodologies
+
+=== Enterprise Architect – Healthcare Systems | 2003 – 2008
+
+*Impact: HIPAA-compliant healthcare systems architecture and Michigan State Award recipient*
+
+* Lead Architect for Health Services Management System with HIPAA and HL7 compliance
+* Designed enterprise-wide J2EE service-based architectures using ESB and JMS integration
+* Member of Enterprise Architecture Group establishing governance frameworks aligned with federal standards
+* Recipient of Michigan State Award for SOA implementation in retirement fund management systems
+
+== Education & Early Background
+
+*M.A. Philosophy* (summa cum laude), Warsaw University | Focus: Methodology of Sciences
+
+*Graduate Certificate in Computer Science*, Warsaw University | Focus: Expert Systems, Logic Programming, AI
+
+*Graduate Student, PhD Program*, Kansas University | Focus: Ontologies and Knowledge Representation
+
+Early career emphasis on AI and expert systems development for financial services sector, establishing foundation for current work in modern AI/ML platforms.
+
+*Aikido Practitioner* (brown belt)

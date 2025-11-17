@@ -1,0 +1,165 @@
+= User Story Quality Checklist
+:toc:
+:toclevels: 2
+:sectnums:
+:doctype: article
+:icons: font
+
+== Purpose
+
+This checklist validates user stories against the INVEST criteria and quality standards defined in `docs/Reference/UserStoryCharacteristics.adoc`.
+
+Use this checklist to review each user story before finalizing.
+
+== Story Metadata Checklist
+
+.Story Metadata Validation
+[%header, cols="^1,<5"]
+|===
+^| ✓ ^| Verification Item
+
+| {nbsp}
+| Story ID follows convention ([Actor]-E[Epic]-[Number])
+
+| {nbsp}
+| Title is concise and descriptive (< 60 characters)
+
+| {nbsp}
+| Actor is clearly identified (Consumer/Driver/Admin)
+
+| {nbsp}
+| Epic assignment is correct
+
+| {nbsp}
+| Brief reference section is documented
+
+| {nbsp}
+| Priority is assigned (M/S/C/W) with justification
+
+| {nbsp}
+| Size is assigned (S/M/L) with reasoning
+
+| {nbsp}
+| Screen count is estimated
+|===
+
+== Story Content Checklist
+
+.Story Content Validation
+[%header, cols="^1,<5"]
+|===
+^| ✓ ^| Verification Item
+
+| {nbsp}
+| Story statement follows "As a... I want... so that..." format
+
+| {nbsp}
+| Goal is specific and actionable
+
+| {nbsp}
+| Value statement is present and meaningful
+
+| {nbsp}
+| Acceptance criteria are specific and testable (minimum 2)
+
+| {nbsp}
+| Given-When-Then format used where appropriate
+
+| {nbsp}
+| Edge cases are addressed in acceptance criteria
+|===
+
+== Dependency & Context Checklist
+
+.Dependency & Context Validation
+[%header, cols="^1,<5"]
+|===
+^| ✓ ^| Verification Item
+
+| {nbsp}
+| Dependencies are identified (if any)
+
+| {nbsp}
+| Technical notes address simulation/mocking needs
+
+| {nbsp}
+| UX notes reference design requirements from brief
+
+| {nbsp}
+| Demo notes provide implementation guidance (if needed)
+|===
+
+== INVEST Criteria Validation
+
+.INVEST Criteria Checklist
+[%header, cols="^1,<2,<3"]
+|===
+^| ✓ ^| Criterion ^| Validation
+
+| {nbsp}
+| **I** - Independent
+| Story can be developed and tested independently with minimal dependencies
+
+| {nbsp}
+| **N** - Negotiable
+| Story describes intent (what/why), not implementation (how)
+
+| {nbsp}
+| **V** - Valuable
+| Clear value statement in "so that" clause from user perspective
+
+| {nbsp}
+| **E** - Estimable
+| Team can understand scope and complexity; size indicator is assigned
+
+| {nbsp}
+| **S** - Small
+| Appropriate scope for demo mockup development (1-3 screens)
+
+| {nbsp}
+| **T** - Testable
+| Acceptance criteria are specific and verifiable
+|===
+
+== Common Issues & Fixes
+
+.Common Story Quality Issues
+[%header, cols="<2,<3,<3"]
+|===
+^| Issue ^| Problem ^| Fix
+
+| **Too Technical**
+| Story describes implementation details
+| Rewrite to describe user goal and value
+
+| **Missing Value**
+| "So that" clause is vague or missing
+| Add clear benefit from user perspective
+
+| **Too Large**
+| Story spans multiple screens or flows
+| Break into multiple stories or consider making it an epic
+
+| **Too Small**
+| Story is a single button or field
+| Combine with related interactions
+
+| **Not Testable**
+| Acceptance criteria are vague (e.g., "looks good")
+| Use specific, measurable criteria
+
+| **Circular Dependencies**
+| Story A depends on B, B depends on A
+| Refactor to break circular dependency
+|===
+
+== Review Sign-off
+
+**Story ID:** _________________ +
+**Reviewer:** _________________ +
+**Review Date:** _________________ +
+**Status:** [ ] Approved [ ] Needs Revision
+
+**Notes:**
+
+[Space for reviewer notes]

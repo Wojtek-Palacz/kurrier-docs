@@ -1,0 +1,713 @@
+= Kurrier Demo: Golden Path Script
+:toc:
+:toclevels: 2
+:sectnums:
+:doctype: article
+:icons: font
+
+<<<
+== Demo Overview
+
+**Purpose:** Demonstrate Kurrier's complete value proposition end-to-end in approximately 10 minutes
+
+**Target Audience:** Investors, stakeholders, potential customers, usability testers
+
+**Demo Type:** Interactive clickable mockup (not production code)
+
+**Devices Required:**
+- Device 1: Consumer Mobile App (iPhone or Android)
+- Device 2: Driver Mobile App (iPhone or Android)
+- Optional: Large screen/projector for audience visibility
+
+**Demo Duration:** 10 minutes (8 minutes core flow + 2 minutes Q&A buffer)
+
+<<<
+== Demo Narrative
+
+=== The Story
+
+**Sarah** needs to send a birthday gift to her mom across the country. It needs to arrive by Friday, and she's booking on Wednesday. She uses Kurrier to get instant quotes from multiple carriers and book a pickup - all without leaving her home.
+
+**Mike** is an independent driver working afternoons in Sarah's area. He accepts her pickup job through the Kurrier driver app, navigates to her location, collects the parcel, and drops it at the FedEx hub - earning $12.50 for a 15-minute job.
+
+**Result:** Sarah's package enters the FedEx network within an hour of booking, she has complete tracking visibility, and Mike has earned money on his flexible schedule.
+
+<<<
+== Demo Setup & Preparation
+
+=== Pre-Demo Checklist
+
+**Consumer App Setup:**
+- [ ] App loaded on Device 1
+- [ ] Test account: +1 (555) 123-4567 or sarah.demo@kurrier.app
+- [ ] OTP code ready: 123456 (auto-fill if possible)
+- [ ] Location permission pre-granted (or ready to grant)
+- [ ] Pre-configured pickup address: 123 Main St, Phoenix, AZ 85001
+- [ ] Pre-configured recipient address: 456 Oak Ave, Boston, MA 02101
+- [ ] Parcel dimensions ready: 30 × 20 × 15 cm
+- [ ] Parcel weight ready: 2.5 kg
+
+**Driver App Setup:**
+- [ ] App loaded on Device 2
+- [ ] Test account: +1 (555) 987-6543 or mike.driver@kurrier.app
+- [ ] OTP code ready: 654321 (auto-fill if possible)
+- [ ] Driver status: Approved and ready to go online
+- [ ] GPS location set near pickup address (2-3 miles away)
+- [ ] Simulated navigation ready
+
+**Demo Data:**
+- [ ] Quote results pre-generated: FedEx Express ($25, 1 day), UPS Ground ($18, 3 days), DHL Economy ($20, 2 days)
+- [ ] Kurrier ID for demo: KUR-A1B2C3
+- [ ] Carrier tracking number: 1Z999AA10123456784
+- [ ] Hub location: FedEx Hub - Downtown Phoenix
+
+**Technical Setup:**
+- [ ] Both devices connected and responsive
+- [ ] Screen mirroring/projection working (if using)
+- [ ] Battery charged on both devices
+- [ ] Do Not Disturb enabled to avoid interruptions
+- [ ] Demo accounts logged out and ready for fresh sign-in
+
+<<<
+== Act 1: Consumer Books Shipment (5 minutes)
+
+**Devices:** Consumer app (Device 1)
+
+**Story IDs:** C-E1-01, C-E1-02, C-E2-01, C-E2-02, C-E2-03, C-E2-04, C-E3-01, C-E3-02, C-E3-03, C-E4-01, C-E4-02, C-E4-03
+
+=== Scene 1: Sign In & Permissions (30 seconds)
+
+**Action:**
+1. Launch Consumer app
+2. Tap "Sign in with Phone"
+3. Enter: +1 (555) 123-4567
+4. Tap "Send Code"
+5. Auto-fill OTP: 123456 (or enter manually)
+6. Tap "Verify"
+7. Accept Terms of Service
+8. Grant Location Permission when prompted
+
+**Talking Points:**
+- "Sarah opens Kurrier and signs in with her phone number"
+- "One-time passcode for secure, passwordless authentication"
+- "Location permission enables address suggestions and live tracking"
+
+**Expected Result:** Home screen appears with "Book Pickup" button
+
+---
+
+=== Scene 2: Enter Pickup Address (30 seconds)
+
+**Action:**
+1. Tap "Book Pickup" or "New Shipment"
+2. On pickup address screen, type "123 Main"
+3. Select "123 Main St, Phoenix, AZ 85001" from autocomplete suggestions
+4. Confirm address on map
+5. Optional: Add pickup notes "Ring doorbell"
+6. Tap "Continue"
+
+**Talking Points:**
+- "Smart address autocomplete makes entry fast"
+- "Map confirmation ensures accuracy"
+- "Sarah can add special instructions for the driver"
+
+**Expected Result:** Recipient address screen appears
+
+---
+
+=== Scene 3: Enter Recipient Address (30 seconds)
+
+**Action:**
+1. Type "456 Oak"
+2. Select "456 Oak Ave, Boston, MA 02101" from suggestions
+3. Confirm on map
+4. Select delivery type: "Home"
+5. Tap "Continue"
+
+**Talking Points:**
+- "Sending to her mom in Boston"
+- "Same smart address entry"
+- "Cross-country shipping - different carriers available"
+
+**Expected Result:** Parcel details screen appears
+
+---
+
+=== Scene 4: Enter Parcel Details (45 seconds)
+
+**Action:**
+1. Enter dimensions: 30 × 20 × 15 cm
+2. Enter weight: 2.5 kg
+3. Optional: Show AR measurement option (Phase 2) but use manual entry
+4. Tap "Continue" or "Get Quotes"
+
+**Talking Points:**
+- "Sarah enters her gift box dimensions"
+- "Optional AR measurement makes this even easier - just point your camera"
+- "Accurate dimensions ensure accurate quotes"
+
+**Expected Result:** Quote loading screen → Quote results appear
+
+---
+
+=== Scene 5: View Multi-Carrier Quotes (45 seconds)
+
+**Action:**
+1. Wait 1-2 seconds for quotes to load
+2. Show quote results:
+   - FedEx Express: $25.00 (Next day)
+   - UPS Ground: $18.00 (3 days)
+   - DHL Economy: $20.00 (2 days)
+3. Tap FedEx Express to expand
+4. Show price breakdown:
+   - Base: $22.00
+   - Fuel surcharge: $1.76
+   - Insurance (optional): $1.24
+   - Total: $25.00
+5. Select UPS Ground ($18.00)
+6. Tap "Continue to Payment"
+
+**Talking Points:**
+- "One request, multiple competitive quotes instantly"
+- "Sarah can choose based on price, speed, or preferred carrier"
+- "Complete price transparency - no hidden fees"
+- "She picks UPS Ground - arrives Friday, saves $7"
+
+**Expected Result:** Payment screen appears
+
+---
+
+=== Scene 6: Payment & Confirmation (45 seconds)
+
+**Action:**
+1. Show payment options: Apple Pay, Google Pay, Card
+2. Select Apple Pay (or Google Pay on Android)
+3. Show Apple Pay sheet (simulated)
+4. Tap "Pay $18.00"
+5. Show processing (2-3 second delay)
+6. Show success animation
+7. Show booking confirmation:
+   - "Booking Confirmed!"
+   - Kurrier ID: KUR-A1B2C3
+   - Carrier Tracking: 1Z999AA10123456784
+   - Service: UPS Ground
+   - Pickup ETA: 30-45 minutes
+
+**Talking Points:**
+- "Fast, secure payment with Apple Pay"
+- "Instant confirmation with tracking numbers"
+- "Kurrier ID for internal tracking, UPS number for end-to-end"
+- "Sarah gets immediate confirmation and her package is now matched to available drivers"
+
+**Expected Result:** Booking confirmed, ready to show tracking
+
+---
+
+=== Scene 7: Initial Tracking View (15 seconds)
+
+**Action:**
+1. Tap "Track Shipment"
+2. Show tracking screen:
+   - Map showing pickup location
+   - Timeline: "Booking confirmed" ✓, "Looking for driver..." (in progress)
+   - Status: "We're matching your pickup with available drivers"
+
+**Talking Points:**
+- "Sarah can track her shipment immediately"
+- "Real-time status updates as things happen"
+- "Now let's see the driver side..."
+
+**Transition:** Switch to Driver app (Device 2)
+
+<<<
+== Act 2: Driver Accepts and Picks Up (3 minutes)
+
+**Devices:** Driver app (Device 2), then Consumer app (Device 1)
+
+**Story IDs:** D-E7-01, D-E8-01, D-E8-02, D-E8-03, D-E8-04, D-E9-01, D-E9-02, D-E9-03
+
+=== Scene 8: Driver Goes Online (15 seconds)
+
+**Action:**
+1. Show Driver app (already signed in or quick sign-in)
+2. Driver dashboard shows "Offline" status
+3. Tap "Go Online" toggle
+4. Status changes to "Online"
+5. Show "Searching for jobs nearby..." message
+6. Jobs list appears with 2-3 available jobs
+
+**Talking Points:**
+- "Meet Mike - an independent driver working this afternoon"
+- "He controls when he works - complete flexibility"
+- "When he goes online, he sees available pickup opportunities"
+
+**Expected Result:** Jobs list visible with Sarah's job included
+
+---
+
+=== Scene 9: View Available Jobs (20 seconds)
+
+**Action:**
+1. Show jobs list with Sarah's job visible:
+   - "123 Main St, Phoenix"
+   - 2.3 miles away
+   - $12.50 payout
+   - Small parcel
+2. Highlight Sarah's job (same address she entered!)
+3. Tap on Sarah's job to view details
+
+**Talking Points:**
+- "**This is Sarah's package!** Her booking just created this job"
+- "Mike can see it's close, pays $12.50, and is a small package"
+- "Distance, payout, and details all upfront - complete transparency"
+
+**Expected Result:** Job detail screen opens
+
+---
+
+=== Scene 10: View Job Details & Accept (25 seconds)
+
+**Action:**
+1. Show job details:
+   - Pickup: 123 Main St, Phoenix
+   - Delivery: Boston, MA (first line only)
+   - Parcel: 30×20×15 cm, 2.5 kg
+   - Service: UPS Ground
+   - Hub: FedEx Hub - Downtown Phoenix
+   - Payout: $12.50
+   - Special notes: "Ring doorbell"
+   - Map preview showing pickup location
+2. Tap "Accept Job"
+3. Show success animation: "Job Accepted!"
+4. Auto-transition to navigation screen
+
+**Talking Points:**
+- "Mike can see all the details before accepting"
+- "Pickup notes from Sarah are right here"
+- "UPS Ground service - he'll drop at the UPS hub"
+- "One tap to accept, and he's on his way"
+
+**Expected Result:** Navigation to pickup starts
+
+**CRITICAL:** Switch to Consumer app to show integration
+
+---
+
+=== Scene 11: Consumer Sees Driver Assigned (15 seconds)
+
+**Switch to Device 1 (Consumer App)**
+
+**Action:**
+1. Show tracking screen update:
+   - Timeline: "Driver Mike assigned!" (new entry)
+   - Driver card appears with:
+     * Mike R.
+     * 4.8 ⭐ rating
+     * Gray Toyota Camry
+     * License: ABC-1234
+   - Map shows Mike's location pin (2.3 mi away)
+   - ETA: "Driver arriving in 8 minutes"
+
+**Talking Points:**
+- "**Real-time integration!** Sarah instantly sees her driver is assigned"
+- "She knows who's coming - name, photo, vehicle, rating"
+- "Live GPS tracking shows Mike approaching"
+- "She can see he's 8 minutes away"
+
+**Transition:** Switch back to Driver app to continue Mike's journey
+
+---
+
+=== Scene 12: Driver Navigation to Pickup (30 seconds)
+
+**Switch to Device 2 (Driver App)**
+
+**Action:**
+1. Show navigation screen with route to 123 Main St
+2. Simulate GPS movement (animated pin moving along route)
+3. Show ETA counting down: 8 min → 5 min → 2 min
+4. Arrive within proximity (simulated)
+5. "Mark Arrived" button appears
+6. Tap "Mark Arrived"
+7. Show arrival confirmation
+
+**Talking Points:**
+- "Mike uses in-app navigation to Sarah's address"
+- "Turn-by-turn directions guide him there"
+- Speed up: "He arrives in a few minutes" (use 2-3x speed animation)
+- "He marks his arrival"
+
+**Optional:** Briefly switch to Consumer app to show "Driver has arrived!" notification
+
+**Expected Result:** Pickup checklist screen appears
+
+---
+
+=== Scene 13: Scan Parcel at Pickup (30 seconds)
+
+**Action:**
+1. Show pickup checklist screen
+2. Tap "Scan Parcel" or "Scan QR Code"
+3. Show camera scanner interface
+4. Simulate successful scan (instant or 2-second delay)
+5. Show "KUR-A1B2C3 - Verified!" confirmation
+6. Show parcel details verification:
+   - Dimensions: 30×20×15 cm ✓
+   - Weight: 2.5 kg ✓
+   - Destination: Boston, MA ✓
+7. Tap "Confirm Pickup"
+8. Optional (Phase 2): Show "Take Photo" → quick photo capture
+9. Show "Pickup Complete!" success message
+10. Auto-transition to hub navigation
+
+**Talking Points:**
+- "Mike scans the QR code on Sarah's parcel"
+- "This verifies he has the right package - no mix-ups"
+- "Dimensions and weight match Sarah's declaration"
+- "Optional photo provides proof of pickup"
+- "Pickup complete - now heading to the hub"
+
+**CRITICAL:** Switch to Consumer app to show timeline update
+
+---
+
+=== Scene 14: Consumer Sees Pickup Confirmation (15 seconds)
+
+**Switch to Device 1 (Consumer App)**
+
+**Action:**
+1. Show tracking screen update:
+   - Timeline: "Your parcel has been picked up!" (new entry with timestamp)
+   - Optional: Pickup photo visible in timeline
+   - Map updates: driver pin moves
+   - Status: "En route to UPS hub"
+
+**Talking Points:**
+- "**Sarah gets instant notification - her package is picked up!**"
+- "Real-time timeline updates as Mike completes each step"
+- "She can see the photo Mike just took"
+- "Complete transparency - she knows exactly where her package is"
+
+**Transition:** Switch back to Driver app for final leg
+
+<<<
+== Act 3: Hub Drop-off & Completion (2 minutes)
+
+**Devices:** Driver app (Device 2), then Consumer app (Device 1)
+
+**Story IDs:** D-E9-04, D-E9-05, D-E10-01, C-E5-01, C-E6-02
+
+=== Scene 15: Navigation to Hub (20 seconds)
+
+**Switch to Device 2 (Driver App)**
+
+**Action:**
+1. Show navigation to UPS Hub - Downtown Phoenix
+2. Simulate GPS movement (faster animation, 3-4x speed)
+3. Show route from pickup → hub on map
+4. Arrive at hub
+5. Tap "Mark Arrived at Hub"
+
+**Talking Points:**
+- "Mike navigates to the assigned UPS hub"
+- Fast-forward: "Just a few minutes away"
+- "Hubs are strategically located for quick drop-offs"
+
+**Expected Result:** Hub drop-off screen appears
+
+---
+
+=== Scene 16: Hub Scan & Job Completion (30 seconds)
+
+**Action:**
+1. Show hub drop-off screen
+2. Tap "Scan Hub Code"
+3. Show scanner (simulate scan or instant success)
+4. Show "Hub Verified - UPS Downtown" confirmation
+5. Optional (Phase 2): "Take Drop-off Photo"
+6. Tap "Complete Job"
+7. Show "Job Complete!" celebration screen with:
+   - "Excellent work, Mike!"
+   - Earnings: $12.50
+   - Time: 15 minutes
+   - Distance: 4.8 miles
+   - "Added to your weekly earnings"
+8. Show earnings summary:
+   - Today: $52.50 (4 jobs)
+   - This week: $340.25 (28 jobs)
+   - Next payout: Friday
+
+**Talking Points:**
+- "Mike scans the hub intake code to verify correct drop-off"
+- "Job complete! Mike earned $12.50 for this 15-minute pickup"
+- "He can see his daily and weekly earnings"
+- "Gets paid every Friday - complete transparency"
+
+**CRITICAL:** Switch to Consumer app for finale
+
+---
+
+=== Scene 17: Consumer Final Status & Invoice (30 seconds)
+
+**Switch to Device 1 (Consumer App)**
+
+**Action:**
+1. Show tracking screen final update:
+   - Timeline: "At Hub - Handed to UPS" (final entry with timestamp)
+   - Map shows hub location
+   - Status: "Your package is now with UPS for delivery to Boston"
+   - "Invoice Ready" button appears
+2. Tap "Invoice Ready" or "View Invoice"
+3. Show professional invoice:
+   - Invoice #INV-00123
+   - Kurrier ID: KUR-A1B2C3
+   - UPS Tracking: 1Z999AA10123456784
+   - From: 123 Main St, Phoenix, AZ
+   - To: 456 Oak Ave, Boston, MA
+   - Service: UPS Ground
+   - Cost breakdown:
+     * Base: $16.00
+     * Fuel surcharge: $1.28
+     * Tax: $0.72
+     * **Total: $18.00**
+   - Payment: Apple Pay (...1234)
+4. Show "Download PDF" and "Share" options
+
+**Talking Points:**
+- "**Complete end-to-end journey!** Sarah's package is now with UPS"
+- "Timeline shows every step with timestamps"
+- "Professional invoice ready for her records"
+- "UPS tracking number for end-to-end visibility"
+- "From booking to carrier handoff in under an hour"
+
+**Expected Result:** Demo complete!
+
+<<<
+== Demo Summary & Key Messages (30 seconds)
+
+**Talking Points for Closing:**
+
+1. **Two-sided marketplace working seamlessly:**
+   - Sarah books → Mike fulfills → Everyone wins
+
+2. **Real-time integration:**
+   - Every driver action updates consumer tracking instantly
+   - Live GPS, status updates, timeline events
+
+3. **Transparency everywhere:**
+   - Multi-carrier quotes with price breakdown
+   - Driver details and ratings
+   - Earnings visibility for drivers
+
+4. **Professional quality:**
+   - QR code verification prevents errors
+   - Photo proof for accountability
+   - Professional invoices for record-keeping
+
+5. **Flexible for drivers:**
+   - Work when they want
+   - See earnings upfront
+   - Fair, transparent payouts
+
+6. **Convenient for consumers:**
+   - No leaving home
+   - Instant quotes from multiple carriers
+   - Live tracking like ride-share apps
+
+**Final Statement:**
+"Kurrier brings the modern, on-demand experience to parcel shipping. Consumers get convenience and transparency. Drivers get flexibility and fair earnings. Carriers get first-mile pickup without infrastructure investment. It's a win-win-win."
+
+<<<
+== Q&A Preparation
+
+=== Anticipated Questions & Answers
+
+**Q: How do you make money?**
+
+A: "We take a service fee on each transaction - a percentage of the shipping cost paid by the consumer. Think of it like how Uber works but for packages. The fee covers platform operations, payment processing, insurance, and driver verification."
+
+**Q: What about insurance and liability?**
+
+A: "Built-in insurance up to declared value, with optional additional coverage available. Drivers are independent contractors who must carry their own vehicle insurance. Platform provides backup coverage for parcel loss or damage during pickup and hub delivery."
+
+**Q: How do you ensure driver quality?**
+
+A: "Multi-layer verification: background checks, document verification (license, vehicle, insurance), customer ratings after each job, photo verification at pickup and drop-off, and QR code scanning to prevent errors. Low-rated drivers are offered coaching or removed."
+
+**Q: What if the driver damages the package?**
+
+A: "Photo evidence at both pickup and hub drop-off. If damage occurs during our portion (pickup to hub), our insurance covers it. Customers can file claims directly in the app with photo evidence."
+
+**Q: How is this different from scheduling a carrier pickup directly?**
+
+A: "Speed, flexibility, and choice. Carrier pickups often require scheduling days in advance, pickup windows are wide (4-8 hours), and you're locked into one carrier. Kurrier: book in minutes, pickup in under an hour, choose from multiple carriers with instant quotes."
+
+**Q: What's your take rate?**
+
+A: [If asked by investors] "We're targeting 15-20% service fee on the base shipping cost. Drivers keep 100% of their earnings from the job payout we show them. Example: $18 shipment, carrier cost $15, driver pays out $3, platform fee $3, net to us $0 initially (scaled economics improve this)."
+
+**Q: How do you handle peak times or driver shortages?**
+
+A: "Dynamic pricing - surge pricing during high demand periods, similar to ride-share. This incentivizes more drivers to go online when needed. We also show heatmaps to drivers so they can position themselves in busy areas."
+
+**Q: What if my package doesn't arrive on time?**
+
+A: "Once the package is handed to the carrier at the hub, delivery timing is managed by them (FedEx, UPS, DHL). We provide the carrier tracking number for end-to-end visibility. Our SLA covers pickup timing - if a driver doesn't show within the promised window, we offer compensation."
+
+**Q: Can businesses use this?**
+
+A: "Absolutely. Business accounts get features like: business profile with tax ID on invoices, bulk shipping capabilities (future), saved addresses and templates, expense reporting exports. Same great service, business-focused tools."
+
+**Q: What cities are you launching in?**
+
+A: [Depends on actual plan] "Starting with Phoenix metro, expanding to LA, San Diego, Dallas, and Austin in Year 1. Focus on Sun Belt cities with geographic spread and strong e-commerce activity."
+
+<<<
+== Demo Troubleshooting
+
+=== Common Issues & Solutions
+
+**Issue: OTP doesn't auto-fill**
+
+Solution: Manually enter 123456 (consumer) or 654321 (driver). Keep moving.
+
+**Issue: Map doesn't load**
+
+Solution: Say "Simulated map data" and proceed. Use screenshot backup if available.
+
+**Issue: App crashes or freezes**
+
+Solution: Have backup device ready with same demo state. "Technical difficulties - let me switch devices." Seamless recovery.
+
+**Issue: Timing is off (going too fast or slow)**
+
+Solution: Use natural pauses for talking points. Speed up boring parts (address entry), slow down exciting parts (quotes, driver acceptance, tracking updates).
+
+**Issue: Audience can't see screen**
+
+Solution: Use screen mirroring. Walk closer with device. Narrate what's happening verbally. Have screenshot deck as backup.
+
+**Issue: Questions interrupt flow**
+
+Solution: "Great question - let me finish this one step and I'll come right back to that." Or: "Hold that thought - you'll see the answer in just a moment." Answer during natural pauses (e.g., after booking confirmed, after job accepted).
+
+**Issue: Demo feels too long**
+
+Solution: Skip optional steps: Skip C-E1-03 (profile setup), Skip C-E2-05 (AR measurement), Skip D-E10-01 (earnings deep dive), Briefly mention C-E6-02 (invoice) without opening. Core flow can be done in 7 minutes.
+
+**Issue: Demo feels too fast/shallow**
+
+Solution: Linger on key moments: Expand quote price breakdown, Show driver card details longer, Pause on timeline updates to let them sink in, Show invoice details more thoroughly. Can extend to 12-13 minutes.
+
+<<<
+== Demo Variations
+
+=== Phase 1: MVP Demo (8 minutes)
+
+**Include:**
+- All Must-Have stories only (25 stories)
+- Skip: AR measurement, photos, insurance, business profile, rewards, quality metrics
+
+**Focus:** Raw functionality and integration
+
+---
+
+=== Phase 2: Enhanced Demo (10 minutes)
+
+**Include:**
+- Must-Have + Should-Have stories (37 stories)
+- Add: AR measurement demo, pickup/drop-off photos, insurance toggle, earnings dashboard, invoice viewing
+
+**Focus:** Polish and professional features
+
+---
+
+=== Phase 3: Complete Demo (12 minutes)
+
+**Include:**
+- All stories (44 stories)
+- Add: Business profile, rewards balance, delivery type selector, quality metrics
+
+**Focus:** Comprehensive feature showcase
+
+---
+
+=== Investor-Focused Demo
+
+**Emphasis:**
+- Market size and problem ("Billions in parcel shipping, no modern first-mile solution")
+- Unit economics ("$X revenue per shipment, $Y driver cost, $Z margin")
+- Scalability ("Platform scales without linear costs")
+- Defensibility ("Network effects, driver quality, carrier relationships")
+
+---
+
+=== Customer-Focused Demo
+
+**Emphasis:**
+- Convenience ("Book from home in 2 minutes")
+- Savings ("Compare carriers, save money")
+- Trust ("See your driver, live tracking, photo proof")
+- Speed ("Pickup in under an hour")
+
+---
+
+=== Technical/Developer Demo
+
+**Emphasis:**
+- Real-time architecture
+- Integration complexity (maps, payments, notifications)
+- Verification systems (QR codes, GPS, photos)
+- Two-sided marketplace coordination
+
+<<<
+== Post-Demo Follow-Up
+
+**Immediate Next Steps:**
+
+1. **Gather feedback:**
+   - "What stood out to you?"
+   - "Any features you'd want to see?"
+   - "Would you use this? Would you drive for this?"
+
+2. **Provide resources:**
+   - Link to demo video (if recorded)
+   - One-pager with key features
+   - Contact information
+
+3. **Call to action:**
+   - Investors: "We're raising $X for market launch"
+   - Customers: "Join our beta waitlist"
+   - Drivers: "Sign up to become a driver"
+   - Partners: "Let's discuss integration opportunities"
+
+**Demo Assets to Prepare:**
+
+- [ ] Recorded demo video (backup or async sharing)
+- [ ] Screenshot deck (if live demo fails)
+- [ ] One-page feature summary
+- [ ] Pitch deck (for investors)
+- [ ] FAQ document
+- [ ] Waitlist signup link
+
+<<<
+== Appendix: Story Coverage Matrix
+
+.Golden Path Story Coverage in Demo
+[%header, cols="^1,<3,^1"]
+|===
+^| Epic ^| Stories Demonstrated ^| Demo Act
+
+| E1 | C-E1-01, C-E1-02 | Act 1, Scene 1
+| E2 | C-E2-01, C-E2-02, C-E2-03, C-E2-04 | Act 1, Scenes 2-4
+| E3 | C-E3-01, C-E3-02, C-E3-03 | Act 1, Scene 5
+| E4 | C-E4-01, C-E4-02, C-E4-03 | Act 1, Scenes 6-7
+| E5 | C-E5-01, C-E5-02, C-E5-03 | Act 2-3 (integrated)
+| E7 | D-E7-01 | Act 2, Scene 8 (brief)
+| E8 | D-E8-01, D-E8-02, D-E8-03, D-E8-04 | Act 2, Scenes 8-11
+| E9 | D-E9-01, D-E9-02, D-E9-03, D-E9-04, D-E9-05 | Act 2-3, Scenes 12-16
+| E6 | C-E6-02 (brief) | Act 3, Scene 17
+| E10 | D-E10-01 (brief) | Act 3, Scene 16
+|===
+
+**Total Golden Path Stories Demonstrated:** 25 Must-Have stories

@@ -1,0 +1,226 @@
+= Epic E1: Consumer Onboarding & Authentication
+:toc:
+:toclevels: 2
+:sectnums:
+:doctype: article
+:icons: font
+:numbered:
+:pagenums:
+:reproducible:
+
+<<<
+== Epic Overview
+
+**Epic ID:** E1 +
+**Epic Name:** Consumer Onboarding & Authentication +
+**Actor:** Consumer +
+**Brief Reference:** Section 4.1.1 (Onboarding & Sign-in) +
+**Priority:** Must Have (contains Golden Path blockers) +
+**Story Count:** 4 (M: 2, S: 1, C: 1)
+
+**Epic Goal:**
+
+Enable consumers to securely authenticate, grant necessary permissions, and set up their profile so they can begin booking shipments through the Kurrier platform.
+
+**Value Proposition:**
+
+This epic establishes the entry point for the consumer experience. Without successful authentication and onboarding, users cannot access any shipment booking features. The demo must show a streamlined, trustworthy sign-in flow that builds confidence in the platform while collecting minimal necessary information.
+
+**Success Criteria:**
+
+- [ ] Consumer can sign in using phone or email with OTP verification
+- [ ] Location permission is requested at the appropriate contextual moment
+- [ ] Basic profile information (name, contact, default address) can be captured
+- [ ] Business users have the option to configure a business profile
+- [ ] The onboarding flow is quick (<2 minutes) and does not create friction
+- [ ] ToS/Privacy consent is clearly presented and captured
+
+<<<
+== Stories
+
+=== Story C-E1-01: Sign in with Phone/Email + OTP
+
+**Story ID:** C-E1-01 +
+**Priority:** Must Have (M) +
+**Size:** Small (S) +
+**Actor:** Consumer
+
+**User Story:**
+
+As a consumer,
+I want to sign in using my phone number or email address with OTP verification
+so that I can securely access the Kurrier platform without creating yet another password.
+
+**Acceptance Criteria:**
+
+- [ ] Given I am on the sign-in screen, when I choose phone or email authentication, then I see an appropriate input field with format validation
+- [ ] Given I enter a valid phone number or email, when I tap "Send Code", then I receive an OTP code (simulated) and see a verification screen
+- [ ] Given I enter the correct OTP code, when I tap "Verify", then I am authenticated and proceed to permission requests or main app
+- [ ] Given I enter an incorrect OTP code, when I tap "Verify", then I see a clear error message and can retry
+- [ ] I can request a new OTP code if the first one expires or is not received
+- [ ] I must accept Terms of Service and Privacy Policy checkboxes before proceeding
+- [ ] The OTP input field provides appropriate keyboard (numeric for phone, default for email)
+- [ ] Loading states are shown during code sending and verification
+
+**Notes:**
+
+- **Brief Reference:** Section 4.1.1 - "Methods: Phone or Email + OTP, ToS/Privacy consent"
+- **Technical:** OTP delivery is simulated (no actual SMS/email). Use a fixed code for demo (e.g., "123456") or auto-fill after delay
+- **UX:** Follow mobile best practices - auto-focus OTP field, provide resend option with countdown timer, clear error messaging
+- **Dependencies:**
+  * Requires: None (entry point to app)
+  * Enables: C-E1-02 (Location permission), C-E1-03 (Profile setup)
+  * Integrates with: None
+- **Screen Count:** 2 screens (Sign-in input + OTP verification)
+
+**Demo Notes:**
+
+For demo purposes, use a pre-configured test phone number or email. Auto-fill OTP after a brief delay to keep demo flowing smoothly. Show both success path and one error state (invalid code) to demonstrate error handling.
+
+---
+
+=== Story C-E1-02: Location Permission Request
+
+**Story ID:** C-E1-02 +
+**Priority:** Must Have (M) +
+**Size:** Small (S) +
+**Actor:** Consumer
+
+**User Story:**
+
+As a consumer,
+I want to be prompted to grant location permission at the right moment
+so that I understand why the app needs my location and can enable features like address auto-detection and driver tracking.
+
+**Acceptance Criteria:**
+
+- [ ] Given I have just authenticated for the first time, when the app needs location access, then I see a contextual permission request explaining why location is needed
+- [ ] Given I grant location permission, when the permission is confirmed, then I proceed to the next onboarding step or main app
+- [ ] Given I deny location permission, when I proceed, then I can still use the app but with manual address entry (no auto-detection)
+- [ ] The permission request uses native OS dialogs (iOS/Android)
+- [ ] The pre-permission explanation clearly states the benefits (address suggestions, live tracking)
+- [ ] I can later enable location permission from app settings if initially denied
+
+**Notes:**
+
+- **Brief Reference:** Section 4.1.1 - "Location permission prompt (contextual)"
+- **Technical:** Use native platform permission APIs (simulated in prototype). Show both granted and denied paths
+- **UX:** Best practice is to show a custom screen explaining the benefit before triggering the OS permission dialog. This improves grant rates
+- **Dependencies:**
+  * Requires: C-E1-01 (User authenticated)
+  * Enables: C-E2-01 (Address entry with auto-suggest), C-E5-02 (Live driver tracking)
+  * Integrates with: All location-based features
+- **Screen Count:** 1-2 screens (Pre-permission explainer + native OS dialog)
+
+**Demo Notes:**
+
+Show the permission granted path in the primary demo flow. Optionally demonstrate the denied path to show graceful degradation. For visual mockup, create a simulated iOS/Android permission dialog.
+
+---
+
+=== Story C-E1-03: Profile Setup
+
+**Story ID:** C-E1-03 +
+**Priority:** Should Have (S) +
+**Size:** Small (S) +
+**Actor:** Consumer
+
+**User Story:**
+
+As a consumer,
+I want to provide my basic profile information (name, contact details, default pickup address)
+so that I don't have to re-enter this information every time I book a shipment.
+
+**Acceptance Criteria:**
+
+- [ ] Given I am completing onboarding, when I reach the profile setup screen, then I see fields for full name, phone, email (pre-filled from auth), and default pickup address
+- [ ] Given I enter my information, when all required fields are valid, then the "Continue" or "Save" button becomes enabled
+- [ ] Given I provide a default pickup address, when I save my profile, then this address will be pre-selected in future shipment bookings
+- [ ] I can skip profile setup and complete it later from settings
+- [ ] Field validation provides inline feedback (e.g., invalid email format)
+- [ ] The default pickup address field supports autocomplete with address suggestions
+
+**Notes:**
+
+- **Brief Reference:** Section 4.1.1 - "Profile: name, phone/email, default pickup address"
+- **Technical:** Default address uses same geocoding/autocomplete as shipment address entry (simulated)
+- **UX:** Keep form short - only essential fields during onboarding. Optional fields can be added later
+- **Dependencies:**
+  * Requires: C-E1-01 (User authenticated)
+  * Enables: C-E2-01 (Pickup address can be pre-filled from profile)
+  * Integrates with: Profile management in settings
+- **Screen Count:** 1 screen (Profile form)
+
+**Demo Notes:**
+
+This is a "Should Have" story because the Golden Path can work with manual address entry each time. However, it significantly improves the perceived UX for repeat use. Include in Phase 2 (Enhanced Demo).
+
+---
+
+=== Story C-E1-04: Business Profile Toggle
+
+**Story ID:** C-E1-04 +
+**Priority:** Could Have (C) +
+**Size:** Small (S) +
+**Actor:** Consumer
+
+**User Story:**
+
+As a business user,
+I want to configure my profile as a business account (company name, tax ID)
+so that my invoices and receipts reflect business information for accounting and tax purposes.
+
+**Acceptance Criteria:**
+
+- [ ] Given I am setting up my profile, when I enable the "Business Account" toggle, then I see additional fields for company name and tax ID
+- [ ] Given I provide business information, when I save my profile, then all future invoices will include this business information
+- [ ] Given I am a personal user, when I skip the business toggle, then my invoices show individual information
+- [ ] I can switch between personal and business profiles later in settings
+- [ ] Tax ID field provides appropriate validation for the user's country
+
+**Notes:**
+
+- **Brief Reference:** Section 4.1.1 - "toggle for business profile (company, tax ID)"
+- **Technical:** Business information is stored in user profile and included in invoice generation (simulated)
+- **UX:** Keep business fields optional and collapsible to avoid overwhelming personal users
+- **Dependencies:**
+  * Requires: C-E1-03 (Profile setup) or can be standalone setting
+  * Enables: Invoice generation with business information (C-E6-02)
+  * Integrates with: Invoicing and tax reporting features
+- **Screen Count:** 0-1 additional fields (part of profile screen)
+
+**Demo Notes:**
+
+This is a "Could Have" feature - not essential for the Golden Path but demonstrates platform's flexibility for business users. Include only in Phase 3 (Complete Demo) if time permits. Can be shown as a collapsed/hidden section in earlier phases.
+
+---
+
+<<<
+== Epic Summary
+
+**Golden Path Coverage:**
+
+Stories C-E1-01 and C-E1-02 are essential for the Golden Path demo. Without authentication and location permission, the consumer cannot proceed with booking a shipment.
+
+**Implementation Notes:**
+
+* Start with C-E1-01 (authentication) as it is the absolute entry point
+* C-E1-02 (location permission) follows immediately after successful authentication
+* C-E1-03 (profile setup) can be implemented in Sprint 1 or Sprint 5 (enhancement phase)
+* C-E1-04 (business profile) is lowest priority and can be deferred
+
+**Integration Points:**
+
+* Authentication state is required by all subsequent consumer features
+* Location permission enablement affects address entry and tracking features
+
+**Development Sequence:**
+
+1. C-E1-01: Sign in flow (Sprint 1 - Foundation)
+2. C-E1-02: Location permission (Sprint 1 - Foundation)
+3. C-E1-03: Profile setup (Sprint 5 - Enhancement)
+4. C-E1-04: Business profile (Phase 3 - Optional)
+
+**Demo Timing:**
+
+The authentication and permission flow should take <60 seconds in the demo to avoid losing audience attention. Use pre-filled data and simulated OTP for smooth flow.

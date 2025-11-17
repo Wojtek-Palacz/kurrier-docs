@@ -1,0 +1,348 @@
+= Epic E5: Live Tracking & Driver Interaction
+:toc:
+:toclevels: 2
+:sectnums:
+:doctype: article
+:icons: font
+:numbered:
+:pagenums:
+:reproducible:
+
+<<<
+== Epic Overview
+
+**Epic ID:** E5 +
+**Epic Name:** Live Tracking & Driver Interaction +
+**Actor:** Consumer +
+**Brief Reference:** Section 4.1.6 (Pickup ETA & Live Map), 4.1.7 (Handover & Tracking) +
+**Priority:** Must Have (core customer experience) +
+**Story Count:** 5 (M: 3, S: 2, C: 0)
+
+**Epic Goal:**
+
+Enable consumers to track their shipment in real-time with live driver location, view shipment status timeline, see driver details, and contact the driver if needed so they have full visibility and confidence in their booking.
+
+**Value Proposition:**
+
+This epic delivers on the transparency promise - consumers can see exactly where their parcel is at every moment. Real-time GPS tracking and automatic status updates eliminate anxiety and uncertainty. The driver card humanizes the service by showing who is handling the parcel. This is where Kurrier differentiates from traditional shipping - live visibility from the moment a driver is assigned until hub handoff.
+
+**Success Criteria:**
+
+- [ ] Consumer can see driver's real-time location on a map
+- [ ] Consumer can view complete shipment timeline with timestamps
+- [ ] Consumer can see driver information (name, photo, vehicle, rating)
+- [ ] Consumer can contact driver if needed (masked communication)
+- [ ] All status updates appear automatically without manual refresh
+- [ ] Tracking feels modern, professional, and confidence-inspiring
+
+<<<
+== Stories
+
+=== Story C-E5-01: View Shipment Timeline with Status
+
+**Story ID:** C-E5-01 +
+**Priority:** Must Have (M) +
+**Size:** Medium (M) +
+**Actor:** Consumer
+
+**User Story:**
+
+As a consumer,
+I want to see a timeline of my shipment's progress with all status updates and timestamps
+so that I know exactly what's happening with my parcel at every stage.
+
+**Acceptance Criteria:**
+
+- [ ] Given I have booked a shipment, when I view tracking, then I see a vertical timeline of all events
+- [ ] The timeline shows: Booking confirmed (with time), Driver assigned (with driver name), Driver en route to pickup (with ETA), Driver arrived at pickup, Parcel picked up (with timestamp and optional photo), En route to hub, Arrived at hub, Handed to carrier (completion)
+- [ ] Current status is highlighted or visually distinct from completed steps
+- [ ] Future steps (not yet completed) are shown in gray/inactive state
+- [ ] Given a status update occurs (from driver actions D-E9-02, D-E9-03, D-E9-05), when it happens, then my timeline updates automatically in real-time
+- [ ] Each timeline event shows date and time
+- [ ] I can tap on timeline events to see more details (e.g., photo from pickup)
+
+**Notes:**
+
+- **Brief Reference:** Section 4.1.7 - "Timeline view shows events: Booked → Driver en route → Picked up → At Hub (drop-off proof photo optional) → Handover to carrier"
+- **Technical:** Timeline data comes from shipment status events triggered by driver actions. Real-time updates via websocket or polling (simulated)
+- **UX:** Clean vertical timeline with checkmarks for completed steps, current step highlighted, future steps muted. Use icons for each status type
+- **Dependencies:**
+  * Requires: C-E4-03 (Booking confirmed - initial timeline entry)
+  * Enables: Visibility into all shipment events
+  * Integrates with: D-E9-02 (Arrived), D-E9-03 (Picked up), D-E9-05 (At hub), real-time status system
+- **Screen Count:** 1 screen (Timeline view, part of tracking screen)
+
+**Demo Notes:**
+
+**CRITICAL DISPLAY:** This timeline is where all driver actions (Epic E9) become visible to Sarah. Start demo showing initial status ("Booking confirmed", "Looking for driver"). As Mike accepts job (D-E8-04), show "Driver assigned" appear. As Mike marks arrived (D-E9-02), show "Driver arrived" update. As Mike scans parcel (D-E9-03), show "Picked up" with timestamp. Finally, when Mike completes hub drop-off (D-E9-05), show "At Hub - Handed to FedEx". This is the integration showcase - every driver action creates a timeline event.
+
+---
+
+=== Story C-E5-02: View Live Driver Location on Map
+
+**Story ID:** C-E5-02 +
+**Priority:** Must Have (M) +
+**Size:** Medium (M) +
+**Actor:** Consumer
+
+**User Story:**
+
+As a consumer,
+I want to see my driver's real-time location on a map as they approach my pickup location
+so that I know when to expect them and can prepare my parcel.
+
+**Acceptance Criteria:**
+
+- [ ] Given a driver has accepted my job (D-E8-04), when I view tracking, then I see a map with driver's live location
+- [ ] The map shows: My pickup location (pin/marker), Driver's current location (moving pin with car icon), Route from driver to my location (optional)
+- [ ] Given the driver is moving (D-E9-01), when their location updates, then the map pin moves smoothly in real-time
+- [ ] I see estimated time of arrival (ETA) based on driver's current location
+- [ ] The map auto-centers to show both my location and driver's location
+- [ ] I can zoom and pan the map to explore
+- [ ] Status chips show current driver state ("En route to you", "Nearby", "Arrived")
+- [ ] The driver pin disappears once pickup is complete (D-E9-03) and is replaced with "Picked up" status
+
+**Notes:**
+
+- **Brief Reference:** Section 4.1.6 - "Live driver pin with status chips (Driver assigned → En route → Arriving → Waiting → Picked up → At Hub)"
+- **Technical:** GPS location streaming from driver app. For demo, simulate smooth location updates along route. Map uses Google Maps/Mapbox SDK
+- **UX:** Map at top of tracking screen, timeline below. Driver pin with direction indicator. ETA updates dynamically. Use platform maps styling
+- **Dependencies:**
+  * Requires: D-E8-04 (Driver accepted - location sharing starts), C-E1-02 (Location permission for map display)
+  * Enables: Real-time visibility of driver approach
+  * Integrates with: Driver GPS location (from D-E9-01 navigation), mapping services
+- **Screen Count:** 1 screen (Map view, part of tracking screen above timeline)
+
+**Demo Notes:**
+
+**CRITICAL INTEGRATION POINT:** This is the live connection between driver and consumer apps. When Mike accepts Sarah's job (D-E8-04), switch to Sarah's app and show: "Driver Mike assigned!" with his location appearing on map. As Mike navigates (D-E9-01 simulated), show his pin moving smoothly toward Sarah's location. Show ETA counting down: "Arriving in 8 minutes... 5 minutes... 2 minutes". When Mike marks arrived (D-E9-02), show "Driver has arrived!" notification. This wow-factor moment proves real-time integration.
+
+---
+
+=== Story C-E5-03: View Driver Card with Details
+
+**Story ID:** C-E5-03 +
+**Priority:** Must Have (M) +
+**Size:** Small (S) +
+**Actor:** Consumer
+
+**User Story:**
+
+As a consumer,
+I want to see information about my assigned driver (name, photo, vehicle, license plate, rating)
+so that I know who to expect and feel safe about the person handling my parcel.
+
+**Acceptance Criteria:**
+
+- [ ] Given a driver is assigned (D-E8-04), when I view tracking, then I see a driver info card
+- [ ] The driver card shows: Driver's first name, Profile photo, Vehicle make/model and color, License plate number, Star rating (out of 5)
+- [ ] The driver card is prominently displayed below the map or in expandable section
+- [ ] I can tap the driver card to see more details (total deliveries, years on platform - optional)
+- [ ] The driver card includes a button/link to contact driver (C-E5-04)
+- [ ] The driver card persists until pickup is complete
+
+**Notes:**
+
+- **Brief Reference:** Section 4.1.6 - "Driver card (name, photo, vehicle, plate, rating) + contact"
+- **Technical:** Driver info comes from driver profile. For demo, use realistic mock driver data (photo, 4.8 star rating, etc.)
+- **UX:** Card design with photo prominent. Use safe, professional stock photos. Vehicle info helps with visual identification
+- **Dependencies:**
+  * Requires: D-E8-04 (Driver assigned to job)
+  * Enables: C-E5-04 (Contact driver), trust and safety
+  * Integrates with: Driver profile system
+- **Screen Count:** 0-1 screens (card within tracking screen, optional detail modal)
+
+**Demo Notes:**
+
+Show driver card appear when Mike accepts job. Display: "Mike R.", 4.8 stars, photo, "Gray Toyota Camry, ABC-1234". Point out: "Sarah knows exactly who's coming and can identify the vehicle. Verified drivers with ratings for trust." If showing detail view, mention "Mike has completed 500+ deliveries with 4.8 average rating."
+
+---
+
+=== Story C-E5-04: Contact Driver (Masked)
+
+**Story ID:** C-E5-04 +
+**Priority:** Should Have (S) +
+**Size:** Small (S) +
+**Actor:** Consumer
+
+**User Story:**
+
+As a consumer,
+I want to call or message my driver using masked contact
+so that I can communicate about pickup details while maintaining privacy for both parties.
+
+**Acceptance Criteria:**
+
+- [ ] Given I have an assigned driver, when I tap "Call Driver" or "Message Driver", then I initiate masked communication
+- [ ] Phone calls are routed through a proxy number (neither party sees the other's real number)
+- [ ] Messages are relayed through the app (in-app chat or SMS proxy)
+- [ ] Given I call the driver, when the call connects, then I can speak with them directly
+- [ ] Given I message the driver, when I send a message, then they receive it in their driver app
+- [ ] Communication is available from driver assignment until pickup completion
+- [ ] After job completion, contact buttons are disabled (privacy protection)
+
+**Notes:**
+
+- **Brief Reference:** Section 4.1.6 - "contact (masked call or chat stub)"
+- **Technical:** Masked calling uses Twilio-style proxy (simulated). In-app messaging uses basic chat interface (simulated). Privacy: no real numbers exchanged
+- **UX:** Clear "Call" and "Message" buttons in driver card. Show that call is "privacy-protected" for user confidence. Simple chat interface for messaging
+- **Dependencies:**
+  * Requires: C-E5-03 (Driver card visible), D-E8-04 (Driver assigned)
+  * Enables: Communication about pickup logistics (delays, location issues)
+  * Integrates with: Communication proxy system (simulated), driver app messaging
+- **Screen Count:** 0-1 screens (call initiates native dialer, or in-app chat modal)
+
+**Demo Notes:**
+
+"Should Have" - demonstrates good customer service but not required for Golden Path. Include in Phase 2. For demo, show "Call Driver" button on driver card. Tap it to show "Calling Mike R. (privacy-protected)" screen for 2 seconds, then dismiss. Explain: "Calls are privacy-protected - neither party sees real phone numbers. Great for coordinating pickup details." Don't actually make call in demo.
+
+---
+
+=== Story C-E5-05: Refresh Tracking Status
+
+**Story ID:** C-E5-05 +
+**Priority:** Should Have (S) +
+**Size:** Small (S) +
+**Actor:** Consumer
+
+**User Story:**
+
+As a consumer,
+I want to manually refresh my tracking status
+so that I can get the latest updates if automatic updates aren't working or I'm impatient.
+
+**Acceptance Criteria:**
+
+- [ ] Given I am viewing tracking, when I pull down to refresh (mobile gesture), then the tracking data refreshes
+- [ ] Given I tap a "Refresh" button or icon, when I activate it, then tracking data updates
+- [ ] The refresh shows a loading indicator while updating
+- [ ] Given tracking is already up-to-date, when I refresh, then I see confirmation that there are no new updates
+- [ ] Refresh updates: Driver location (map), Timeline events, ETA
+- [ ] Refresh is throttled to prevent spam (max once per 5 seconds)
+
+**Notes:**
+
+- **Brief Reference:** Implied by live tracking functionality
+- **Technical:** Refresh triggers API call to get latest shipment status. For demo, automatic updates should work smoothly, making manual refresh rarely needed
+- **UX:** Standard pull-to-refresh gesture on mobile. Optional refresh button in header. Subtle loading spinner during refresh
+- **Dependencies:**
+  * Requires: C-E5-01, C-E5-02 (Tracking screens exist)
+  * Enables: Manual status check for anxious users
+  * Integrates with: Shipment status API
+- **Screen Count:** 0 screens (interaction within tracking screen)
+
+**Demo Notes:**
+
+"Should Have" - nice for user control but automatic updates should be so good that manual refresh is rarely needed. If including in Phase 2 demo, briefly demonstrate pull-to-refresh gesture with quick reload animation. Point out: "Updates happen automatically in real-time, but you can manually refresh anytime."
+
+---
+
+<<<
+== Epic Summary
+
+**Golden Path Coverage:**
+
+Stories C-E5-01, C-E5-02, and C-E5-03 are essential for the Golden Path. These provide complete visibility into shipment status, driver location, and driver information.
+
+**Implementation Notes:**
+
+* Timeline (C-E5-01) is the information backbone - must update reliably
+* Live map (C-E5-02) is the visual centerpiece - must feel smooth and real-time
+* Driver card (C-E5-03) adds trust and human connection
+* Contact (C-E5-04) is important for customer service but not core to demo
+* Refresh (C-E5-05) is a fallback - automatic updates should make it unnecessary
+
+**Critical Integration Points:**
+
+Epic E5 is the consumer-facing display of all driver activities from Epic E9:
+
+**All Integration Points Visible Here:**
+* D-E8-04 (Job accepted) → C-E5-02 (Driver location appears), C-E5-03 (Driver card shown)
+* D-E9-02 (Mark arrived) → C-E5-01 (Timeline: "Driver arrived")
+* D-E9-03 (Scan parcel) → C-E5-01 (Timeline: "Picked up" with photo)
+* D-E9-05 (Hub complete) → C-E5-01 (Timeline: "At Hub - Handed to carrier")
+
+This epic is the consumer window into the entire fulfillment process.
+
+**Development Sequence:**
+
+Sprint 4 (Integration & Tracking):
+
+1. C-E5-01: Timeline view (displays all status events)
+2. C-E5-02: Live map tracking (real-time driver location)
+3. C-E5-03: Driver card (trust and identification)
+
+Sprint 5 (Enhancement):
+
+1. C-E5-04: Masked contact (customer service)
+2. C-E5-05: Manual refresh (user control)
+
+**Demo Timing:**
+
+Tracking demonstration is woven throughout the demo as driver fulfills the job:
+
+- 2 minutes: Initial tracking view after booking (map, driver assigned, timeline start)
+- Ongoing: Show tracking updates as driver progresses (30s per status change)
+- 1 minute: Final tracking state showing completion
+
+Total dedicated tracking time: ~3-4 minutes, plus integration moments
+
+**Demo Choreography:**
+
+**Tracking appears in Acts 2 & 3:**
+
+**After Booking (Act 1 end):**
+- Sarah sees "Booking Confirmed" in timeline
+- Map shows her location, waiting for driver assignment
+
+**During Driver Acceptance (Act 2 start):**
+- Switch to driver app: Mike accepts job
+- Switch back to consumer: "Driver Mike assigned!" appears
+- Driver card shows: Mike R., 4.8 stars, Gray Toyota Camry
+- Map shows Mike's location 2.3 miles away
+
+**During Driver Navigation (Act 2 middle):**
+- Map shows Mike's pin moving smoothly toward Sarah
+- ETA counts down: "Arriving in 5 minutes"
+- Timeline updates: "Driver en route"
+
+**During Pickup (Act 2 end):**
+- "Driver has arrived!" notification
+- Timeline: "Driver arrived at pickup location"
+- Mike scans parcel (switch to driver app briefly)
+- Timeline updates: "Your parcel has been picked up!" with photo
+
+**During Hub Journey (Act 3):**
+- Timeline: "En route to FedEx hub"
+- Map shows route to hub (optional)
+- Mike completes hub drop-off (switch to driver app)
+- Timeline final update: "At Hub - Handed to FedEx Express"
+- "Invoice Ready" button appears
+
+**Key Demo Talking Points:**
+
+* "Sarah gets real-time visibility from the moment a driver accepts"
+* "Live GPS tracking - she can see Mike approaching"
+* "Every driver action automatically updates Sarah's timeline"
+* "She knows who's handling her parcel - verified driver with ratings"
+* "Complete transparency from booking to carrier handoff"
+* "This is what modern shipping should feel like - no uncertainty"
+
+**Real-Time Update Strategy:**
+
+For demo, use one of these approaches:
+1. **Simulated real-time:** Pre-choreograph all updates to happen at specific moments
+2. **Manual triggers:** Developer controls when each status update appears
+3. **Fully automated:** Driver actions in one window automatically update consumer view in another window (impressive but complex)
+
+Recommend approach #1 or #2 for reliable demo flow.
+
+**Quality Notes:**
+
+* All timestamps must be realistic and sequential
+* Map movement should be smooth (30-60 fps), not jumpy
+* Status updates should appear within 1-2 seconds of driver action (feels real-time)
+* ETA should count down believably
+* Driver photo should look professional and trustworthy
+
+This epic is critical for investor/stakeholder demos - it's where the magic becomes visible.

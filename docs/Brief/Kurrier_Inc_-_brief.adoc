@@ -1,0 +1,480 @@
+= Kurrier Inc. – Dual visual mockup UX/PRD Brief (Consumer & Driver Apps)
+:doctype: book
+:author: Kurrier Inc.
+:email: wp@kurrier.app
+:revnumber: Rev A
+:revdate: 16 Sept 2025
+:toc:
+:toclevels: 3
+:sectnums:
+:sectnumlevels: 3
+
+[abstract]
+== Executive Summary
+
+Kurrier Inc. is developing a dual-app, on-demand parcel pickup experience that connects consumers and businesses with major courier networks (e.g., FedEx, UPS, DHL) via a flexible driver fleet that transports parcels to pre-assigned hubs. This brief specifies high-fidelity, clickable visual mockups (not production code) for four surfaces: Consumer Mobile, Driver Mobile, Web Admin Dashboard, and Consumer Web Dashboard.
+
+*Purpose* - Validate UX/UI, flows, and business rules end-to-end—from booking and live multi-carrier quotes to pickup, hub handover, tracking, invoicing, rewards, and post-booking changes.
+
+*Included* - Detailed flows, screen maps, components/patterns, interaction & accessibility notes; simulated API touchpoints (maps, quoting, payments, notifications); conceptual data model; acceptance criteria; and a full handoff package (design tokens, redlines, copy deck).
+
+*Not included* - Production back-end, live carrier/payment/KYC integrations, or PCI processing (visual placeholders only).
+
+*Outcome* - A realistic, clickable UI that demonstrates the full journey and confirms requirements, enabling accurate estimates and a smooth transition into MVP planning and the PRD phase.
+
+== Purpose
+
+Design and deliver two clickable, high-fidelity mobile visual mockups (iOS/Android) to:
+
+* Visualize the full product concept end-to-end.
+* Validate UI/UX decisions, process flows, and feature feasibility with stakeholders and test users.
+* Establish the visual and interaction baseline for MVP implementation.
+
+[NOTE]
+====
+This engagement is for visual mockups only (no production back-end). States and data may be simulated, but user journeys must be complete and realistic.
+====
+
+== Scope of Work (In-Scope)
+
+* *Two separate visual mockups*
+** *Consumer App:* Sender books pickup → gets instant multi-carrier quote → pays → hands parcel to driver → tracks to hub → gets invoice.
+** *Driver App:* Driver verifies account → accepts jobs → navigates → collects parcel with photo/scan → drops at assigned hub → tracks earnings.
+
+* *Full journey coverage* including: AR dimension measure, sender & recipient addressing, service selection, live quotation (multi-carrier), pickup ETA with live courier map, payment, handover, tracking/timeline, invoice/receipt.
+
+* *High-fidelity UI* with a component library/design tokens (typography, color, spacing, elevations, states) and accessibility notes.
+
+* *Interaction notes* for transitions, gestures, and loading/skeleton patterns.
+
+* *visual mockup API stubs* (read-only, simulated) for: maps/geolocation, quoting, payments, notifications, courier status.
+
+* *Handoff pack* with redlines/specs, copy deck, and a developer walkthrough.
+
+=== Explicit Out-of-Scope (visual mockup Phase)
+
+* No live integrations (carriers, payments, KYC, etc.).
+* No PCI scope or storage of real payment data.
+* No production infra, SRE, analytics pipelines beyond simulated events.
+
+== Success Criteria (visual mockup Gate)
+
+* *Completeness:* All primary and secondary flows listed below are realistically represented end-to-end.
+* *Traceability:* Each screen and interaction maps to a defined user story and acceptance criteria.
+* *Usability:* Clear information hierarchy, consistent components, accessible tap targets (≥44px), contrast compliance for core flows.
+* *Handoff Quality:* Organized Figma files, named layers/components, design tokens, redlines for critical screens, copy deck included.
+
+== Target Platforms & Devices
+
+* Mobile phones only (portrait): iOS (390×844 pt baseline), Android (411×891 dp baseline).
+* Provide adaptive guidance for common small/large phone sizes.
+
+== Primary User Journeys
+
+=== Consumer App – Detailed Flows
+
+. *Onboarding & Sign-in*
+** Methods: Phone or Email + OTP, ToS/Privacy consent, Location permission prompt (contextual).
+** Profile: name, phone/email, default pickup address; toggle for business profile (company, tax ID).
+
+. *Create Shipment*
+** *Pickup Address:* auto-suggest + map confirmation; optional pickup notes (gate codes, reception hours).
+** *Recipient Address:* auto-suggest + map; country detection; delivery type (home/business/locker where available).
+** *Parcel Capture:*
+*** AR Dimension Measure (simulated): guided camera; returns L×W×H.
+*** Weight: manual entry with unit switch; validation ranges.
+*** Photos (optional): 1–3 images for proof/insurance (optional to limit scale).
+** *Service Selection:*
+*** Available Providers: show FedEx, UPS, DHL, TNT/DPD/Parcelforce (stubbed by geo).
+*** Service Tiers: Express / Economy / Ground (examples) with ETA, price, carrier logo, terms.
+*** Filters/Sort: price, ETA, carrier; info modals for surcharges, volumetric weight.
+
+. *Quotation & Price Breakdown*
+** Display live quote options (simulated API) with fare breakdown: base, fuel surcharge, remote area (if any), insurance add-on.
+
+. *Extras & Insurance*
+** Toggle to purchase additional insurance; brief coverage summary; show updated price.
+
+. *Payment & Booking*
+** Methods: Card / Apple Pay / Google Pay (simulated). Success, 3-D Secure, and failure states.
+** On success: generate Kurrier ID (internal parcel reference) (human-writable code) and display assigned carrier tracking number (simulated).
+** Label Option: Provide "Generate Label" → printable PDF (4×6" or A4) with NFC/airprint/share actions if the phone supports it. Include QR/Code128 containing Kurrier ID (internal parcel reference) + carrier ref.
+
+. *Pickup ETA & Live Map*
+** Live driver pin with status chips (Driver assigned → En route → Arriving → Waiting → Picked up → At Hub).
+** Driver card (name, photo, vehicle, plate, rating) + contact (masked call or chat stub).
+
+. *Handover & Tracking*
+** Driver scans/enters Kurrier ID (internal parcel reference) and takes pickup photo (optional feature, can be toggled on/off at system level to manage data scale).
+** Timeline view shows events: Booked → Driver en route → Picked up → At Hub (drop-off proof photo optional) → Handover to carrier.
+
+. *Invoice & History*
+** Auto-issued invoice/receipt (PDF) with line-items; saved in Past Shipments.
+** Business profile: tax ID on invoice; download/share options.
+
+. *Issues & Support*
+** Change/cancel rules (time-based windows); surcharge handling if hub scan > quoted data; help center (FAQ + chat stub).
+
+=== Driver App – Detailed Flows
+
+. *Onboarding & Verification*
+** Phone + OTP; upload license, vehicle, insurance (simulated); contract acceptance; background check status (simulated).
+
+. *Availability & Job Intake*
+** Go Online/Offline; heatmap for peak zones (simulated).
+** Jobs List: proximity, payout, pickup ETA, parcel size/weight, special notes.
+** Job Detail: pickup address + map, customer contact (masked), parcel specs (dims/weight), carrier/service chosen, assigned hub.
+
+. *Navigation & Pickup*
+** In-app route preview; handoff steps checklist.
+** Arrival: mark "Arrived"; start Pickup: (a) scan Kurrier ID (internal parcel reference) (or manual entry), (b) optional photo(s) of the parcel, (c) confirm dimensions/weight as declared.
+
+. *Hub Drop-off*
+** Route to pre-assigned hub (FedEx/UPS/DHL, simulated); upon arrival, scan hub intake code; optional drop-off photo; mark Complete.
+
+. *Earnings & Quality*
+** Daily/weekly totals, next payout schedule (simulated).
+** Ratings, quality tips (e.g., photo clarity, ID match, safe handling), support/safety hub.
+
+== Screen Inventory (Detailed)
+
+=== Consumer (~30 screens)
+
+* Welcome → Sign-in (Phone/Email) → OTP → ToS/Privacy → Location permission
+* Home (Book Pickup) – empty & active states
+* Pickup Address: search, map confirm, saved addresses
+* Recipient Address: search, map confirm, delivery type
+* Parcel Measure (AR walkthrough, result) + manual edit
+* Weight Entry (validation) + optional Photos
+* Service Providers List (multi-carrier cards) + Filters/Sort + Provider info modals
+* Quote/Price Breakdown (base, fuel, insurance)
+* Insurance add-on (toggle, details)
+* Payment – methods + success/3DS/failure
+* Booking Confirmation (Kurrier ID (internal parcel reference) + carrier ref) + Generate Label (PDF) screen with print/share/NFC actions
+* Live Map & Driver Card; status chips & ETA
+* Handover flow (scan/confirm; optional pickup photo capture)
+* Shipment Details (timeline, events, photos if enabled)
+* Invoice/Receipt (PDF preview) + Past Shipments list
+* Notifications Center; Help/FAQ; Chat stub
+* Profile & Settings (personal/business toggle, tax ID, payment, privacy)
+
+=== Driver (~26 screens)
+
+* Welcome → OTP → Docs Upload (license/vehicle/insurance) → Contract → Background check pending/done
+* Home (Go Online/Offline) + Heatmap
+* Jobs List; Job Detail (parcel specs, payout, hub)
+* Navigation preview; Arrival confirm
+* Pickup: Scan Kurrier ID (internal parcel reference) → optional parcel Photo(s) → confirm specs
+* Issue resolution (can't find customer, mismatch, cancel/reassign)
+* Hub route; Hub Check-in (scan); optional Drop-off Photo; Job Complete
+* Earnings Home; Job History; Payouts
+* Support & Safety; Profile & Vehicle; Notifications
+
+== Interaction & State Model
+
+* *Consumer:* Searching → Quote options ready → Payment processing → Booked → Driver assigned → En route → Arriving → Waiting → Picked up → At hub → Handover to carrier → Completed.
+
+* *Driver:* Offline → Online → Job offered → Accepted → Navigating → Arrived → Pickup in progress → Picked up → En route to hub → At hub → Dropped off → Complete.
+
+* *Edge cases:* address not found; AR fail → manual input; payment fail → retry; driver cancels → auto-reassign; surcharge notification → pay now/defer; connectivity loss (retry queue for photos/scans).
+
+== Data & ID Model (Conceptual)
+
+* *User (Consumer):* id, name, phone/email, business toggle, addresses, payment token (via PSP), preferences.
+
+* *Driver:* id, docs (KYC placeholders), vehicle, status, rating, payout account token.
+
+* *Shipment:* kurrier_id, carrier_tracking_no, origin/destination, dims, weight, optional photos, chosen service, pricing snapshot, status timeline, invoice id.
+
+* *Quote:* inputs (origin, dest, dims/weight), options[{carrier, service, ETA, price}], chosen_option.
+
+* *Event:* timestamp, actor (system/driver/user), location, evidence (photo/scan id).
+
+== Acceptance Criteria (per Flow)
+
+=== Consumer
+
+* Can complete a booking with realistic branching: addresses → AR measure/weight → multi-carrier quote → extras → pay → confirm.
+* Label PDF can be generated and shared/printed (AirPrint/NFC/share sheet where available).
+* Live map shows driver pin and status transitions; timeline holds Kurrier ID (internal parcel reference) + carrier ref.
+* Surcharges scenario visualized end-to-end (notify → pay → update timeline/invoice).
+
+=== Driver
+
+* Can go online, accept a job, navigate, _scan Kurrier ID (internal parcel reference)_, capture optional photos, and complete a hub drop-off with scan.
+* Earnings reflect completed jobs; payout screen shows next payout (simulated).
+* Quality and safety prompts shown contextually.
+
+== Third-Party (Simulated) & Tech Notes
+
+* *Maps/Geocoding:* Google Maps/Mapbox for pins, routes, ETA.
+* *AR Measure:* Guided camera UI; scripted results; manual override.
+* *Payments:* Stripe/Apple Pay/Google Pay states only; no real tokens.
+* *Notifications:* Push banners and in-app feed samples.
+* *Printing/Label:* Generate PDF asset in-visual mockup; expose share/print actions.
+
+== Design System (Starter Kit)
+
+* *Typography:* H1 28/32, H2 22/28, body 16/24.
+* *Color:* Neutral surfaces, high-contrast text; semantic success/info/warn/error.
+* *Components:* app bars, tabs, sheets, cards, list rows, inputs, buttons (primary/secondary/tertiary), chips/pills, badges, banners, skeleton loaders.
+* *Map pins:* Consumer: driver/hub; Driver: pickup/hub.
+* *Icons:* parcel, camera/AR, price tag, clock/ETA, shield (insurance), route, hub, scan.
+
+== Handoff Pack Checklist
+
+* Figma visual mockups (Consumer, Driver) with organized pages and components.
+* Design tokens (JSON): colors, type, spacing, radii, elevation, shadows.
+* Redlines/specs for critical flows: booking, quote, payment, live map, pickup, drop-off, label.
+* Copy deck (EN-US) for all UI text, errors, toasts, empty states.
+* visual mockup data dictionary & sample payloads (stubbed APIs).
+* Developer walkthrough + open questions log.
+
+== Glossary (Abbreviations & Terms)
+
+AR (Augmented Reality):: Camera-aided overlay to measure parcel dimensions (simulated in visual mockup).
+
+U.S. State Privacy (General Placeholder):: Apply the relevant state privacy act(s) governing personal data rights and obligations; finalized per launch states. If a specific example is needed, use Texas Data Privacy and Security Act (TDPSA).
+
+GDPR (General Data Protection Regulation):: EU data privacy regulation.
+
+KYC (Know Your Customer):: Identity verification process (simulated placeholders in visual mockup).
+
+NFC (Near Field Communication):: Short-range wireless to share/print label from a phone.
+
+OTP (One-Time Password):: Short numeric code sent for sign-in verification.
+
+PCI Scope (Payment Card Industry scope):: Requirements for systems handling real card data; *out-of-scope for visual mockup*.
+
+PSP (Payment Service Provider):: Vendor that processes payments (e.g., Stripe); simulated in visual mockup.
+
+ToS (Terms of Service) Consent:: User acceptance of legal terms during onboarding.
+
+== Vendor Response Template (for Quotation)
+
+* *Approach & Team:* roles, relevant case studies (mobility/logistics/fintech).
+* *Plan & Timeline:* workshops, milestones, reviews, buffers.
+* *Deliverables:* mapped to this brief; recommended additions.
+* *Assumptions & Constraints:* tools, licenses, time zones, stakeholder availability.
+* *Commercials:* fixed price + T&M rates for changes; payment schedule; IP usage rights.
+* *Risks & Mitigations:* proposed handling of dependencies and open questions.
+
+== Visual Mockups Specification – Consumer App (Mobile)
+
+=== Objective
+
+Create a clickable, high-fidelity visual mockup that validates UI/UX, end-to-end customer journey, and business rules for booking, paying, handing over, tracking, and invoicing a shipment. All data may be simulated; flows must be complete and realistic.
+
+=== In-Scope Customer Flows
+
+. *Onboarding & Account* – Phone/Email + OTP, ToS/Privacy consent, location permission, personal vs business profile (tax ID on invoices).
+
+. *Create Shipment* – Pickup & recipient addresses (auto-suggest + map), parcel capture (AR dimensions – simulated) + weight entry, optional parcel photos.
+
+. *Carrier & Service Selection* – Multi-carrier matrix (FedEx/UPS/DHL/TNT/DPD/Parcelforce per geo), ETAs, prices, terms; filters/sort; volumetric note.
+
+. *Quotation & Price Breakdown* – Base price + fuel + remote area + optional insurance; promo code field.
+
+. *Payment & Booking* – Card/Apple Pay/Google Pay (success/3DS/failure); on success issue Kurrier ID (internal parcel reference) + carrier ref.
+
+. *Label Generation* – Generate PDF label (A4 & 4×6); share/print/AirPrint/NFC; QR/Code128 with Kurrier ID + carrier ref.
+
+. *Pickup ETA & Live Map* – Driver card, live pin, status chips; masked call/chat; safe handover tips.
+
+. *Handover & Tracking* – Driver scans Kurrier ID; optional pickup photo (toggle at system level); timeline events to At Hub → Handover to carrier.
+
+. *Invoice & History* – PDF invoice, download/share; Past Shipments list with search/filter.
+
+. *Rewards & Incentives* – Points accrual, tier badges (Bronze/Silver/Gold), referral code/share, progress widget; apply points at checkout (mock).
+
+. *Shipment Management* – Active Shipments hub: Reschedule pickup, Change delivery address (rules by status), Cancel (windowed), Add/Remove insurance (pre-pickup), surcharge approval/payment.
+
+=== Screen Map (Consumer)
+
+* *Auth & Permissions:* Welcome → Sign-in (Phone/Email) → OTP → ToS/Privacy → Location.
+* *Home:* Book Pickup CTA; shortcuts: Past Shipments, Rewards, Support.
+* *Addressing:* Pickup (search/map/saved), Recipient (search/map/delivery type).
+* *Parcel:* AR Measure walkthrough/result, manual edit; Weight entry; Optional Photos.
+* *Services:* Carrier list (cards/table), Filters/Sort, Service details modal.
+* *Pricing:* Quote & breakdown; Insurance add-on; Promo code.
+* *Payment:* Method select; Success/3DS/Failure.
+* *Confirmation:* Kurrier ID (internal parcel reference) + carrier ref; Generate Label; Tips to mark parcel.
+* *Live Map:* Driver card, ETA chip, status chips; contact.
+* *Handover:* Scan/enter Kurrier ID; optional photo capture; confirmation toast.
+* *Shipment Details:* Timeline, events, photos (if enabled), invoice link.
+* *Rewards:* Points balance, tier ladder, referral; Apply at checkout.
+* *Active Shipments:* Manage (reschedule/change address/cancel/add insurance).
+* *Invoices:* PDF preview & share; Past Shipments.
+* *Support:* FAQ, policy pages, chat stub.
+* *Settings:* Personal/Business profile, addresses, payment methods, privacy.
+
+=== Components & Patterns
+
+* *Inputs:* address search with typeahead, numeric weight w/ unit switch, code entry fields.
+* *Cards/Lists:* carrier option card (logo, ETA, price, terms badge), driver card, shipment list row with status pill.
+* *Status Chips:* Searching / Driver assigned / En route / Arriving / Waiting / Picked up / At hub / Completed.
+* *Badges:* Tier badges (Bronze/Silver/Gold); Promo applied; Insurance added.
+* *Modals/Sheets:* Service details, change/cancel rules, surcharge explanation & approval.
+* *Empty/Loading:* Skeleton loaders; empty states with actions.
+* *Errors:* Address not found; AR failed → manual; Payment failed → retry; Driver cancel → auto-reassign banner.
+* *Map Pins:* customer, driver, hub.
+
+=== Business Rules (Mocked)
+
+* *Volumetric vs actual weight:* pricing uses the higher; surface note shown.
+* *Reschedule/edit allowed until driver assigned*; after assignment → request change (visualized as pending).
+* *Cancel window:* free before assignment; partial refund after (UI copy only).
+* *Surcharges:* triggered by hub scan delta; user receives notification → pay now to avoid delay.
+* *Rewards:* default earn rate 1 pt per USD equivalent; tiers unlocked by annual points; referral bonus once per new user.
+
+=== Copy & Accessibility
+
+* Microcopy deck covering toasts, empty, error, confirmations.
+* Tap targets ≥44px; color contrast compliant for primary flows; dynamic type friendly labels.
+* Plain-language explanations for volumetric weight, surcharges, cancellation rules, and rewards.
+
+=== Data Stubs (Examples)
+
+* *Quote option:* `{carrier, service, ETA_text, price_total, price_breakdown{base,fuel,insurance}, terms_link}`.
+* *Shipment:* `{kurrier_id, carrier_ref, origin,dest, dims, weight, photos[], status[], invoice_id}`.
+* *Event:* `{ts, actor, type, note, lat,lng, evidence_photo?}`.
+* *Rewards:* `{points_balance, tier, referral_code}`.
+
+=== Deliverables (Consumer Visual Mockups)
+
+* Organized Figma file with named pages (Auth, Home, Addressing, Parcel, Services, Pricing, Payment, Confirmation/Label, Live Map, Handover, Shipment Details, Active Shipments, Rewards, Invoices, Support, Settings).
+* Component library + tokens (colors, type, spacing, elevation, states).
+* Redlines/specs for critical screens; copy deck; interaction notes.
+* Clickable prototype paths for demo and usability checks.
+
+== Visual Mockups Specification – Driver App (Mobile)
+
+=== Objective
+
+Create a clickable, high-fidelity visual mockup validating UI/UX, driver workflow, safety, and earnings visibility from going Online → Pickup → Hub drop-off → Complete. All data simulated; flows must be complete and realistic.
+
+=== In-Scope Driver Flows
+
+. *Onboarding & KYC placeholders* – Phone/Email + OTP, consent, upload license/vehicle/insurance (mock), accept contract; background check status (mock).
+
+. *Availability & Heatmap* – Go Online/Offline; peak bonuses (UI only); service area hinting.
+
+. *Job Intake* – Jobs list with distance/ETA/payout; Job Detail shows pickup addr, contact (masked), parcel specs (dims/weight), carrier/service, assigned hub.
+
+. *Navigation & Arrival* – Route preview; safety checklist; arrival confirmation.
+
+. *Pickup Flow* – Scan/enter Kurrier ID (internal parcel reference); optional parcel Photo(s); note discrepancies (dims/weight mismatch reason codes).
+
+. *Hub Drop-off* – Navigate to assigned hub; scan hub intake; optional Drop-off Photo; mark Complete.
+
+. *Earnings & Payouts* – Day/Week totals, per-job breakdown (distance/time/payout), payout schedule; tips/bonuses (mock).
+
+. *Quality & Support* – Ratings, guidance (photo clarity, ID match), incident report, safety hotline.
+
+=== Screen Map (Driver)
+
+* *Auth:* Welcome → OTP → Docs Upload → Contract → Background Check (pending/done).
+* *Home:* Online/Offline, Heatmap, mini-stats.
+* *Jobs:* List + Detail; Accept/Decline; Queue state.
+* *Pickup:* Navigate, Arrive, Scan Kurrier ID, optional Photos, Confirm specs.
+* *Hub:* Route, Check-in Scan, optional Photo, Complete.
+* *Earnings:* Home, Job History, Payouts.
+* *Support:* Safety, FAQ, Incident report, Chat stub.
+* *Profile:* Driver/Vehicle, Notifications.
+
+=== Components & Patterns
+
+* *Cards:* Job card (payout, distance, ETA), Hub card, Earnings card.
+* *Status chips:* Offline/Online; Offered/Accepted; Navigating; Arrived; Pickup in progress; Picked up; En route to hub; At hub; Dropped off; Complete.
+* *Scanners:* Kurrier ID scanner; Hub intake scanner.
+* *Banners/Sheets:* Reassign notice; Mismatch noted; Safety prompts.
+
+=== Business Rules (Mocked)
+
+* Jobs expire after X min if not accepted; visualized countdown.
+* Reassign logic shown if driver cancels/no-show.
+* Mismatch: if driver flags dims/weight delta, system shows surcharge copy to sender.
+* Photo capture *optional* (system toggle) to manage storage scale.
+
+=== Platform Notes (iOS & Android)
+
+* *iOS:* Safe areas, bottom sheets, native share, SF Symbols where suitable.
+* *Android:* Material 3 patterns, back-gesture, system bars; ensure DP-based spacing.
+* *Common:* tap targets ≥44px, haptics for key confirmations, offline toasts for weak connectivity.
+
+=== Data Stubs (Examples)
+
+* *Job:* `{id, payout, distance_km, ETA_pickup, pickup_addr, contact_masked, dims, weight, carrier, service, hub_id}`.
+* *Scan event:* `{job_id, ts, type: "pickup|hub", kurrier_id, photo_ids[]}`.
+* *Earnings:* `{period, jobs_count, gross, bonuses, next_payout_date}`.
+
+=== Deliverables (Driver Visual Mockups)
+
+* Figma file pages: Auth, Home/Heatmap, Jobs, Pickup, Hub, Earnings, Support, Profile.
+* Component library + tokens; redlines/specs for critical flows; copy deck; interaction notes.
+
+== Visual Mockups Specification – Web Admin Dashboard
+
+=== Objective
+
+Design a responsive web dashboard for operations staff to monitor supply/demand, manage shipments, drivers, hubs, pricing rules, and support tickets. Clickable mockup with realistic tables, filters, and drill-downs.
+
+=== Key Modules
+
+. *Overview* – KPIs (active shipments, drivers online, avg ETA, exceptions), live map of pickups/hubs, alerts panel.
+
+. *Shipments* – Search/filter (status, date, customer, carrier); detail drawer with timeline, photos, scans, surcharges; edit permissions (mock) per status.
+
+. *Drivers* – Roster, status (online/offline), ratings, documents status (mock), last activity; driver detail sheet.
+
+. *Hubs* – List/map of hubs; capacity notes (mock); assignment rules preview.
+
+. *Quoting & Pricing* – Rate cards (carrier/service), fuel surcharge table, volumetric rules; A/B test placeholders.
+
+. *Support* – Tickets inbox; canned responses; escalate; SLA timers (mock).
+
+. *Settings* – Policies, cancellation windows, rewards tiers, surcharge thresholds, notification templates.
+
+=== Interaction Patterns
+
+* Data grid with sticky header, column sort, multi-filter, CSV export (mock).
+* Map/list sync; click map pin → open detail drawer.
+* Bulk actions (mock): reassign driver, resend label, issue credit.
+
+=== Roles & Permissions (Mocked)
+
+* *Ops Agent:* read/write shipments, read drivers.
+* *Supervisor:* all of the above + pricing edits.
+* *Viewer:* read-only.
+
+=== Deliverables (Web Admin)
+
+* Figma pages for each module; component library (tables, drawers, tabs, badges, toasts).
+* Redlines/specs for data density, breakpoints (≥1280px desktop, ≥768px tablet), and empty/exception states.
+
+== Visual Mockups Specification – Consumer Web Dashboard
+
+=== Objective
+
+Provide a web self-service portal for senders to review shipments, download invoices, manage rewards, and handle post-booking modifications within policy windows.
+
+=== In-Scope Flows
+
+. *Authentication* – Email/Phone + OTP; optional SSO (future).
+
+. *Dashboard Home* – Active shipments, quick actions (reschedule/cancel), rewards snapshot, recent invoices.
+
+. *Create Shipment (Lite)* – Same as mobile but streamlined; address entry, manual dims/weight; carrier comparison; pay; label download.
+
+. *Shipment Details* – Timeline, photos (if enabled), map, surcharges; contact support.
+
+. *Invoices & Billing* – List/search; download PDFs; business profile with tax ID.
+
+. *Rewards & Referrals* – Balance, tier, referral link; apply points at checkout.
+
+. *Profile & Settings* – Addresses, payment methods (tokens display), notifications, privacy.
+
+=== Deliverables (Consumer Web)
+
+* Figma pages: Auth, Home, Create Shipment, Details, Invoices, Rewards, Settings.
+* Component library (nav, tables, forms, badges); redlines/specs; copy deck.

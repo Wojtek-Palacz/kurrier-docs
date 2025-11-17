@@ -1,0 +1,309 @@
+= User Story Characteristics and Guidelines for LLM-Assisted Creation
+:toc:
+:toclevels: 2
+
+== Purpose
+
+This document provides comprehensive characteristics and guidelines for creating effective user stories. Use this as a reference when generating user stories to ensure they follow best practices and align with agile methodology principles.
+
+== Core Definition
+
+A *User Story* is a lightweight, informal requirement that expresses user value and drives iterative development. It emphasizes conversation and collaboration over comprehensive documentation.
+
+== Standard Format
+
+The canonical user story format follows this template:
+
+[source]
+----
+As a <type of user>,
+I want <some goal>
+so that <some reason>.
+----
+
+**Components:**
+
+* *Role/Actor*: The type of user or stakeholder who will benefit
+* *Goal/Action*: What the user wants to accomplish
+* *Value/Benefit*: Why the user wants this (the business value or motivation)
+
+== Essential Elements
+
+When creating a user story, include these elements:
+
+[cols="1,3", options="header"]
+|===
+| Element | Description
+
+| User Story Statement
+| The narrative using the "As a... I want... so that..." format
+
+| Acceptance Criteria
+| Specific, testable conditions that define when the story is complete (use Given-When-Then format when appropriate)
+
+| Notes
+| Additional context, technical considerations, or clarifications
+
+| Priority
+| Relative importance (e.g., High/Medium/Low or MoSCoW: Must have, Should have, Could have, Won't have)
+
+| Story Points
+| Effort estimation using team-agreed scale (e.g., Fibonacci: 1, 2, 3, 5, 8, 13)
+|===
+
+== Key Characteristics
+
+When generating user stories, ensure they exhibit these characteristics:
+
+=== Formality
+* **Informal narrative format** emphasizing user value
+* Conversational tone, not technical specification
+* Written in plain language understandable to all stakeholders
+
+=== Level of Detail
+* **Low, conversational** initial documentation
+* Minimal upfront detail—details emerge through conversation (3Cs: Card, Conversation, Confirmation)
+* Enough information to start a conversation, not a complete specification
+
+=== Focus
+* **Value delivery to the user** is paramount
+* Express the benefit or outcome, not just the feature
+* User-centric perspective throughout
+
+=== Scope
+* **Narrow scope**: single goal or task
+* Small enough to complete within one sprint/iteration
+* Focused on one specific piece of value
+
+=== Completeness
+* Stories are **incomplete by design**—they need clarification through conversation
+* Follow the **3Cs principle**:
+** *Card*: Physical or digital representation
+** *Conversation*: Discussion to elaborate details
+** *Confirmation*: Acceptance criteria that verify completion
+
+=== Audience
+* Written for and by: **Product owners, developers, and stakeholders**
+* Team-driven through collaborative discussion
+* Accessible to both technical and non-technical audiences
+
+=== Collaboration Style
+* **Team and Product Owner-driven** through discussion
+* Encourages face-to-face communication
+* Refined iteratively through backlog grooming/refinement
+
+== INVEST Criteria
+
+Effective user stories should be *INVEST*:
+
+[cols="1,3", options="header"]
+|===
+| Criterion | Description
+
+| **I**ndependent
+| Stories should be self-contained and not depend on other stories when possible
+
+| **N**egotiable
+| Details can be discussed and adjusted; not a rigid contract
+
+| **V**aluable
+| Must deliver clear value to the user or customer
+
+| **E**stimable
+| Team must be able to estimate the effort required
+
+| **S**mall
+| Small enough to plan, prioritize, and deliver within a sprint
+
+| **T**estable
+| Clear acceptance criteria that can be verified
+|===
+
+== When User Stories Are Appropriate
+
+User stories work best in these contexts:
+
+* **Agile Development**: Teams working in iterative sprints with frequent releases
+* **User-Centered Design**: Focus on delivering incremental user value
+* **Flexible Requirements**: Requirements expected to evolve based on feedback
+* **Collaborative Teams**: Co-located or well-connected teams with strong communication
+* **MVP Development**: Building minimum viable products with rapid validation
+* **Simple to Moderate Complexity**: Features that don't require extensive exception handling
+
+== Acceptance Criteria Guidelines
+
+Acceptance criteria define the boundaries of the user story and provide testable conditions for completion.
+
+=== Format Options
+
+**Scenario-Based (Given-When-Then):**
+[source]
+----
+Given [precondition/context]
+When [action/event]
+Then [expected outcome]
+----
+
+**Checklist Format:**
+[source]
+----
+- [ ] Criterion 1 is met
+- [ ] Criterion 2 is verified
+- [ ] Criterion 3 is satisfied
+----
+
+=== Characteristics of Good Acceptance Criteria
+
+* Specific and unambiguous
+* Testable (can be verified)
+* Clear pass/fail conditions
+* Written from user perspective
+* Include both functional and non-functional requirements when relevant
+* Cover edge cases and error conditions
+
+== Common Pitfalls to Avoid
+
+When creating user stories, avoid these common mistakes:
+
+. **Technical Focus**: Writing from system perspective instead of user perspective
+** ❌ Bad: "System shall validate email format"
+** ✅ Good: "As a user, I want to be notified if my email is invalid so that I can correct it before submitting"
+
+. **Too Large**: Stories that span multiple sprints (these should be epics)
+
+. **No Value Statement**: Omitting the "so that" clause
+** ❌ Bad: "As a user, I want to see my order history"
+** ✅ Good: "As a user, I want to see my order history so that I can track past purchases and reorder items"
+
+. **Implementation Details**: Specifying how instead of what
+** ❌ Bad: "As a developer, I want to use Redis cache..."
+** ✅ Good: "As a user, I want page load times under 2 seconds so that I have a smooth browsing experience"
+
+. **Weak Acceptance Criteria**: Vague or non-testable criteria
+** ❌ Bad: "The page should look good"
+** ✅ Good: "Page loads within 2 seconds on 4G connection"
+
+. **Wrong Actor**: Using "system" or "admin" when the real user should be specified
+
+. **Multiple Goals**: Combining several distinct pieces of value into one story
+
+== Example Templates by Domain
+
+=== Consumer/Customer Story
+[source]
+----
+As a [consumer/customer/shopper],
+I want to [action/capability]
+so that I can [benefit/outcome].
+
+Acceptance Criteria:
+- Given [context], when [action], then [result]
+- [Additional criteria]
+
+Notes: [Technical considerations, design references, etc.]
+Priority: [High/Medium/Low]
+Story Points: [Estimate]
+----
+
+=== Driver/Service Provider Story
+[source]
+----
+As a [driver/provider/courier],
+I want to [action/capability]
+so that I can [benefit/improve efficiency/earn more].
+
+Acceptance Criteria:
+- [Specific testable condition 1]
+- [Specific testable condition 2]
+- [Edge cases and error handling]
+
+Notes: [Platform considerations, safety requirements, etc.]
+Priority: [High/Medium/Low]
+Story Points: [Estimate]
+----
+
+=== Admin/Operations Story
+[source]
+----
+As an [admin/ops manager/supervisor],
+I want to [action/capability]
+so that I can [manage/monitor/optimize] [business goal].
+
+Acceptance Criteria:
+- [Functional requirement]
+- [Performance requirement]
+- [Access control requirement]
+
+Notes: [Integration points, reporting requirements, etc.]
+Priority: [High/Medium/Low]
+Story Points: [Estimate]
+----
+
+== Quality Checklist
+
+Before finalizing a user story, verify:
+
+- [ ] Follows "As a... I want... so that..." format
+- [ ] Clearly identifies the user/actor
+- [ ] Expresses a specific goal or need
+- [ ] Includes the value/benefit (the "so that" clause)
+- [ ] Has clear, testable acceptance criteria
+- [ ] Meets INVEST criteria (Independent, Negotiable, Valuable, Estimable, Small, Testable)
+- [ ] Is written from user perspective, not technical/system perspective
+- [ ] Scope is small enough for one sprint
+- [ ] Value is clear and meaningful
+- [ ] Can be estimated by the development team
+- [ ] Includes relevant notes or context
+- [ ] Priority is indicated
+- [ ] Does not prescribe implementation details
+
+== Relationship to Other Artifacts
+
+=== User Stories vs. Use Cases
+
+* **User Stories**: Lightweight, conversational, value-focused
+* **Use Cases**: Detailed, formal, behavior-focused
+
+User stories can be:
+* Extracted from use cases for implementation
+* Expanded into use cases for complex scenarios
+* Used alongside use cases in hybrid approaches
+
+=== User Stories vs. Epics
+
+* **Epic**: Large body of work that spans multiple sprints
+* **User Story**: Small, deliverable unit of work within a sprint
+
+Epics are decomposed into user stories during backlog refinement.
+
+=== User Stories and Tasks
+
+* **User Story**: What needs to be delivered from user perspective
+* **Tasks**: How the story will be implemented (technical breakdown)
+
+Tasks are created from stories during sprint planning.
+
+== Best Practices Summary
+
+. **Start with the user**: Always write from the perspective of someone who will use or benefit from the feature
+. **Focus on value**: The "so that" clause is crucial—never omit it
+. **Keep it conversational**: Use plain language, avoid jargon
+. **Make it testable**: Acceptance criteria should be clear and verifiable
+. **Size appropriately**: Should fit within one sprint
+. **Collaborate**: Stories are meant to spark conversation, not replace it
+. **Iterate**: Refine stories during backlog grooming
+. **Prioritize ruthlessly**: Not all stories are equally valuable
+. **Consider the INVEST criteria**: Use as a quality filter
+. **Document minimally**: Capture just enough to enable conversation
+
+== Reference
+
+Normative sources:
+* Extreme Programming (XP), Ron Jeffries (1998)
+* Agile Manifesto (2001)
+* Scrum Guide (Scrum.org)
+* INVEST principles by Bill Wake
+
+== Conclusion
+
+Effective user stories balance brevity with clarity, focusing on user value while remaining open to elaboration through team collaboration. They serve as conversation starters rather than comprehensive specifications, supporting agile principles of responding to change and valuing individuals and interactions over processes and documentation.

@@ -1,0 +1,101 @@
+= Piotr Palacz
+:description: Senior IT Architect Resume
+:author: Piotr Palacz
+:email: piotr@palacz.com
+:revdate: 2025-08-09
+:doctype: article
+:toc:
+:toclevels: 2
+:icons: font
+
+[.lead]
+*Senior IT Architect | Full SDLC Practitioner*
+
+*Chandler, AZ* | (480) 295-6909 | mailto:piotr@palacz.com[piotr@palacz.com]
+
+== Professional Summary
+
+Senior IT Architect with 30+ years of experience in in all stages of the lifecycle of complex IT projects, starting with legacy system analysis, business process (re-)engineering, RFP development, through Architecture, Roadmap and Solution Proposals, the realization analysis, design, implementation, testing, and system delivery, up to post-delivery maintenance, architectural and technology audits. He provided services in various roles, such as Solution Architect, Technical/Lead Architect, Technical Audit Lead, to state and local government clients, including State of California government agencies for the last 15+years and several other state agencies (MA, MO, TN, and WI) and in private sector clients before that.
+
+Early adopter of Object-Orientation (Smalltalk and Ruby), Symbolic AI (expert and decision-support systems in financial services, early 90s), Natural Language Processing (Prolog and DCGs), and Generative AI (2018). Has experience with cloud-based and local clustered LMM deployments and configurations, including RAG-based solutions and MCP-compliant agents. Advocate for using GenAI not only at the enterprise level but also in the small, including agentic platforms for BPR and Business Analysts.
+
+== Core Competencies
+
+* *Enterprise Architecture:* SOA, Microservices, API-First Design, Cloud-Native Architectures
+* *AI/ML Integration:* IBM Watson, Natural Language Processing, Chatbot Development, Generative AI, Symbolic AI
+* *Cloud Platforms:* Azure, IBM Cloud
+* *Backend Development:* REST APIs (OpenAPI), Spring Boot, J2EE, Inter-Service integration, ESB, ServiceNow platform
+* *Frontend Development:* JHipster, Pharo, Python and Rust (web and cli), LLM-based: Claude Code, Windsurf
+* *DevOps & CI/CD:* Git/GitHub/Azure, Docker, Kubernetes, Maven, Jenkins
+* *Data Architecture:* ETL, Data Migration, Business Intelligence, Cognos Suite
+* *Standards & Compliance:* International Standards (ISO, IEEE), Federal (NIST, FedRAMP), State (CDT, CEAF, SIMM, PAL Process).
+
+== Technical Skills
+
+*Programming Languages*:: Python, Java, Prolog, Pharo/Smalltalk, Groovy, Ruby, Rust
+
+*Frameworks & Libraries*:: Flask, Tauri, FastAPI, Actix, Spring Boot, Spring, JHipster, Grails, Rails, Seaside, Zinc
+
+*AI/ML & GenAI*:: Various base LLMs (OpenAI, Anthropic, X/AI, Google, Qwen, Mistral, etc.), RAG-based hybrid search, MCP agents, IBM Watson (Assistant, Discovery), NLP, Chatbot Development, non-cloud clustered LLMs deployments (Ollama, LM Studio)
+
+*Cloud Platforms*:: Azure, IBM Cloud (Watson Services), ServiceNow Cloud Platform
+
+*Enterprise Architecture*:: TOGAF, ArchiMate, CEAF 2.0, MITA 3.0, ISO 25010, ISO/IEC/IEEE 42010, SOA Patterns
+
+*Data-Related*:: DB2, MySQL, PostgreSQL, Oracle, Data Warehousing, ETL Processes, declarative data validations (incl. self-service portals)
+
+*DevOps & Tools*:: CD/CI, Git, Maven, Docker, WildFly, Tomcat, Jenkins, IBM Rational Suite, RequisitePro
+
+*Integration & APIs*:: RESTfull APIs, SOAP Web Services, IBM MQ Series, Enterprise Service Bus integration
+
+*Testing & QA*:: Unit-, Mock-, Integration Testing in various languages/environments, Performance Testing, UAT, Statistical Sampling, LLM-assisted test creation and analysis.
+
+== Professional Experience
+
+=== Senior Solution Architect – AI & Cloud Modernization
+
+*California State Agencies* – Sacramento, CA | 2018 – Present
+
+* Technical Lead in multiple (DMV, CDPH, DOJ, DFPI) CA PAL-related engagements, including As-Is complex systems analysis, and To-Be Solutions, including Business Objectives and metrics, BPR efforts, and leading To-Be Non-Functional and Migration Requirement teams
+* Developed RAG- and MCP-based platform for assisting in documentation analyses, model transformations (such as workflow diagrams to BPMN), hybrid searches, and documentation creation workflows
+* Led AI adoption initiative using IBM Watson platform, implementing chatbot solution serving 10,000+ internal users with 85%+ confidence scoring on production intents.
+* Designed and implemented enterprise-grade Natural Language Processing platform using IBM Watson Assistant, Watson Discovery, and Watson Knowledge Studio for automated user support.
+* Developed comprehensive training corpus with 1,000+ intents, 150+ entities, and 8,000+ training examples covering financial procedures and technical support scenarios.
+* Architected ServiceNow-based enterprise system management platform, implementing Configuration Management, Service Management, and Change Management workflows.
+* Modernized legacy applications using Spring Boot, Angular, MySQL, and cloud-based authentication (Azure C2B, Okta), reducing processing time by 50%.
+
+=== Enterprise Technical Architect – System Modernization
+
+*California State Agencies* – Sacramento, CA | 2013 – 2018
+
+* Contributed to California Enterprise Architecture Framework (CEAF 2.0) development, authoring eGovernment Reference Architecture and contributing to adoption of TOGAF and ArchiMate.
+* As Technical Lead, conducted technical assessments and audits for large-scale state systems (Fi$Cal, CalSTRS), analyzing architectural artifacts, performance, and SDLC compliance.
+* Participated in data migration and ETL processes for financial systems, implementing automated validation and self-service portals serving 500+ users across state departments.
+
+=== Solution Architect/Technical Lead – Legacy System Transformation
+
+*California DMV & Other State Agencies* – Sacramento, CA | 2008 – 2013
+
+* Led $100M+ DMV Legacy to SOA Migration Project as Solution Architect, implementing enterprise-scale modernization from mainframe systems to service-oriented architecture.
+* Contributed to programmatic analysis of legacy code (EDL) to determine data and control flows.
+* Contributed to adoption of BI/DW platform using IBM Cognos Business Intelligence Suite, supporting 200+ production reports and dashboards.
+* Developed architectural framework including declarative business process engine with business rules, scaling to support thousands of concurrent users in production environment.
+* Implemented continuous integration and CI/CD pipelines using Maven, establishing strong QA processes and automated testing frameworks.
+* Mentored cross-functional teams in SOA design patterns, UML modeling, Business Analysis (BPR, Use Cases) and OO design best practices.
+
+=== Enterprise Architect – Healthcare & Retirement Systems
+
+*Massachusetts & Michigan State Agencies* | 2003 – 2008
+
+* Lead Architect for Health Services Management System; designed enterprise-wide J2EE service-based architectures using ESB and JMS integration models with XML payloads, with HIPAA and HL7 compliance
+* Initial member of the Enterprise Architecture Group for MA State health departments, establishing governance frameworks and architectural standards aligned with FEAF.
+* Led technical teams across multiple geographic locations, mentoring in RUP processes, model-centered design, and distributed configuration management.
+* Implemented Web Service-enablement for legacy retirement fund management systems, introducing SOA and shared security services (Michigan State Award recipient).
+
+== Education
+
+*M.A. Philosophy* (1980-86)::
+Warsaw University, Warsaw, Poland - Master's thesis (summa cum laude) in methodology of sciences
+
+*Graduate Professional Certificate in Computer Science* (1986-88)::
+Institute of Mathematics and Computer Science, Warsaw University, Poland - Emphasis on Expert Systems, Logic Programming, System Modeling and Unix

@@ -1,0 +1,2234 @@
+= Kurrier User Story Creation Plan: Interactive Demo Scope
+:doctype: book
+:toc:
+:toclevels: 3
+:sectnums:
+:sectnumlevels: 3
+:author: Kurrier Inc.
+:revdate: 2025-10-29
+:source-highlighter: rouge
+:numbered:
+:pagenums:
+
+
+// [abstract]
+<<<
+== Executive Summary
+
+This document provides a comprehensive, systematic plan for transforming the Kurrier Inc. UX/PRD Brief (docs/Brief/Kurrier_Inc_-_brief.adoc) into a structured backlog of user stories suitable for creating an interactive demo. The plan follows agile best practices as defined in the User Story Characteristics reference guide (docs/Reference/UserStoryCharacteristics.adoc).
+
+**Scope:** Consumer Mobile App, Driver Mobile App, Web Admin Dashboard (limited), Consumer Web Dashboard (limited)
+
+**Outcome:** Approximately 44 user stories organized into 10 epics with MoSCoW prioritization, enabling phased demo development
+
+**Key Artifacts:** Master backlog document, 10 epic detail documents, demo golden path script, dependency map, prioritization summary
+
+**Approach:** Hybrid journey-priority model combining epic-based narrative structure with MoSCoW prioritization and clear actor ownership
+
+<<<
+=== Version History
+
+.Version History
+[%header, cols="^1,^1,<5"]
+
+|====
+| *Date*
+| *Author*
+| *Description*
+
+
+| 251029
+| pxp
+| First shared draft
+
+
+
+|====
+<<<
+<<<
+== Purpose & Context
+
+=== Planning Objectives
+
+This plan enables:
+
+.Planning Objectives
+[%header, cols="^1,<4"]
+|===
+| # | Objective
+
+| 1
+| Systematic extraction of requirements from the detailed UX/PRD brief
+
+| 2
+| Organization of user stories into coherent epics that tell a complete narrative
+
+| 3
+| Prioritization of features for phased demo development
+
+| 4
+| Clear traceability from brief requirements to implementable stories
+
+| 5
+| Alignment with INVEST criteria and agile best practices
+|===
+
+=== Scope & Constraints
+
+.Scope & Constraints
+[%header, cols="<1,<1"]
+|===
+| In Scope | Out of Scope
+
+| Visual mockup/prototype stories (not production implementation)
+| Production backend implementation stories
+
+| End-to-end user journeys for believability
+| Live integrations (payments, carriers, KYC, etc.)
+
+| Simulated APIs and data (no real integrations)
+| PCI compliance requirements
+
+| Consumer and Driver mobile apps (iOS/Android)
+| Full Admin dashboard features
+
+| Limited Admin dashboard (optional/deferred)
+| Help/FAQ/Support content creation
+|===
+
+=== Success Criteria
+
+The plan is successful when:
+
+* [ ] All primary user journeys from brief are captured with traceability
+* [ ] Stories pass INVEST criteria validation
+* [ ] Clear MoSCoW prioritization enables scope management
+* [ ] Dependencies are mapped and documented
+* [ ] Stories are appropriately sized for mockup implementation
+* [ ] Demo narrative is coherent and compelling
+* [ ] Implementation sequence is logical and achievable
+
+<<<
+== Plan Architecture
+
+=== Planning Phases
+
+The plan is organized into three major phases:
+
+.Planning Phases
+[.text-center]
+[plantuml, planning-phases, svg]
+----
+@startuml
+!define RECTANGLE class
+
+skinparam backgroundColor transparent
+skinparam defaultFontName Arial
+skinparam defaultFontSize 16
+skinparam linetype ortho
+
+package "Phase 1: Foundation & Analysis" {
+  [Step 1: Context & Approach] as S1
+  [Step 2: Actor/Journey Extraction] as S2
+}
+
+package "Phase 2: Story Development" {
+  [Step 3: Decomposition Methodology] as S3
+  [Step 4: Prioritization Framework] as S4
+}
+
+package "Phase 3: Integration & Delivery" {
+  [Step 5: Dependency Mapping] as S5
+  [Step 6: Deliverable Specification] as S6
+}
+
+S1 --> S2
+S2 --> S3
+S3 --> S4
+S4 --> S5
+S5 --> S6
+@enduml
+----
+
+=== Approach Selection
+
+**Selected Approach:** Hybrid Journey-Priority Model
+
+This approach combines:
+
+.Hybrid Journey-Priority Model
+[.text-center]
+[plantuml, approach-components, svg]
+----
+@startuml
+!define RECTANGLE class
+
+skinparam backgroundColor transparent
+skinparam defaultFontName Arial
+skinparam defaultFontSize 16
+skinparam linetype ortho
+skinparam component {
+  BackgroundColor LightSkyBlue
+  BorderColor DarkBlue
+  ArrowColor DarkBlue
+}
+
+component "1. EPIC-BASED ORGANIZATION" as E1 #LightBlue {
+  [Stories grouped by user journeys]
+  [→ Narrative coherence]
+}
+
+component "2. MoSCoW PRIORITIZATION" as E2 #LightGreen {
+  [Must/Should/Could/Won't framework]
+  [→ Practical scope management]
+}
+
+component "3. ACTOR TAGGING" as E3 #LightYellow {
+  [Consumer / Driver / Admin]
+  [→ Clear ownership]
+}
+
+component "4. DEPENDENCY LAYERING" as E4 #LightCoral {
+  [6 implementation layers]
+  [→ Logical sequencing]
+}
+
+E1 -down-> E2
+E2 -down-> E3
+E3 -down-> E4
+
+@enduml
+----
+
+.Hybrid Journey-Priority Model Components
+[%header, cols="<2,<3"]
+|===
+| Component | Description
+
+| **Epic-based organization**
+| Stories grouped by user journeys for narrative coherence
+
+| **MoSCoW prioritization**
+| Practical scope management for phased delivery
+
+| **Actor tagging**
+| Clear ownership and perspective
+
+| **Dependency layering**
+| Logical implementation sequencing
+|===
+
+**Alternative Approaches Considered:**
+
+.Alternative Approaches Considered
+[%header, cols="<2,<3"]
+|===
+| Approach | Assessment
+
+| *Actor-Centric*
+| Groups by user type but misses end-to-end flow visibility
+
+| *Journey-Based*
+| Shows complete value but complex coordination across actors
+
+| *Priority Layers*
+| Clear scope rings but loses narrative coherence
+|===
+
+<<<
+== Phase 1: Foundation & Analysis
+
+=== Step 1: Context & Approach Definition
+
+==== Demo Context Requirements
+
+The interactive demo must:
+
+.Demo Context Requirements
+[%header, cols="^1,<4"]
+|===
+| # | Requirement
+
+| 1
+| Demonstrate complete value proposition end-to-end
+
+| 2
+| Use visual mockups with simulated backend
+
+| 3
+| Show believable, realistic user interactions
+
+| 4
+| Validate UX/UI decisions with stakeholders
+
+| 5
+| Enable accurate MVP implementation estimates
+|===
+
+==== Key Decisions
+
+**Story Granularity:**
+
+.Story Granularity Guidelines
+[%header, cols="<1,<3"]
+|===
+| Level | Description
+
+| *Target*
+| 1 story = 1-3 related screens OR 1 complete micro-interaction
+
+| *Too Fine*
+| Individual buttons, form fields (avoid)
+
+| *Too Coarse*
+| Entire booking flow (should be epic)
+
+| *Right Size*
+| "Enter pickup address with map confirmation" (1 story)
+|===
+
+**Prioritization Principles:**
+
+.Prioritization Principles
+[%header, cols="<2,<3"]
+|===
+| Principle | Question
+
+| *Narrative Completeness*
+| Does it complete the Golden Path?
+
+| *Value Demonstration*
+| Does it show core value proposition?
+
+| *Stakeholder Impact*
+| Will stakeholders understand the product?
+
+| *Technical Feasibility*
+| Can it be mocked/simulated credibly?
+|===
+
+=== Step 2: Actor & Journey Extraction
+
+==== Primary Actors
+
+.Primary Actors
+[%header, cols="<1,4,<2,^1"]
+|===
+| Actor | Description | Brief Source | Screens
+
+| Consumer (Sender)
+| Person or business shipping parcels
+| Sections 4.1, 14.2
+| ~30
+
+| Driver
+| Independent contractor handling pickups
+| Sections 4.2, 15.2
+| ~26
+
+| Operations Admin
+| Staff managing system operations
+| Section 16.2
+| ~15
+
+| System
+| Automated processes (supporting actor)
+| Throughout
+| N/A
+|===
+
+==== Epic Framework
+
+The story backlog is organized into 10 epics:
+
+**Consumer Epics (6):**
+
+.Consumer Epics
+[%header, cols="^1,<2,<3,<2"]
+|===
+| ID | Epic Name | Scope | Brief Reference
+
+| E1
+| Consumer Onboarding & Authentication
+| Sign-in, permissions, profile setup
+| Sections 4.1.1, 14.2.1
+
+| E2
+| Shipment Creation & Booking
+| Address entry, parcel capture, dimensions/weight
+| Sections 4.1.2, 14.2.2
+
+| E3
+| Service Selection & Quotation
+| Multi-carrier options, pricing, service tiers
+| Sections 4.1.3, 14.2.3
+
+| E4
+| Payment & Confirmation
+| Payment methods, transaction flow, booking confirmation
+| Sections 4.1.5, 14.2.5
+
+| E5
+| Live Tracking & Driver Interaction
+| Real-time map, status updates, driver card
+| Sections 4.1.6, 4.1.7, 14.2.7
+
+| E6
+| Shipment Management & History
+| Past shipments, invoices, rewards (optional)
+| Sections 4.1.8, 14.2.9, 14.2.10
+|===
+
+**Driver Epics (4):**
+
+.Driver Epics
+[%header, cols="^1,<2,<3,<2"]
+|===
+| ID | Epic Name | Scope | Brief Reference
+
+| E7
+| Driver Onboarding & Verification
+| Sign-in, document upload, KYC placeholders
+| Sections 4.2.1, 15.2.1
+
+| E8
+| Job Discovery & Acceptance
+| Go online/offline, job list, job details, acceptance
+| Sections 4.2.2, 15.2.2, 15.2.3
+
+| E9
+| Pickup & Hub Fulfillment
+| Navigation, scanning, pickup, hub drop-off
+| Sections 4.2.3, 4.2.4, 15.2.4, 15.2.5, 15.2.6
+
+| E10
+| Earnings & Performance
+| Earnings display, job history, payouts
+| Sections 4.2.5, 15.2.7
+|===
+
+**Admin Epic (1) - Deferred:**
+
+.Admin Epic (Deferred)
+[%header, cols="^1,<2,<3,<2"]
+|===
+| ID | Epic Name | Scope | Brief Reference
+
+| E11
+| Operations Dashboard
+| Monitoring, management, support (low priority for initial demo)
+| Section 16
+|===
+
+==== Golden Path Definition
+
+The *Golden Path* is the minimum viable demo narrative that demonstrates complete value:
+
+.Consumer Journey (5 minutes)
+[.text-center]
+[plantuml, consumer-journey, svg]
+----
+@startuml
+skinparam backgroundColor transparent
+skinparam defaultFontName Arial
+skinparam defaultFontSize 16
+skinparam linetype ortho
+skinparam activity {
+  BackgroundColor LightSkyBlue
+  BorderColor DarkBlue
+  ArrowColor DarkBlue
+  FontColor DarkBlue
+}
+
+start
+:Sign In;
+:Enter Pickup & Recipient Addresses;
+:Measure/Weigh Parcel;
+:View Multi-Carrier Quotes;
+:Select Service & Pay;
+:View Confirmation + Label;
+:Track Shipment (Live Map);
+:View Invoice;
+stop
+
+@enduml
+----
+
+.Driver Journey (3 minutes)
+[.text-center]
+[plantuml, driver-journey, svg]
+----
+@startuml
+skinparam backgroundColor transparent
+skinparam defaultFontName Arial
+skinparam defaultFontSize 16
+skinparam linetype ortho
+skinparam activity {
+  BackgroundColor LightGreen
+  BorderColor DarkGreen
+  ArrowColor DarkGreen
+  FontColor DarkGreen
+}
+
+start
+:Sign In;
+:Go Online;
+:View Available Jobs;
+:Accept Job;
+:Navigate to Pickup;
+:Scan Parcel + Take Photo;
+:Navigate to Hub;
+:Scan at Hub → Complete;
+:View Earnings;
+stop
+
+@enduml
+----
+
+.Integration Points
+[.text-center]
+[plantuml, integration-points, svg]
+----
+@startuml
+skinparam backgroundColor transparent
+skinparam defaultFontName Arial
+skinparam defaultFontSize 16
+skinparam linetype ortho
+skinparam sequence {
+  ArrowColor Navy
+  ArrowFontColor Navy
+  ActorBorderColor Black
+  LifeLineBorderColor Gray
+  ParticipantFontColor Black
+}
+
+participant "Consumer App" as C #87CEEB
+participant "System" as S #FFD700
+participant "Driver App" as D #90EE90
+
+C -> S: Books Shipment
+S -> D: Job Appears in Driver List
+
+D -> S: Accepts Job
+S -> C: Driver Location Visible
+
+D -> S: Scans Parcel
+S -> C: Timeline Updates
+
+D -> S: Hub Drop-off
+S -> C: Invoice Generated
+
+@enduml
+----
+
+**Result:** Complete, believable demonstration of Kurrier's value proposition in 10 minutes.
+
+<<<
+== Phase 2: Story Development
+
+=== Step 3: Story Decomposition Methodology
+
+==== Decomposition Process
+
+For each epic, follow this systematic 6-step process:
+
+**Step 3.1: Extract User Goals from Brief**
+
+Review the relevant brief sections and identify discrete user goals.
+
+*Example from Consumer Epic 2 (Shipment Creation):*
+
+* Brief Section 4.1.2 lists: "Pickup Address", "Recipient Address", "Parcel Capture", "Service Selection"
+* Brief Section 14.3 shows screens: "Pickup (search/map/saved)", "Recipient (search/map/delivery type)"
+
+*Convert to user goals:*
+
+* User needs to specify where parcel is located
+* User needs to specify where parcel should be delivered
+* User needs to provide parcel dimensions
+* User needs to provide parcel weight
+
+**Step 3.2: Write Story Statement**
+
+Apply the standard user story template:
+
+[source]
+----
+As a [actor],
+I want to [goal]
+so that [value].
+----
+
+*Example:*
+
+[quote]
+As a consumer, I want to enter my pickup address with autocomplete suggestions so that I can quickly specify where my parcel is located without typing the full address.
+
+**Step 3.3: Define Acceptance Criteria**
+
+Use Given-When-Then format or checklist style:
+
+*Example:*
+
+[source]
+----
+Acceptance Criteria:
+- Given I am on the pickup address screen
+  When I type at least 3 characters
+  Then I see address suggestions from geocoding API (simulated)
+- Given I select an address from suggestions
+  When I tap to confirm
+  Then I see the address displayed on a map for visual verification
+- I can edit or change the selected address before proceeding
+- I can add special pickup instructions (gate code, reception hours)
+- Selected address is saved to my profile for reuse in future bookings
+----
+
+**Step 3.4: Add Context Notes**
+
+Include:
+
+* *Brief Reference:* Section and screen name
+* *Technical:* API simulation notes, platform considerations
+* *UX:* Interaction requirements, design system notes
+* *Dependencies:* Other stories that must be complete first
+
+*Example:*
+
+[source]
+----
+Notes:
+- Brief Reference: Section 14.3 - Addressing screens
+- Technical: Uses Google Maps/Mapbox API (simulated for demo)
+- UX: Show map confirmation as per brief requirement, support both manual entry and selection from suggestions
+- Dependencies: Requires C-E1-02 (Location permission granted)
+- Screen Count: 2 screens (search/entry + map confirmation)
+----
+
+**Step 3.5: Assign Priority & Size**
+
+* *Priority:* Must/Should/Could/Won't (MoSCoW)
+* *Size:* S/M/L based on complexity
+
+|===
+| Size | Complexity | Example
+
+| S (Small)
+| Single simple screen
+| Text input, static list view
+
+| M (Medium)
+| Screen with interactions
+| Search + map + confirmation
+
+| L (Large)
+| Complex multi-screen flow
+| AR measurement walkthrough
+|===
+
+**Step 3.6: Apply INVEST Checklist**
+
+Validate each story against INVEST criteria:
+
+* [ ] *Independent:* Can be developed without strong dependencies
+* [ ] *Negotiable:* Details can be refined during implementation
+* [ ] *Valuable:* Clear value statement in "so that" clause
+* [ ] *Estimable:* Team can estimate effort (aided by size indicator)
+* [ ] *Small:* Appropriate scope for demo mockup
+* [ ] *Testable:* Acceptance criteria are verifiable
+
+==== Story Template
+
+[source,asciidoc]
+----
+=== Story [ID]: [Short Title]
+
+**Story ID:** [Actor]-E[Epic]-[Number]
+**Priority:** [Must/Should/Could/Won't]
+**Size:** [S/M/L]
+**Actor:** [Consumer/Driver/Admin]
+
+**User Story:**
+
+As a [actor],
+I want to [goal]
+so that [value].
+
+**Acceptance Criteria:**
+
+- [ ] Given [context], when [action], then [outcome]
+- [ ] [Additional criteria]
+- [ ] [Edge case criteria]
+
+**Notes:**
+
+- Brief Reference: Section X.X, Screen: [screen name]
+- Technical: [API/mock notes]
+- UX: [Interaction notes]
+- Dependencies: [Story IDs]
+- Screen Count: [number]
+
+**Demo Notes:**
+
+[Any specific notes for demo implementation]
+
+---
+----
+
+==== Decomposition Strategy by Epic Type
+
+Different epic types require different decomposition approaches:
+
+**Onboarding Epics:**
+
+* One story per authentication method
+* One story for each permission request
+* One story for profile setup
+
+**Data Entry Epics:**
+
+* One story per major form or input group
+* Consider grouping related fields
+* Separate validation as needed
+
+**Selection/Browsing Epics:**
+
+* One story for list/grid display
+* Separate story for filters/sort
+* Separate story for detail view
+
+**Transaction Epics:**
+
+* One story per transaction step (review → pay → confirm)
+* Include success and failure states
+
+**Tracking/Viewing Epics:**
+
+* One story for main view/dashboard
+* Separate stories for interactions (refresh, contact, etc.)
+
+=== Step 4: Prioritization Framework (MoSCoW)
+
+==== Priority Definitions
+
+**MUST HAVE (M) - Demo Blockers**
+
+* Required for Golden Path narrative completion
+* Without these, the demo story doesn't make sense
+* Core value proposition is invisible without them
+
+*Examples:*
+
+* Consumer: Sign in, Create shipment, Enter addresses, Get quote, Pay, View tracking
+* Driver: Sign in, View jobs, Accept job, Navigate, Scan parcel, Complete pickup, Drop at hub
+* Cross-cutting: Status updates, live map, basic timeline
+
+**SHOULD HAVE (S) - Demo Enhancers**
+
+* Significantly improve demo believability
+* Show important features but not Golden Path critical
+* Add depth to user experience understanding
+
+*Examples:*
+
+* Consumer: AR measurement, Insurance add-on, Saved addresses, Rewards balance display
+* Driver: Heatmap, Earnings breakdown, Photo capture
+* Polish: Loading states, error messages, empty states
+
+**COULD HAVE \(C) - Nice-to-Have Features**
+
+* Further enhancements if time permits
+* Secondary features that add realism
+* Features that demonstrate scalability
+
+*Examples:*
+
+* Consumer: Shipment management (reschedule/cancel), Business profile toggle, Promo codes
+* Driver: Quality metrics, Incident reporting
+* Admin: Basic monitoring view
+
+**WON'T HAVE (W) - Explicitly Deferred**
+
+* Out of scope for initial demo
+* May be included in enhanced demo v2
+* Documented for future reference
+
+*Examples:*
+
+* Consumer Web dashboard (use mobile app for demo)
+* Full Admin dashboard (operations can be implied)
+* Complex edge cases (payment retry flows, detailed surcharge handling)
+* Help/FAQ/Support content
+
+==== Story Count by Epic
+
+.Story Count by Epic
+[%header, cols="^1,4,^1,^1,^1,^1,2"]
+|===
+| Epic ID | Epic Name | Total | M | S | C | Brief Ref
+
+| E1
+| Consumer Onboarding & Authentication
+| 4
+| 2
+| 1
+| 1
+| 4.1.1, 14.2.1
+
+| E2
+| Shipment Creation & Booking
+| 8
+| 4
+| 2
+| 2
+| 4.1.2, 14.2.2
+
+| E3
+| Service Selection & Quotation
+| 5
+| 3
+| 1
+| 1
+| 4.1.3, 14.2.3
+
+| E4
+| Payment & Confirmation
+| 4
+| 3
+| 1
+| 0
+| 4.1.5, 14.2.5
+
+| E5
+| Live Tracking & Driver Interaction
+| 5
+| 3
+| 2
+| 0
+| 4.1.6-7, 14.2.7
+
+| E6
+| Shipment Management & History
+| 3
+| 0
+| 2
+| 1
+| 4.1.8, 14.2.9-10
+
+| E7
+| Driver Onboarding & Verification
+| 3
+| 1
+| 1
+| 1
+| 4.2.1, 15.2.1
+
+| E8
+| Job Discovery & Acceptance
+| 4
+| 4
+| 0
+| 0
+| 4.2.2, 15.2.2-3
+
+| E9
+| Pickup & Hub Fulfillment
+| 6
+| 5
+| 1
+| 0
+| 4.2.3-4, 15.2.4-6
+
+| E10
+| Driver Earnings & Performance
+| 2
+| 0
+| 1
+| 1
+| 4.2.5, 15.2.7
+
+| *TOTAL*
+| *10 Epics*
+| *44*
+| *25*
+| *12*
+| *7*
+|
+|===
+
+==== Demo Phase Definitions
+
+The stories are organized into three progressive demo phases:
+
+.Demo Phase Definitions
+[%header, cols="1, 3,3,3,<2"]
+|===
+| Phase | Scope | Narrative | Characteristics | Use Case | Epics Included
+
+| *Phase 1* +
+MVP Demo +
+(Golden Path Only)
+| Must-have stories only (25 stories)
+| Complete Golden Path end-to-end
+| Believable but minimal
+| Initial stakeholder validation
+| Full E1-E5, E7-E9; Partial E6, E10
+
+| *Phase 2* +
+Enhanced Demo +
+(Polished & Realistic)
+| Must + Should stories (37 stories)
+| Golden Path with depth and polish
+| Production-quality mockup
+| Investor demos, usability testing
+| All epics with Must and Should stories
+
+| *Phase 3* +
+Complete Demo +
+(Comprehensive Feature Showcase)
+| All in-scope stories (44 stories)
+| Full feature set including alternatives
+| Demonstrates scalability and edge cases
+| Developer handoff, comprehensive validation
+| All 10 epics fully implemented
+|===
+
+<<<
+== Phase 3: Integration & Delivery
+
+=== Step 5: Dependency Mapping & Sequencing
+
+==== Dependency Types
+
+**1. Hard Dependencies (Blockers)**
+
+Story B cannot be implemented until Story A is complete.
+
+*Example:* "View tracking timeline" depends on "Complete payment" (need booking to track)
+
+**2. Soft Dependencies (Logical Flow)**
+
+Stories work better when implemented in sequence.
+
+*Example:* "AR measurement" ideally comes after "Manual dimensions" (fallback established first)
+
+**3. Cross-Actor Dependencies**
+
+Consumer story requires corresponding Driver story.
+
+*Example:* "View driver location" (Consumer) depends on "Accept job" (Driver)
+
+**4. Data Dependencies**
+
+Story requires data/state created by another story.
+
+*Example:* "View invoice" requires "Payment completed" state
+
+==== Dependency Layers
+
+Stories are organized into six dependency layers:
+
+.Dependency Layers: Logical Build Sequence
+[.text-center]
+[plantuml, dependency-layers, svg]
+----
+@startuml
+skinparam backgroundColor transparent
+skinparam defaultFontName Arial
+skinparam defaultFontSize 16
+skinparam linetype ortho
+skinparam rectangle {
+  BackgroundColor LightSkyBlue
+  BorderColor DarkBlue
+  FontColor DarkBlue
+}
+
+rectangle "LAYER 1: Foundation\n(No Dependencies)" as L1 #E6F3FF {
+  [Authentication (Consumer & Driver)]
+  [Permission requests]
+  [Basic navigation]
+}
+
+rectangle "LAYER 2: Data Entry\n(Depends on Layer 1)" as L2 #CCE5FF {
+  [Address entry]
+  [Parcel details]
+  [Driver online/offline]
+}
+
+rectangle "LAYER 3: Business Logic\n(Depends on Layer 2)" as L3 #B3D9FF {
+  [Quote generation]
+  [Service selection]
+  [Job matching]
+}
+
+rectangle "LAYER 4: Transactions\n(Depends on Layer 3)" as L4 #99CCFF {
+  [Payment processing]
+  [Job acceptance]
+  [Booking confirmation]
+}
+
+rectangle "LAYER 5: Fulfillment\n(Depends on Layer 4)" as L5 #80BFFF {
+  [Live tracking]
+  [Navigation]
+  [Scanning/pickup]
+  [Hub drop-off]
+}
+
+rectangle "LAYER 6: Post-Transaction\n(Depends on Layer 5)" as L6 #66B2FF {
+  [History/invoices]
+  [Earnings display]
+  [Reporting]
+}
+
+L1 -down-> L2 : Enables
+L2 -down-> L3 : Enables
+L3 -down-> L4 : Enables
+L4 -down-> L5 : Enables
+L5 -down-> L6 : Enables
+
+@enduml
+----
+
+**Key Insight:** Consumer and Driver flows can be developed in parallel through Layer 4, then integrated in Layer 5.
+
+**Layer 1: Foundation (No Dependencies)**
+
+Authentication and onboarding stories. Can be developed in parallel across apps.
+
+[source]
+----
+Stories:
+  C-E1-01: Consumer sign-in with OTP
+  C-E1-02: Location permission request
+  D-E7-01: Driver sign-in with OTP
+----
+
+**Layer 2: Data Entry (Depends on Layer 1)**
+
+Form and input stories that create core entities.
+
+[source]
+----
+Stories:
+  C-E2-01: Enter pickup address
+  C-E2-02: Enter recipient address
+  C-E2-03: Enter parcel dimensions
+  C-E2-04: Enter parcel weight
+  D-E8-01: Driver go online/offline toggle
+----
+
+**Layer 3: Business Logic (Depends on Layer 2)**
+
+Processing, calculation, and selection stories.
+
+[source]
+----
+Stories:
+  C-E3-01: View multi-carrier service options
+  C-E3-02: View price breakdown
+  C-E3-03: Select service
+  D-E8-02: View available jobs list
+  D-E8-03: View job details
+----
+
+**Layer 4: Transactions (Depends on Layer 3)**
+
+Commitment actions that trigger downstream effects.
+
+[source]
+----
+Stories:
+  C-E4-01: Select payment method
+  C-E4-02: Complete payment transaction
+  C-E4-03: View booking confirmation with IDs
+  D-E8-04: Accept job
+----
+
+**Layer 5: Fulfillment (Depends on Layer 4)**
+
+Execution and real-time tracking stories.
+
+[source]
+----
+Stories:
+  C-E5-01: View shipment timeline with status
+  C-E5-02: View live driver location on map
+  C-E5-03: View driver card with details
+  D-E9-01: Navigate to pickup location
+  D-E9-02: Mark arrived at pickup
+  D-E9-03: Scan Kurrier ID
+  D-E9-04: Navigate to hub
+  D-E9-05: Scan at hub and mark complete
+----
+
+**Layer 6: Post-Transaction (Depends on Layer 5)**
+
+History, receipts, and reporting (read-only views).
+
+[source]
+----
+Stories:
+  C-E6-01: View past shipments list
+  C-E6-02: View invoice PDF
+  D-E10-01: View earnings dashboard
+----
+
+==== Critical Integration Points
+
+The following diagram (see <<Golden Path Definition>>) shows the key integration points between Consumer and Driver apps:
+
+.Critical Integration Points Details
+[%header, cols="^1,<3,<2,<2"]
+|===
+| # | Integration Event | Consumer Story | Driver Story
+
+| 1
+| Booking Confirmed → Job Created
+| C-E4-03: View booking confirmation
+| D-E8-02: Job appears in list
+
+| 2
+| Job Accepted → Location Sharing
+| C-E5-02: Driver location visible
+| D-E8-04: Accept job
+
+| 3
+| Parcel Scanned → Timeline Update
+| C-E5-01: Timeline updates to "Picked up"
+| D-E9-03: Scan Kurrier ID at pickup
+
+| 4
+| Hub Drop-off → Completion
+| C-E5-01: Timeline shows "At Hub" + C-E6-02: Invoice generated
+| D-E9-05: Scan at hub and mark complete
+|===
+
+These integration points represent the critical synchronization moments where the demo must show real-time coordination between both apps to demonstrate the platform's value proposition.
+
+==== Recommended Implementation Sequence
+
+**Sprint 1: Foundation (Week 1)**
+
+*Goal:* Establish navigation and basic authentication
+
+* Both auth flows (Consumer & Driver)
+* Consumer address entry screens
+* Driver job list/detail screens
+* Basic navigation patterns
+
+*Deliverable:* Users can sign in and navigate through empty states
+
+**Sprint 2: Core Flow - Consumer (Week 2)**
+
+*Goal:* Complete consumer booking journey
+
+* Parcel details entry (dimensions, weight)
+* Service selection and quote display
+* Payment flow (simulated success only)
+* Booking confirmation screen
+
+*Deliverable:* Consumer can complete a booking end-to-end
+
+**Sprint 3: Core Flow - Driver (Week 3)**
+
+*Goal:* Complete driver fulfillment journey
+
+* Driver online/offline toggle
+* Job acceptance flow
+* Navigation to pickup (simulated)
+* Scan and pickup confirmation
+* Hub navigation and drop-off
+
+*Deliverable:* Driver can complete a job end-to-end
+
+**Sprint 4: Integration & Tracking (Week 4)**
+
+*Goal:* Connect both apps with real-time updates
+
+* Live map with driver location
+* Status timeline updates
+* Cross-app state synchronization
+* Demo data orchestration
+
+*Deliverable:* Complete Golden Path demo works end-to-end
+
+**Sprint 5: Polish & Enhancement (Week 5)**
+
+*Goal:* Add Should-have features for realistic demo
+
+* AR measurement simulation
+* Photo capture (pickup/drop-off)
+* Earnings display
+* Loading states, error states, empty states
+* Demo script refinement
+
+*Deliverable:* Polished, believable Phase 2 demo
+
+==== Dependency Documentation Format
+
+For each story, document dependencies using this format:
+
+[source,asciidoc]
+----
+**Dependencies:**
+
+- **Requires:** [Story IDs that must be complete first]
+- **Enables:** [Story IDs that this story unblocks]
+- **Integrates with:** [Story IDs that work in concert]
+- **Data needs:** [What data/state this story requires]
+- **Data provides:** [What data/state this story creates]
+----
+
+*Example:*
+
+[source]
+----
+**Dependencies:**
+
+- **Requires:** C-E4-02 (Payment completed)
+- **Enables:** C-E5-01, C-E5-02, C-E5-03 (All tracking stories)
+- **Integrates with:** D-E8-02 (Creates job in driver's list)
+- **Data needs:** User authentication, shipment details, selected service
+- **Data provides:** Kurrier ID, carrier tracking number, booking status
+----
+
+==== Risk Mitigation Strategies
+
+**Risk:** Long-pole stories delay entire demo
+
+*Mitigation:*
+
+* Identify complex integrations early (Layer 4-5 stories)
+* Use mocked data initially, integrate real flow later
+* Create API contracts/"seams" for parallel development
+
+**Risk:** Cross-actor dependencies create bottlenecks
+
+*Mitigation:*
+
+* Develop Consumer and Driver flows in parallel through Sprint 3
+* Use stubbed/simulated state for testing until Sprint 4 integration
+* Test integration points early with smoke tests
+
+**Risk:** Scope creep during implementation
+
+*Mitigation:*
+
+* Strict adherence to MoSCoW priorities
+* "Won't Have" list is documented and respected
+* Change requests require re-prioritization discussion
+
+=== Step 6: Deliverable Specification
+
+==== Document Structure
+
+The user story backlog will be delivered as a structured set of AsciiDoc documents:
+
+[source]
+----
+docs/UserStories/
+│
+├── Kurrier_User_Stories_Master.adoc       (Main index & overview)
+│
+├── Epics/
+│   ├── Epic_E1_Consumer_Onboarding.adoc   (4 stories)
+│   ├── Epic_E2_Shipment_Creation.adoc     (8 stories)
+│   ├── Epic_E3_Service_Selection.adoc     (5 stories)
+│   ├── Epic_E4_Payment_Confirmation.adoc  (4 stories)
+│   ├── Epic_E5_Live_Tracking.adoc         (5 stories)
+│   ├── Epic_E6_History_Rewards.adoc       (3 stories)
+│   ├── Epic_E7_Driver_Onboarding.adoc     (3 stories)
+│   ├── Epic_E8_Job_Discovery.adoc         (4 stories)
+│   ├── Epic_E9_Pickup_Fulfillment.adoc    (6 stories)
+│   └── Epic_E10_Driver_Earnings.adoc      (2 stories)
+│
+├── Demo_Golden_Path.adoc                   (Complete demo script)
+├── Story_Dependencies.adoc                 (Dependency map & layers)
+├── Story_Prioritization_Summary.adoc       (MoSCoW summary tables)
+├── Traceability_Matrix.adoc                (Story ID → Brief mapping)
+│
+└── Templates/
+    ├── Epic_Template.adoc                  (Template for new epics)
+    └── Story_Quality_Checklist.adoc        (INVEST validation)
+----
+
+==== Story ID Convention
+
+**Format:** `[Actor]-E[Epic]-[Number]`
+
+**Actor Codes:**
+
+* `C` = Consumer
+* `D` = Driver
+* `A` = Admin
+
+**Examples:**
+
+* `C-E1-01` = Consumer, Epic 1, Story 1 (Consumer sign-in)
+* `C-E2-04` = Consumer, Epic 2, Story 4 (Enter parcel weight)
+* `D-E8-04` = Driver, Epic 8, Story 4 (Accept job)
+* `D-E9-03` = Driver, Epic 9, Story 3 (Scan Kurrier ID)
+
+**Benefits:**
+
+* Unique and sortable
+* Actor immediately visible
+* Epic grouping clear
+* Sequence within epic obvious
+* Brief for verbal communication ("C-E-one-oh-one")
+
+==== Master Document Contents
+
+The `Kurrier_User_Stories_Master.adoc` document includes:
+
+**1. Executive Summary**
+
+* Purpose of user stories
+* Scope for interactive demo
+* Total story count: 44 stories
+* Prioritization breakdown: 25 Must, 12 Should, 7 Could
+
+**2. Epic Overview Table**
+
+Summary table of all 10 epics with story counts and priorities.
+
+**3. Demo Phases**
+
+Detailed definitions of Phase 1 (MVP), Phase 2 (Enhanced), and Phase 3 (Complete) with story lists for each.
+
+**4. Actor Summary**
+
+* Consumer stories: 29 stories across 6 epics
+* Driver stories: 15 stories across 4 epics
+* Cross-cutting concerns: Integration points, shared components
+
+**5. Quick Reference**
+
+* Story ID convention explained
+* Priority definitions (M/S/C/W)
+* Size definitions (S/M/L)
+* How to read story format
+* INVEST criteria checklist
+
+**6. Links to Epic Documents**
+
+Hyperlinks to all 10 epic detail documents for easy navigation.
+
+==== Epic Document Structure
+
+Each epic document follows this template:
+
+[source,asciidoc]
+----
+= Epic EX: [Epic Name]
+:toc:
+:toclevels: 2
+:sectnums:
+
+<<<
+== Epic Overview
+
+**Epic ID:** EX +
+**Epic Name:** [Name] +
+**Actor:** [Consumer/Driver/Admin] +
+**Brief Reference:** Section X.X +
+**Priority:** [Overall priority] +
+**Story Count:** [Total] (M: [#], S: [#], C: [#])
+
+**Epic Goal:**
+
+[1-2 sentences describing what this epic achieves from user perspective]
+
+**Value Proposition:**
+
+[Why this epic matters for the demo - what capability it demonstrates]
+
+**Success Criteria:**
+
+- [ ] [Criterion 1]
+- [ ] [Criterion 2]
+- [ ] [Criterion 3]
+
+<<<
+== Stories
+
+=== Story EX-01: [Story Title]
+
+**Story ID:** EX-01 +
+**Priority:** [M/S/C/W] +
+**Size:** [S/M/L] +
+**Actor:** [Who]
+
+**User Story:**
+
+As a [actor],
+I want to [goal]
+so that [value].
+
+**Acceptance Criteria:**
+
+- [ ] Given [context], when [action], then [outcome]
+- [ ] [Additional criteria]
+- [ ] [Edge case criteria]
+
+**Notes:**
+
+- **Brief Reference:** Section X.X, Screen: [screen name]
+- **Technical:** [API/mock notes]
+- **UX:** [Interaction notes]
+- **Dependencies:**
+  * Requires: [Story IDs]
+  * Enables: [Story IDs]
+  * Integrates with: [Story IDs]
+- **Screen Count:** [number]
+
+**Demo Notes:**
+
+[Any specific notes for demo implementation]
+
+---
+
+[Repeat for each story in epic]
+----
+
+==== Demo Golden Path Document
+
+The `Demo_Golden_Path.adoc` document provides a complete demo script:
+
+**Contents:**
+
+. *Demo Narrative*
+** Overview of the demo story
+** Target audience and presentation context
+** Demo duration: approximately 10 minutes
+
+. *Demo Scenario*
+** *Personas:*
+*** Sarah (Consumer) - Sending a birthday gift to her mom
+*** Mike (Driver) - Independent courier doing afternoon pickups
+** *Scenario setup:* Gift needs to arrive by Friday, Sarah books Wednesday pickup
+
+. *Act 1: Consumer Books Shipment* (5 minutes)
+** Stories demonstrated: C-E1-01, C-E2-01 to C-E2-04, C-E3-01 to C-E3-03, C-E4-01 to C-E4-03
+** Step-by-step walkthrough with screen references
+** Key talking points for presenter
+** Expected outcomes and success indicators
+
+. *Act 2: Driver Accepts and Picks Up* (3 minutes)
+** Stories demonstrated: D-E7-01, D-E8-01 to D-E8-04, D-E9-01 to D-E9-03
+** Step-by-step walkthrough
+** Integration points to highlight
+** Real-time interaction demonstration
+
+. *Act 3: Live Tracking to Completion* (2 minutes)
+** Stories demonstrated: C-E5-01 to C-E5-03, D-E9-04 to D-E9-05
+** Status synchronization demonstration
+** Timeline updates in real-time
+** Invoice generation
+
+. *Demo Data Setup*
+** Pre-configured accounts and credentials
+** Sample addresses for pickup and delivery
+** Parcel specifications (dimensions, weight)
+** Selected carrier and service level
+
+. *Integration Points*
+** Detailed list of where Consumer and Driver apps synchronize
+** State transitions to observe
+** Expected timing for each integration event
+
+. *Troubleshooting*
+** Common demo issues and resolutions
+** Reset procedures between demo runs
+
+==== Additional Deliverables
+
+**1. Story Dependencies Document** (`Story_Dependencies.adoc`)
+
+* Visual dependency map showing all 6 layers
+* Critical path highlighted
+* Integration points detailed
+* Parallel development opportunities identified
+
+**2. Prioritization Summary Document** (`Story_Prioritization_Summary.adoc`)
+
+Tables showing:
+
+* Must-have stories by epic (Golden Path)
+* Should-have stories by epic (Enhanced Demo)
+* Could-have stories by epic (Complete Demo)
+* Won't-have features with rationale
+
+**3. Traceability Matrix** (`Traceability_Matrix.adoc`)
+
+.Traceability Matrix
+[%header, cols="^2,<2,^1,^1,^1,<2"]
+|===
+| Story ID | Story Title | Epic | Priority | Size | Brief Section
+
+| C-E1-01 | Consumer sign-in | E1 | M | S | 4.1.1, 14.2.1
+| C-E2-01 | Enter pickup address | E2 | M | M | 4.1.2, 14.3
+| ... | ... | ... | ... | ... | ...
+|===
+
+**4. Story Quality Checklist** (`Templates/Story_Quality_Checklist.adoc`)
+
+Template for reviewing each story against INVEST criteria with references to UserStoryCharacteristics.adoc.
+
+**5. Implementation Notes**
+
+Guidance document including:
+
+* Mockup development approach
+* API simulation patterns
+* Demo data requirements and seeding
+* Platform considerations (iOS/Android)
+* Design system references from brief
+
+==== Output Format Standards
+
+**Primary Format:** AsciiDoc (.adoc)
+
+*Rationale:*
+
+* Version control friendly (plain text, easy diffs)
+* Semantic structure (headings, lists, tables)
+* Can generate HTML, PDF, DocBook as needed
+* Consistent with existing project documentation
+* Supports include directives for modular docs
+
+**File Naming Convention:**
+
+* Lowercase with underscores
+* Descriptive names
+* Examples:
+** `epic_e1_consumer_onboarding.adoc`
+** `story_dependencies.adoc`
+** `demo_golden_path.adoc`
+
+**Metadata Standards:**
+
+Every story must have:
+
+* [ ] Story ID (unique, following convention)
+* [ ] Title (concise, descriptive)
+* [ ] Actor (Consumer/Driver/Admin)
+* [ ] Story statement (As a... I want... so that...)
+* [ ] Acceptance criteria (testable, specific)
+* [ ] Priority (M/S/C/W with rationale)
+* [ ] Size (S/M/L with justification)
+* [ ] Epic assignment
+* [ ] Brief reference (section number)
+* [ ] Dependencies (if any)
+* [ ] Notes (technical, UX, demo context)
+
+==== Success Metrics
+
+The deliverable is considered complete when:
+
+- [ ] All 10 epics defined and documented
+- [ ] All 25 Must-have stories written with full acceptance criteria
+- [ ] All 12 Should-have stories written with full acceptance criteria
+- [ ] All 7 Could-have stories identified and outlined
+- [ ] Dependencies mapped in Story_Dependencies.adoc
+- [ ] Golden Path demo script written and validated
+- [ ] Traceability to brief verified for every story
+- [ ] INVEST criteria validated for all Must and Should stories
+- [ ] Stakeholder review completed with sign-off
+- [ ] Documentation can be rendered to HTML/PDF without errors
+
+<<<
+== Execution Roadmap
+
+=== When to Execute This Plan
+
+This plan should be executed:
+
+* **After:** Brief review and approval by stakeholders
+* **Before:** Mockup/prototype development begins
+* **Alongside:** Design system finalization
+* **Duration:** Approximately 1-2 weeks for complete backlog creation
+
+=== Execution Steps
+
+==== Step 1: Infrastructure Setup
+
+.Step 1: Infrastructure Setup
+[%header, cols="<1,<3"]
+|===
+| Attribute | Details
+
+| *Duration*
+| 2-3 hours
+
+| *Actions*
+a|
+. Create directory structure: `/docs/UserStories/`
+. Create subdirectories: `/Epics/`, `/Templates/`
+. Initialize master document with headers and TOC
+. Create epic template file (`Templates/Epic_Template.adoc`)
+. Create story quality checklist (`Templates/Story_Quality_Checklist.adoc`)
+. Set up version control tracking for documentation
+
+| *Deliverable*
+| Empty document structure ready for content
+|===
+
+==== Step 2: Pilot Epic (E1 - Consumer Onboarding)
+
+.Step 2: Pilot Epic (E1 - Consumer Onboarding)
+[%header, cols="<1,<3"]
+|===
+| Attribute | Details
+
+| *Duration*
+| 3-4 hours
+
+| *Purpose*
+| Validate the approach with one complete epic
+
+| *Actions*
+a|
+. Read Brief sections 4.1.1 and 14.2.1 thoroughly
+. Extract user goals for onboarding flow
+. Write 4 stories following the template:
+** C-E1-01: Sign in with Phone/Email + OTP (Priority: M, Size: S)
+** C-E1-02: Location permission request (Priority: M, Size: S)
+** C-E1-03: Profile setup (Priority: S, Size: S)
+** C-E1-04: Business profile toggle (Priority: C, Size: S)
+. Define acceptance criteria for each story
+. Validate against INVEST checklist
+. Review with one other team member
+. Refine template based on learnings
+
+| *Deliverable*
+| `Epic_E1_Consumer_Onboarding.adoc` completed and validated
+|===
+
+==== Step 3: Complete Golden Path Epics (Priority Order)
+
+.Step 3: Complete Golden Path Epics (Priority Order)
+[%header, cols="<1,<3"]
+|===
+| Attribute | Details
+
+| *Duration*
+| 12-16 hours
+
+| *Consumer Booking Flow (Priority 1)*
+a|
+. *E2 - Shipment Creation* (8 stories)
+** Extract from sections 4.1.2, 14.2.2
+** Focus on Must-have stories first
+** Expected time: 4 hours
+
+. *E3 - Service Selection* (5 stories)
+** Extract from sections 4.1.3, 14.2.3
+** Multi-carrier quote logic
+** Expected time: 2.5 hours
+
+. *E4 - Payment & Confirmation* (4 stories)
+** Extract from sections 4.1.5, 14.2.5
+** Payment simulation notes critical
+** Expected time: 2 hours
+
+| *Driver Fulfillment Flow (Priority 2)*
+a|
+. *E7 - Driver Onboarding* (3 stories)
+** Extract from sections 4.2.1, 15.2.1
+** KYC placeholder notes
+** Expected time: 1.5 hours
+
+. *E8 - Job Discovery* (4 stories)
+** Extract from sections 4.2.2, 15.2.2-3
+** Job matching logic
+** Expected time: 2 hours
+
+. *E9 - Pickup & Fulfillment* (6 stories)
+** Extract from sections 4.2.3-4, 15.2.4-6
+** Scanning and photo capture logic
+** Expected time: 3 hours
+
+| *Consumer Tracking (Priority 3)*
+a|
+. *E5 - Live Tracking* (5 stories)
+** Extract from sections 4.1.6-7, 14.2.7
+** Real-time integration points critical
+** Expected time: 2.5 hours
+
+| *Deliverable*
+| 7 epic documents complete with all Golden Path stories
+|===
+
+==== Step 4: Enhancement Epics
+
+.Step 4: Enhancement Epics
+[%header, cols="<1,<3"]
+|===
+| Attribute | Details
+
+| *Duration*
+| 4-6 hours
+
+| *Actions*
+a|
+. *E6 - Shipment Management & History* (3 stories)
+** Extract from sections 4.1.8, 14.2.9-10
+** Expected time: 1.5 hours
+
+. *E10 - Driver Earnings* (2 stories)
+** Extract from sections 4.2.5, 15.2.7
+** Expected time: 1 hour
+
+. Add Should-have and Could-have details to all epics
+. Review each story for completeness
+. Expected time: 2-3 hours
+
+| *Deliverable*
+| All 10 epic documents complete
+|===
+
+==== Step 5: Integration Documentation
+
+.Step 5: Integration Documentation
+[%header, cols="<1,<3"]
+|===
+| Attribute | Details
+
+| *Duration*
+| 6-8 hours
+
+| *Actions*
+a|
+. *Demo Golden Path Script*
+** Define demo personas (Sarah, Mike)
+** Write Act 1 (Consumer booking) with screen references
+** Write Act 2 (Driver pickup) with timing
+** Write Act 3 (Tracking & completion)
+** Document integration points
+** Create demo data setup instructions
+** Expected time: 3-4 hours
+
+. *Story Dependencies Document*
+** Create layer diagrams (text-based or ASCII)
+** Map all dependencies between stories
+** Highlight critical path
+** Document integration points in detail
+** Expected time: 2-3 hours
+
+. *Prioritization Summary*
+** Create MoSCoW tables by epic
+** Document rationale for priority decisions
+** Define phase boundaries clearly
+** Expected time: 1 hour
+
+. *Traceability Matrix*
+** Create table linking every story to brief section
+** Verify coverage (no gaps, no orphans)
+** Expected time: 1 hour
+
+| *Deliverable*
+| Complete documentation package
+|===
+
+==== Step 6: Review & Validation
+
+.Step 6: Review & Validation
+[%header, cols="<1,<3"]
+|===
+| Attribute | Details
+
+| *Duration*
+| 4-6 hours
+
+| *Actions*
+a|
+. *Quality Assurance*
+** Run INVEST validation on all Must-have stories
+** Verify all stories have acceptance criteria
+** Check all dependencies are documented
+** Validate story IDs are unique and consistent
+** Expected time: 2 hours
+
+. *Traceability Verification*
+** Map every brief section to stories
+** Identify any missing coverage
+** Document intentional exclusions (Won't Have)
+** Expected time: 1 hour
+
+. *Stakeholder Review*
+** Walk through Golden Path with product owner
+** Review prioritization decisions
+** Validate demo narrative makes sense
+** Gather feedback and incorporate changes
+** Expected time: 2-3 hours
+
+. *Final Refinement*
+** Update based on review feedback
+** Generate HTML versions for distribution
+** Tag version in source control
+** Expected time: 1 hour
+
+| *Deliverable*
+| Approved, final user story backlog
+|===
+
+=== Estimated Total Effort
+
+.Estimated Total Effort
+[%header, cols="<2,^1,<2"]
+|===
+| Phase | Duration | Key Activities
+
+| Infrastructure Setup
+| 2-3 hours
+| Create structure, templates
+
+| Pilot Epic
+| 3-4 hours
+| E1 with validation
+
+| Golden Path Epics (7)
+| 12-16 hours
+| E2-E5, E7-E9 stories
+
+| Enhancement Epics (2)
+| 4-6 hours
+| E6, E10 stories
+
+| Integration Docs
+| 6-8 hours
+| Demo script, dependencies, traceability
+
+| Review & Validation
+| 4-6 hours
+| QA, stakeholder review, refinement
+
+| *TOTAL*
+| *31-43 hours*
+| *Complete backlog creation*
+|===
+
+**Timeline:** 1-2 weeks depending on team availability and review cycles
+
+<<<
+== Quality Assurance
+
+=== INVEST Criteria Validation
+
+Every user story will be validated against the INVEST criteria:
+
+.INVEST Criteria Validation
+[%header, cols="^1,<3,<3"]
+|===
+| Criterion | Requirements | Validation Method
+
+| *I* +
+Independent
+a|
+* Story can be developed and tested independently
+* Minimal dependencies on other incomplete stories
+* Value can be demonstrated standalone
+| Review dependency list, ensure no circular dependencies
+
+| *N* +
+Negotiable
+a|
+* Story describes intent, not implementation
+* Details can be refined during development
+* Room for developer judgment and creativity
+| Story uses "what" and "why" language, avoids "how"
+
+| *V* +
+Valuable
+a|
+* Clear value statement in "so that" clause
+* Value is from user/stakeholder perspective
+* Contributes to demo narrative or feature understanding
+| "So that" clause is present and meaningful
+
+| *E* +
+Estimable
+a|
+* Team can understand scope and complexity
+* Size indicator (S/M/L) is assigned
+* Enough information to plan and schedule
+| Acceptance criteria are clear, size is justified
+
+| *S* +
+Small
+a|
+* Appropriate scope for demo mockup development
+* Can be completed in reasonable timeframe
+* Not too granular, not too broad
+| Story fits within one epic, addresses 1-3 screens
+
+| *T* +
+Testable
+a|
+* Acceptance criteria are specific and verifiable
+* Success conditions are clear
+* Can be demonstrated in clickable prototype
+| Acceptance criteria use Given-When-Then or checkable conditions
+|===
+
+=== Story Quality Checklist
+
+For each story, verify:
+
+.Story Quality Checklist
+[%header, cols="^1,<5"]
+|===
+| ✓ | Verification Item
+
+| {nbsp}
+| Story ID follows convention ([Actor]-E[Epic]-[Number])
+
+| {nbsp}
+| Title is concise and descriptive (< 60 characters)
+
+| {nbsp}
+| Actor is clearly identified
+
+| {nbsp}
+| Story statement follows "As a... I want... so that..." format
+
+| {nbsp}
+| Goal is specific and actionable
+
+| {nbsp}
+| Value statement is present and meaningful
+
+| {nbsp}
+| Acceptance criteria are specific and testable (minimum 2)
+
+| {nbsp}
+| Given-When-Then format used where appropriate
+
+| {nbsp}
+| Priority is assigned with justification
+
+| {nbsp}
+| Size is assigned (S/M/L) with reasoning
+
+| {nbsp}
+| Epic assignment is correct
+
+| {nbsp}
+| Brief reference section is documented
+
+| {nbsp}
+| Dependencies are identified (if any)
+
+| {nbsp}
+| Technical notes address simulation/mocking needs
+
+| {nbsp}
+| UX notes reference design requirements from brief
+
+| {nbsp}
+| Screen count is estimated
+
+| {nbsp}
+| Story passes all INVEST criteria
+|===
+
+=== Traceability Requirements
+
+Every user story must be traceable to the brief:
+
+.Traceability Requirements
+[%header, cols="<2,<4"]
+|===
+| Traceability Type | Requirements
+
+| *Forward Traceability* +
+Brief → Stories
+a|
+* Every flow in the brief maps to one or more stories
+* No brief requirements are missed (unless explicitly deferred)
+* Coverage is documented in traceability matrix
+
+| *Backward Traceability* +
+Stories → Brief
+a|
+* Every story references a specific brief section
+* Rationale for story is clear from brief context
+* No "orphan" stories without brief justification
+
+| *Change Traceability*
+a|
+* If brief is updated, affected stories are identified
+* Impact analysis is documented
+* Priority adjustments are justified
+|===
+
+=== Review Checkpoints
+
+.Review Checkpoints
+[%header, cols="<2,<4"]
+|===
+| Checkpoint | Validation Activities
+
+| *Checkpoint 1* +
+After Pilot Epic (E1)
+a|
+* Validate template works for real stories
+* Confirm INVEST criteria are achievable
+* Adjust approach based on lessons learned
+
+| *Checkpoint 2* +
+After Golden Path Epics (E1-E5, E7-E9)
+a|
+* Verify end-to-end narrative is coherent
+* Validate integration points are documented
+* Confirm Must-have set is sufficient for demo
+
+| *Checkpoint 3* +
+After All Epics Complete
+a|
+* Full traceability verification
+* Prioritization review
+* Dependencies validated
+
+| *Checkpoint 4* +
+Stakeholder Review
+a|
+* Demo narrative walkthrough
+* Prioritization approval
+* Scope sign-off
+|===
+
+<<<
+== Risk Management
+
+=== Identified Risks
+
+.Identified Risks
+[%header, cols="<1,<2,<1,<2"]
+|===
+| Risk | Description | Impact | Mitigation
+
+| Story Explosion
+| Too many granular stories
+| High effort, low value
+| Maintain screen-level granularity; combine related micro-interactions
+
+| Incomplete Requirements
+| Brief doesn't cover edge cases
+| Gaps in story coverage
+| Document assumptions; mark stories as "requires clarification"
+
+| Scope Creep
+| Adding features beyond brief
+| Timeline impact
+| Strict MoSCoW adherence; defer to Won't Have
+
+| Integration Complexity
+| Cross-actor dependencies underestimated
+| Demo flow breaks
+| Map integration points early; validate in Sprint 4
+
+| Stakeholder Disagreement
+| Prioritization disputes
+| Rework required
+| Involve stakeholders early; document rationale
+
+| Template Rigidity
+| Template doesn't fit all stories
+| Forced, awkward content
+| Allow template variations with justification
+
+| Time Underestimation
+| Story writing takes longer than planned
+| Delayed delivery
+| Use pilot epic to calibrate; adjust plan
+
+| Technical Feasibility
+| Some features can't be mocked credibly
+| Demo believability
+| Identify early; adjust Should/Could priorities
+|===
+
+=== Contingency Plans
+
+**If story count exceeds 50:**
+
+* Review for over-decomposition
+* Combine related micro-interactions
+* Consider deferring Could-have stories
+
+**If integration points are too complex:**
+
+* Simplify Golden Path to essential interactions only
+* Use "fade to black" transitions for complex state changes
+* Document real implementation complexity separately
+
+**If stakeholder feedback requires major changes:**
+
+* Re-run prioritization workshop
+* Update traceability matrix
+* Version control allows rollback if needed
+
+**If timeline is compressed:**
+
+* Focus on Must-have stories only (Phase 1)
+* Document Should/Could stories as outlines
+* Plan follow-up iteration for enhancement stories
+
+<<<
+== Conclusion
+
+This plan provides a comprehensive, systematic approach to creating a high-quality user story backlog for the Kurrier interactive demo. By following the six-step process outlined in this document, the team will produce:
+
+* **44 well-formed user stories** organized into 10 logical epics
+* **Clear prioritization** enabling phased demo development (MVP → Enhanced → Complete)
+* **Complete traceability** from brief requirements to implementable stories
+* **Coherent demo narrative** showcasing end-to-end value proposition
+* **Documented dependencies** enabling logical implementation sequencing
+
+The deliverables from this plan will serve as the foundation for mockup development, stakeholder validation, and eventual transition to MVP implementation.
+
+**Next Step:** Begin execution with infrastructure setup and pilot epic (E1 - Consumer Onboarding).
+
+<<<
+[appendix]
+== References
+
+=== Source Documents
+
+* **Primary Brief:** `docs/Brief/Kurrier_Inc_-_brief.adoc`
+** UX/PRD specification for Kurrier dual-app system
+** Version: Rev A (16 Sept 2025)
+** Sections 4 (User Journeys) and 14-17 (Screen Specifications)
+
+* **User Story Guidelines:** `docs/Reference/UserStoryCharacteristics.adoc`
+** INVEST criteria definitions
+** Story template specifications
+** Best practices and common pitfalls
+** Examples by domain
+
+=== Normative Sources
+
+User story methodology based on:
+
+* Extreme Programming (XP), Ron Jeffries (1998)
+* Agile Manifesto (2001)
+* Scrum Guide (Scrum.org)
+* INVEST principles by Bill Wake
+
+=== Related Documents
+
+* Design System documentation (referenced in brief Section 10)
+* Acceptance Criteria guidelines (brief Section 8)
+* Component library specifications (brief Section 14.4, 15.4)
+
+<<<
+[appendix]
+== Story ID Quick Reference
+
+.Story ID Quick Reference
+[%header, cols="^1,3,4"]
+|===
+| Story ID | Epic | Title
+
+| C-E1-01 | Consumer Onboarding | Sign in with Phone/Email + OTP
+| C-E1-02 | Consumer Onboarding | Location permission request
+| C-E2-01 | Shipment Creation | Enter pickup address
+| C-E2-02 | Shipment Creation | Enter recipient address
+| C-E2-03 | Shipment Creation | Enter parcel dimensions
+| C-E2-04 | Shipment Creation | Enter parcel weight
+| C-E3-01 | Service Selection | View multi-carrier options
+| C-E3-02 | Service Selection | View price breakdown
+| C-E3-03 | Service Selection | Select service
+| C-E4-01 | Payment & Confirmation | Select payment method
+| C-E4-02 | Payment & Confirmation | Complete payment
+| C-E4-03 | Payment & Confirmation | View booking confirmation
+| C-E5-01 | Live Tracking | View shipment timeline
+| C-E5-02 | Live Tracking | View live driver location
+| C-E5-03 | Live Tracking | View driver card details
+| D-E7-01 | Driver Onboarding | Sign in with OTP
+| D-E8-01 | Job Discovery | Go online/offline toggle
+| D-E8-02 | Job Discovery | View available jobs list
+| D-E8-03 | Job Discovery | View job details
+| D-E8-04 | Job Discovery | Accept job
+| D-E9-01 | Pickup & Fulfillment | Navigate to pickup
+| D-E9-02 | Pickup & Fulfillment | Mark arrived at pickup
+| D-E9-03 | Pickup & Fulfillment | Scan Kurrier ID
+| D-E9-04 | Pickup & Fulfillment | Navigate to hub
+| D-E9-05 | Pickup & Fulfillment | Scan at hub and complete
+|===
+
+*Note:* This is a subset showing Golden Path Must-have stories. Complete list includes all 44 stories across 10 epics.
+
+[appendix]
+== MoSCoW Decision Matrix
+
+Decision framework for prioritization:
+
+.MoSCoW Decision Matrix
+[%header, cols="^1,4a,3"]
+|===
+| Priority | Criteria | Examples
+
+| MUST
+| Required for Golden Path narrative +
+Without it, demo story doesn't make sense +
+Core value invisible without it
+| Sign in, Enter addresses, Get quote, Pay, Track
+
+| SHOULD
+| Significantly improves believability +
+Important but not Golden Path critical +
+Adds depth to UX understanding
+| AR measurement, Photo capture, Earnings breakdown
+
+| COULD
+| Enhances if time permits +
+Secondary features for realism +
+Demonstrates scalability
+| Shipment management, Business profile, Promo codes
+
+| WON'T
+| Out of initial demo scope +
+May be in enhanced demo v2 +
+Documented for future
+| Consumer Web dashboard, Full Admin, Edge cases
+|===
+
+<<<
+[appendix]
+== Glossary
+
+.Glossary
+[%header, cols="<1,<3"]
+|===
+| Term | Definition
+
+| AR
+| Augmented Reality - Camera-aided dimension measurement (simulated in demo)
+
+| Epic
+| Large body of work containing multiple user stories, typically spanning multiple screens or a complete user journey
+
+| Golden Path
+| The minimum viable demo narrative showing complete end-to-end value for both Consumer and Driver
+
+| INVEST
+| Independent, Negotiable, Valuable, Estimable, Small, Testable - criteria for well-formed user stories
+
+| Kurrier ID
+| Internal parcel reference (human-readable code) used for scanning and tracking
+
+| MoSCoW
+| Must have, Should have, Could have, Won't have - prioritization framework
+
+| PSP
+| Payment Service Provider (e.g., Stripe) - simulated in demo
+
+| Story Points
+| Relative effort estimation (not used in this plan; using t-shirt sizes instead)
+
+| User Story
+| Lightweight requirement expressing user value in "As a... I want... so that..." format
+|===

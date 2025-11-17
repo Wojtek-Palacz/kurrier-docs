@@ -1,0 +1,234 @@
+= Epic E6: Shipment Management & History
+:toc:
+:toclevels: 2
+:sectnums:
+:doctype: article
+:icons: font
+:numbered:
+:pagenums:
+:reproducible:
+
+<<<
+== Epic Overview
+
+**Epic ID:** E6 +
+**Epic Name:** Shipment Management & History +
+**Actor:** Consumer +
+**Brief Reference:** Section 4.1.8 (Invoice & History), 4.1.9 (Issues & Support) +
+**Priority:** Should Have (enhances user experience) +
+**Story Count:** 3 (M: 0, S: 2, C: 1)
+
+**Epic Goal:**
+
+Enable consumers to view their past shipments, access invoices/receipts, and optionally view loyalty rewards so they have a complete record of their Kurrier usage and can manage their shipping history.
+
+**Value Proposition:**
+
+This epic provides the "account management" layer - consumers need access to past bookings for record-keeping, expense reporting, and tax purposes. Invoice generation is especially important for business users. Shipment history also builds engagement by showing usage patterns. While not required for the Golden Path demo, these features are essential for a complete product and demonstrate platform maturity.
+
+**Success Criteria:**
+
+- [ ] Consumer can view a list of all past shipments
+- [ ] Consumer can access detailed information about any past shipment
+- [ ] Consumer can download/view invoices for completed shipments
+- [ ] Business users see tax ID on invoices
+- [ ] Invoices are professional and suitable for expense reporting
+- [ ] Optional: Rewards/loyalty balance is visible
+
+<<<
+== Stories
+
+=== Story C-E6-01: View Past Shipments List
+
+**Story ID:** C-E6-01 +
+**Priority:** Should Have (S) +
+**Size:** Medium (M) +
+**Actor:** Consumer
+
+**User Story:**
+
+As a consumer,
+I want to see a list of all my past shipments with key details
+so that I can review my shipping history and access specific shipments for more information.
+
+**Acceptance Criteria:**
+
+- [ ] Given I navigate to "Past Shipments" or "History", when the screen loads, then I see a chronological list of all my completed shipments
+- [ ] Each shipment entry shows: Kurrier ID, Pickup date, Recipient (first line of address), Carrier and service tier, Total cost, Status (Completed, In Progress, Cancelled)
+- [ ] Given I have many shipments, when I scroll, then the list loads more items (pagination or infinite scroll)
+- [ ] I can tap on a shipment to view full details (addresses, parcel specs, timeline, invoice)
+- [ ] I can filter shipments by date range or status
+- [ ] I can search shipments by Kurrier ID or recipient address
+- [ ] Empty state shows helpful message if no shipments exist yet
+
+**Notes:**
+
+- **Brief Reference:** Section 4.1.8 - "Invoice & History: Auto-issued invoice/receipt (PDF) with line-items; saved in Past Shipments"
+- **Technical:** Shipment history comes from user's booking records. Query by user ID, sorted by date descending. For demo, pre-populate 3-5 past shipments
+- **UX:** Clean list layout with card-based design. Most recent shipments first. Use color coding for status (green=completed, blue=in progress)
+- **Dependencies:**
+  * Requires: C-E4-03 (Completed bookings to display)
+  * Enables: Access to C-E6-02 (Invoices), shipment management
+  * Integrates with: User account, booking database
+- **Screen Count:** 1 screen (Shipment history list)
+
+**Demo Notes:**
+
+"Should Have" - not required for Golden Path but demonstrates complete product. Include in Phase 2 demo. Show Sarah navigate to "Past Shipments". Display 3-4 entries including the one she just booked (status: "Completed") plus some older ones. Tap on the most recent to show detail view with timeline and invoice access.
+
+---
+
+=== Story C-E6-02: View and Download Invoice
+
+**Story ID:** C-E6-02 +
+**Priority:** Should Have (S) +
+**Size:** Medium (M) +
+**Actor:** Consumer
+
+**User Story:**
+
+As a consumer,
+I want to view and download a detailed invoice for my shipment with all cost breakdowns
+so that I can submit it for expense reimbursement or keep records for my business.
+
+**Acceptance Criteria:**
+
+- [ ] Given a shipment is completed (D-E9-05), when I access the shipment, then I see "View Invoice" or "Download Invoice" option
+- [ ] Given I tap "View Invoice", when it opens, then I see a professional invoice with: Invoice number and date, Kurrier ID and carrier tracking number, Sender and recipient addresses, Parcel details (dimensions, weight), Service details (carrier, tier, delivery time), Cost breakdown (base rate, surcharges, insurance, tax/VAT), Total amount paid, Payment method used
+- [ ] Given I am a business user (C-E1-04), when I view invoice, then my business name and tax ID appear in the billing section
+- [ ] I can download the invoice as PDF
+- [ ] I can share the invoice via email or messaging
+- [ ] The invoice is professional quality - suitable for accounting/tax purposes
+- [ ] Invoice includes Kurrier branding and contact information
+
+**Notes:**
+
+- **Brief Reference:** Section 4.1.8 - "Auto-issued invoice/receipt (PDF) with line-items; saved in Past Shipments. Business profile: tax ID on invoice; download/share options"
+- **Technical:** Invoice generated when shipment completes (D-E9-05 triggers generation). PDF created from template with booking data. For demo, use pre-generated PDF or HTML-based invoice
+- **UX:** Professional invoice design. Clean typography, clear sections, line items with prices. Support standard invoice format (header, line items, total, footer)
+- **Dependencies:**
+  * Requires: D-E9-05 (Shipment completed), C-E4-03 (Booking with payment data)
+  * Enables: Expense reporting, tax documentation, business record-keeping
+  * Integrates with: C-E1-04 (Business profile adds tax ID to invoice), PDF generation
+- **Screen Count:** 1-2 screens (Invoice preview + Share/Download options)
+
+**Demo Notes:**
+
+"Should Have" - important for business users and completeness. Phase 2 demo. After showing Sarah's completed shipment in C-E6-01, tap "View Invoice". Show professional invoice with Kurrier logo, all booking details, cost breakdown matching what she paid ($23.60 example). Point out: "Professional invoices ready for expense reporting or tax filing. Business users automatically get company name and tax ID included."
+
+---
+
+=== Story C-E6-03: View Rewards Balance
+
+**Story ID:** C-E6-03 +
+**Priority:** Could Have (C) +
+**Size:** Small (S) +
+**Actor:** Consumer
+
+**User Story:**
+
+As a consumer,
+I want to see my loyalty rewards balance and understand how I can earn and redeem points
+so that I'm incentivized to use Kurrier regularly and get value from my loyalty.
+
+**Acceptance Criteria:**
+
+- [ ] Given I have a Kurrier account, when I view my profile or home screen, then I see my rewards/points balance
+- [ ] I can tap on rewards balance to see: Total points, Points earned per shipment (e.g., "1 point per $1 spent"), How to redeem points (discounts on future shipments), Points expiration policy (if any)
+- [ ] Given I complete a shipment, when it's processed, then I earn points automatically
+- [ ] I can see my rewards history (points earned and redeemed)
+- [ ] The rewards section explains the benefits clearly ("$5 off for every 100 points")
+- [ ] Rewards integration is optional - users can ignore if not interested
+
+**Notes:**
+
+- **Brief Reference:** Section 4.1.8 - Brief mentions "rewards" in passing as optional feature
+- **Technical:** Points system tracks earnings per booking and redemptions. For demo, show simple point balance (e.g., "350 points = $17.50 in rewards")
+- **UX:** Simple, clear display of balance. Use visual progress indicators (e.g., "70 points to next $5 reward"). Don't be pushy - keep it subtle
+- **Dependencies:**
+  * Requires: User account, completed shipments
+  * Enables: Customer retention, repeat usage
+  * Integrates with: Booking system (points earned per transaction)
+- **Screen Count:** 0-1 screens (Balance shown on home/profile, optional detail screen)
+
+**Demo Notes:**
+
+"Could Have" - nice for demonstrating growth strategy but not essential for MVP demo. Include only in Phase 3 if time permits. If shown, briefly point to rewards balance on home screen: "Sarah has earned 350 points from her shipments - that's $17.50 toward her next booking." Don't spend more than 15 seconds on this feature.
+
+---
+
+<<<
+== Epic Summary
+
+**Golden Path Coverage:**
+
+No stories in Epic E6 are required for the Golden Path. This entire epic is enhancement content for Phase 2-3 demos.
+
+**Implementation Notes:**
+
+* Shipment history (C-E6-01) is important for user retention and satisfaction
+* Invoices (C-E6-02) are critical for business users - this could be prioritized higher for B2B focus
+* Rewards (C-E6-03) is pure engagement/retention feature - lowest priority
+
+**Business Value:**
+
+While not in Golden Path, Epic E6 has significant business value:
+
+* **Invoices:** Enable B2B market - businesses need proper documentation
+* **History:** Reduces support queries ("What was my tracking number?")
+* **Rewards:** Drives repeat usage and customer lifetime value
+
+Consider including C-E6-01 and C-E6-02 in Phase 2 demo for investor appeal.
+
+**Development Sequence:**
+
+Sprint 5 (Enhancement):
+
+1. C-E6-01: Past shipments list (useful for all users)
+2. C-E6-02: Invoice generation (essential for business users)
+
+Phase 3 (Optional):
+
+1. C-E6-03: Rewards balance (engagement feature)
+
+**Demo Timing:**
+
+If including in Phase 2 demo, dedicate 1-2 minutes:
+
+- 30s: Show past shipments list
+- 45s: Open most recent shipment, view invoice
+- 15s: Point out rewards balance (optional)
+
+**Demo Notes:**
+
+For Phase 1 (MVP Demo): Skip entirely or mention briefly ("Full history and invoices available in account")
+
+For Phase 2 (Enhanced Demo): Include C-E6-01 and C-E6-02 to show completeness
+
+For Phase 3 (Complete Demo): Add C-E6-03 to demonstrate retention strategy
+
+**Key Demo Talking Points:**
+
+* "Complete shipment history for record-keeping"
+* "Professional invoices for expense reporting - critical for business users"
+* "Tax ID automatically included for business accounts"
+* "PDF download and share for easy expense submission"
+* Optional: "Loyalty rewards program to encourage repeat usage"
+
+**Integration with Business Profile:**
+
+If demo includes business users (C-E1-04):
+
+- Emphasize invoice quality and tax ID inclusion
+- Show how business name appears on invoice
+- Mention bulk shipping and invoice exports (future features)
+
+**User Retention Strategy:**
+
+While this epic isn't glamorous, it's essential for product-market fit:
+
+- History builds trust (nothing is lost)
+- Invoices enable B2B adoption
+- Rewards drive repeat usage
+
+Consider how to position these features in investor presentations.

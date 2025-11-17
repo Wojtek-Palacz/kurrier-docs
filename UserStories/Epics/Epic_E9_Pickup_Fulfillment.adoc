@@ -1,0 +1,368 @@
+= Epic E9: Pickup & Hub Fulfillment
+:toc:
+:toclevels: 2
+:sectnums:
+:doctype: article
+:icons: font
+:numbered:
+:pagenums:
+:reproducible:
+
+<<<
+== Epic Overview
+
+**Epic ID:** E9 +
+**Epic Name:** Pickup & Hub Fulfillment +
+**Actor:** Driver +
+**Brief Reference:** Section 4.2.3 (Navigation & Pickup), 4.2.4 (Hub Drop-off) +
+**Priority:** Must Have (core fulfillment workflow) +
+**Story Count:** 6 (M: 5, S: 1, C: 0)
+
+**Epic Goal:**
+
+Enable drivers to navigate to pickup locations, collect parcels with proper verification (scan/photo), navigate to assigned carrier hubs, and complete drop-off so that parcels enter the carrier network and drivers earn their payout.
+
+**Value Proposition:**
+
+This epic represents the physical execution of the Kurrier service - the moment when the digital booking becomes a real-world pickup and handoff to carriers. The driver experience must be efficient, clear, and foolproof to ensure quality and reliability. Every step provides verification and tracking updates that flow back to the consumer (Epic E5). This is where Kurrier's value is delivered.
+
+**Success Criteria:**
+
+- [ ] Driver can navigate to pickup location with turn-by-turn directions
+- [ ] Driver can mark arrival and notify customer
+- [ ] Driver can scan Kurrier ID to verify correct parcel
+- [ ] Driver can capture photos as proof of pickup
+- [ ] Driver can navigate to correct carrier hub
+- [ ] Driver can complete hub drop-off with scan verification
+- [ ] Each step updates the consumer's tracking timeline in real-time
+- [ ] The flow prevents errors (wrong parcel, wrong hub)
+
+<<<
+== Stories
+
+=== Story D-E9-01: Navigate to Pickup Location
+
+**Story ID:** D-E9-01 +
+**Priority:** Must Have (M) +
+**Size:** Medium (M) +
+**Actor:** Driver
+
+**User Story:**
+
+As a driver,
+I want to see turn-by-turn navigation to the pickup location
+so that I can efficiently reach the customer's address without getting lost or needing a separate GPS app.
+
+**Acceptance Criteria:**
+
+- [ ] Given I have accepted a job (D-E8-04), when I start navigation, then I see the route from my current location to pickup address
+- [ ] The route displays on a map with turn-by-turn directions
+- [ ] I see estimated time of arrival (ETA) and distance remaining
+- [ ] I can tap to open the route in external navigation apps (Google Maps, Apple Maps, Waze)
+- [ ] The navigation updates in real-time as I move
+- [ ] I see a button or prompt to "Mark Arrived" when I'm within 100m of the pickup location
+- [ ] I can access customer's special pickup notes/instructions from navigation screen
+
+**Notes:**
+
+- **Brief Reference:** Section 4.2.3 - "In-app route preview; handoff steps checklist"
+- **Technical:** Use platform mapping APIs (Google Maps/Mapbox) for routing. For demo, simulate GPS movement along route. External navigation apps open via deep links
+- **UX:** Clear map view with route highlighted. ETA prominently displayed. Easy access to "Call Customer" if needed. Show pickup notes floating card
+- **Dependencies:**
+  * Requires: D-E8-04 (Job accepted)
+  * Enables: D-E9-02 (Mark arrived), C-E5-02 (Consumer sees driver approaching on map)
+  * Integrates with: Mapping/navigation services, location tracking
+- **Screen Count:** 1 screen (Navigation view)
+
+**Demo Notes:**
+
+For demo, use simulated map with route pre-drawn. Show driver icon moving along route with smooth animation (2-3x speed). Show ETA counting down. Point out: "Sarah can see Mike's real-time location on her tracking screen". This demonstrates live integration with consumer app (C-E5-02).
+
+---
+
+=== Story D-E9-02: Mark Arrived at Pickup
+
+**Story ID:** D-E9-02 +
+**Priority:** Must Have (M) +
+**Size:** Small (S) +
+**Actor:** Driver
+
+**User Story:**
+
+As a driver,
+I want to mark my arrival at the pickup location
+so that the customer knows I'm there and I can proceed with parcel collection steps.
+
+**Acceptance Criteria:**
+
+- [ ] Given I am within proximity of pickup address (simulated: <100m), when I tap "Mark Arrived", then my status updates to "At Pickup"
+- [ ] Given I mark arrived, when status updates, then customer receives notification ("Driver has arrived")
+- [ ] Given I mark arrived, when I proceed, then I see the pickup checklist (scan parcel, confirm details, optional photo)
+- [ ] The "Mark Arrived" button is disabled until I'm close enough (or override for demo)
+- [ ] I can tap "Call Customer" if they're not responding or I can't find the location
+- [ ] Timer starts for pickup completion (not enforced, but tracked for quality metrics)
+
+**Notes:**
+
+- **Brief Reference:** Section 4.2.3 - "Arrival: mark 'Arrived'"
+- **Technical:** Geofence detection determines proximity. Status update triggers consumer notification and timeline update
+- **UX:** Clear "Arrived" button appears when close. Haptic feedback on tap. Transition to pickup checklist screen
+- **Dependencies:**
+  * Requires: D-E9-01 (Navigated to location)
+  * Enables: D-E9-03 (Scan parcel), C-E5-01 (Consumer timeline updates to "Driver arrived")
+  * Integrates with: Location services, notification system, consumer tracking
+- **Screen Count:** 0-1 screens (button within navigation, optional arrival confirmation)
+
+**Demo Notes:**
+
+When simulated driver reaches pickup location, tap "Mark Arrived". Show quick notification animation. Switch to consumer app briefly to show timeline update: "Driver Mike has arrived at pickup location" with timestamp. This shows real-time status synchronization.
+
+---
+
+=== Story D-E9-03: Scan Kurrier ID at Pickup
+
+**Story ID:** D-E9-03 +
+**Priority:** Must Have (M) +
+**Size:** Medium (M) +
+**Actor:** Driver
+
+**User Story:**
+
+As a driver,
+I want to scan the Kurrier ID barcode/QR code on the parcel label
+so that I verify I'm collecting the correct parcel and prevent mix-ups.
+
+**Acceptance Criteria:**
+
+- [ ] Given I am at pickup location, when I tap "Scan Parcel", then I see camera viewfinder with QR/barcode scanning overlay
+- [ ] Given I scan a valid Kurrier ID, when it matches the job, then I see success confirmation and proceed
+- [ ] Given I scan an incorrect/invalid Kurrier ID, when it doesn't match, then I see error message and can retry or enter manually
+- [ ] I can manually enter the Kurrier ID if scan fails or label is damaged
+- [ ] Given scan succeeds, when I confirm, then I see parcel details to verify (dimensions, weight, destination)
+- [ ] I can mark dimensions/weight as "different from declared" if there's a discrepancy (triggers potential surcharge)
+- [ ] Successful scan updates consumer timeline to "Picked up" status
+
+**Notes:**
+
+- **Brief Reference:** Section 4.2.3 - "start Pickup: (a) scan Kurrier ID (internal parcel reference) (or manual entry)"
+- **Technical:** QR/barcode scanner uses device camera. For demo, use simulated scan with instant success. Kurrier ID format: KUR-XXXXXX
+- **UX:** Clear scanning frame with helpful hints ("Center QR code in frame"). Quick success animation. Manual entry as fallback option
+- **Dependencies:**
+  * Requires: D-E9-02 (Arrived at pickup)
+  * Enables: D-E9-04 (Navigate to hub), C-E5-01 (Timeline: "Picked up"), D-E9-06 (Optional photo)
+  * Integrates with: Camera, parcel verification system, consumer tracking
+- **Screen Count:** 1-2 screens (Scanner + Verification confirmation)
+
+**Demo Notes:**
+
+**CRITICAL INTEGRATION POINT:** This scan triggers major status update. Show camera scanner briefly, then instant successful scan of Kurrier ID (matches the one from Sarah's booking confirmation C-E4-03). Show: "KUR-A1B2C3 - Confirmed!" Then switch to consumer app to show timeline update: "Your parcel has been picked up by Mike" with photo (if D-E9-06 included). This is a key "aha" moment showing end-to-end tracking.
+
+---
+
+=== Story D-E9-04: Navigate to Hub
+
+**Story ID:** D-E9-04 +
+**Priority:** Must Have (M) +
+**Size:** Small (S) +
+**Actor:** Driver
+
+**User Story:**
+
+As a driver,
+I want to navigate to the assigned carrier hub (FedEx, UPS, or DHL facility)
+so that I can drop off the parcel for the next leg of its journey.
+
+**Acceptance Criteria:**
+
+- [ ] Given I have completed pickup (D-E9-03), when I proceed, then I see navigation to the assigned hub
+- [ ] The hub address and name are clearly displayed (e.g., "FedEx Hub - Downtown")
+- [ ] I see turn-by-turn directions and ETA to hub
+- [ ] I can open hub route in external navigation apps
+- [ ] I see a button to "Mark Arrived at Hub" when within proximity
+- [ ] The route shows both pickup and hub locations for context
+- [ ] I can access hub hours and contact info if needed
+
+**Notes:**
+
+- **Brief Reference:** Section 4.2.4 - "Route to pre-assigned hub (FedEx/UPS/DHL, simulated)"
+- **Technical:** Hub assignment determined during quote generation (Epic E3). Hub locations are simulated. Navigation same as D-E9-01
+- **UX:** Similar navigation UI to pickup but destination is hub. Clear indication this is "drop-off" leg, not another pickup
+- **Dependencies:**
+  * Requires: D-E9-03 (Parcel picked up and scanned)
+  * Enables: D-E9-05 (Hub drop-off), C-E5-01 (Consumer sees "En route to hub" status)
+  * Integrates with: Mapping services, hub database
+- **Screen Count:** 1 screen (Navigation to hub)
+
+**Demo Notes:**
+
+Show brief navigation to hub with simulated movement. Can be faster than pickup navigation (use 3-4x speed). Point out: "Mike is now taking Sarah's FedEx Express package to the FedEx hub downtown. Sarah can track this entire journey." Show ETA to hub. Fast-forward to arrival.
+
+---
+
+=== Story D-E9-05: Scan at Hub and Mark Complete
+
+**Story ID:** D-E9-05 +
+**Priority:** Must Have (M) +
+**Size:** Medium (M) +
+**Actor:** Driver
+
+**User Story:**
+
+As a driver,
+I want to scan the hub intake code and mark the job complete
+so that the parcel is logged as handed off to the carrier and I receive my payout confirmation.
+
+**Acceptance Criteria:**
+
+- [ ] Given I am at the hub, when I tap "Complete Drop-off", then I see hub scan interface
+- [ ] I scan the hub intake code/barcode (simulated - unique to each hub bay)
+- [ ] Given scan succeeds, when confirmed, then I see job completion confirmation with earnings summary
+- [ ] The completion screen shows: Job earnings ($XX.XX), Pickup and drop-off timestamps, Distance traveled, Next payout date (simulated)
+- [ ] I receive confirmation notification ("Job completed! $XX.XX added to your earnings")
+- [ ] The job moves from "Active" to "Completed" in my history
+- [ ] Consumer tracking updates to "At Hub - Handed to Carrier" with timestamp
+- [ ] I can optionally capture drop-off photo before completing (D-E9-06)
+
+**Notes:**
+
+- **Brief Reference:** Section 4.2.4 - "upon arrival, scan hub intake code; optional drop-off photo; mark Complete"
+- **Technical:** Hub scan verifies correct hub. Completion triggers payout calculation, consumer status update, job archival. For demo, auto-complete or simulate instant scan
+- **UX:** Celebratory completion screen - job done! Show earnings prominently. Clear next steps ("View Earnings" or "Go Online for more jobs")
+- **Dependencies:**
+  * Requires: D-E9-04 (Navigated to hub)
+  * Enables: D-E10-01 (Earnings updated), C-E5-01 (Final tracking status), C-E6-02 (Invoice generated)
+  * Integrates with: Hub verification, payout system, consumer tracking, job completion
+- **Screen Count:** 1-2 screens (Hub scan + Completion confirmation)
+
+**Demo Notes:**
+
+**CRITICAL INTEGRATION POINT - FINAL STATUS:** This completes the entire Golden Path journey. Show hub scan success → "Job Complete!" screen with earnings ($12.50). Then switch to consumer app for finale: Sarah's tracking shows "Package at Hub - Handed to FedEx" and "Invoice Ready". This demonstrates complete end-to-end flow from booking to carrier handoff. Major applause moment in demo!
+
+---
+
+=== Story D-E9-06: Capture Pickup and Drop-off Photos
+
+**Story ID:** D-E9-06 +
+**Priority:** Should Have (S) +
+**Size:** Small (S) +
+**Actor:** Driver
+
+**User Story:**
+
+As a driver,
+I want to take photos at pickup and drop-off
+so that I have proof of parcel condition and successful handover to protect against disputes.
+
+**Acceptance Criteria:**
+
+- [ ] Given I am at pickup (after D-E9-03 scan), when I tap "Take Photo", then I see camera interface
+- [ ] I can take 1-2 photos of the parcel at pickup
+- [ ] Photos are automatically tagged with timestamp and GPS location
+- [ ] Given I am at hub drop-off (before D-E9-05 complete), when I tap "Take Photo", then I can capture hub handover photo
+- [ ] Photos are attached to the job record and visible to customer in shipment timeline
+- [ ] Photo capture is optional - I can skip if customer declines or for privacy
+- [ ] Photos are compressed and optimized for upload (simulated)
+
+**Notes:**
+
+- **Brief Reference:** Section 4.2.3 - "(b) optional photo(s) of the parcel" and Section 4.2.4 - "optional drop-off photo"
+- **Technical:** Camera access required. Photos stored with job record. For demo, use simulated camera or allow gallery selection. Brief notes photos are "optional to limit scale"
+- **UX:** Quick camera access from pickup/drop-off screens. Show thumbnail after capture. Easy to skip if not needed
+- **Dependencies:**
+  * Requires: D-E9-03 (At pickup) or D-E9-04 (At hub)
+  * Enables: Enhanced proof of service, consumer confidence (photos in C-E5-01 timeline)
+  * Integrates with: Camera, image storage, consumer tracking timeline
+- **Screen Count:** 1 screen (Camera interface)
+
+**Demo Notes:**
+
+"Should Have" - adds professionalism and accountability but not required for Golden Path. Include in Phase 2 demo. Show one pickup photo being captured quickly. Explain: "Photo proof protects both driver and customer. Sarah can see the photo in her tracking timeline for peace of mind."
+
+---
+
+<<<
+== Epic Summary
+
+**Golden Path Coverage:**
+
+Stories D-E9-01 through D-E9-05 complete the Golden Path driver fulfillment flow. These are all essential for demonstrating the complete pickup-to-hub-handoff process.
+
+**Implementation Notes:**
+
+* Navigation (D-E9-01, D-E9-04) uses same mapping infrastructure for both legs
+* Arrival marking (D-E9-02) triggers customer notifications - critical for experience
+* Scanning (D-E9-03, D-E9-05) provides verification and prevents errors
+* Photos (D-E9-06) add quality and accountability but are optional
+
+**Critical Integration Points:**
+
+This epic has the highest number of integration points with the consumer app:
+
+**Integration Point #3: Pickup Scan → Timeline Update**
+
+* Driver: D-E9-03 (Scan Kurrier ID)
+* Consumer: C-E5-01 (Timeline: "Picked up" with timestamp and photo)
+* System: Update shipment status, notify consumer
+
+**Integration Point #4: Hub Drop-off → Completion**
+
+* Driver: D-E9-05 (Hub scan and complete)
+* Consumer: C-E5-01 (Timeline: "At Hub - Handed to Carrier"), C-E6-02 (Invoice generated)
+* System: Complete job, trigger payout, generate invoice, final status update
+
+**Development Sequence:**
+
+Sprint 3 (Core Flow - Driver):
+
+1. D-E9-01: Navigate to pickup (essential for reaching customer)
+2. D-E9-02: Mark arrived (triggers notifications)
+3. D-E9-03: Scan Kurrier ID (verification + major status update)
+4. D-E9-04: Navigate to hub (second leg of journey)
+5. D-E9-05: Hub drop-off complete (final status + payout)
+
+Sprint 5 (Enhancement):
+
+1. D-E9-06: Photo capture (quality and proof)
+
+**Demo Timing:**
+
+Pickup and fulfillment should take ~3 minutes in demo:
+
+- 30s: Navigate to pickup (D-E9-01) - show movement on map
+- 10s: Mark arrived (D-E9-02) - show notification to consumer
+- 30s: Scan parcel (D-E9-03) - show verification success
+- Optional 15s: Take photo (D-E9-06) - Phase 2
+- 20s: Navigate to hub (D-E9-04) - faster than pickup navigation
+- 30s: Hub scan and complete (D-E9-05) - show earnings, consumer invoice
+
+Total: ~2.5-3 minutes to show complete driver fulfillment.
+
+**Demo Choreography:**
+
+**Act 2 (Driver Fulfillment) - 3 minutes:**
+
+1. Mike navigates to Sarah's address (simulated GPS movement)
+2. Mike marks arrival → Sarah's app shows "Driver arrived!"
+3. Mike scans parcel QR code → Verified!
+4. Switch to Sarah's app: "Your package has been picked up!"
+5. Mike navigates to FedEx hub (fast-forward)
+6. Mike scans hub code → "Job Complete! $12.50 earned"
+7. Switch to Sarah's app: "At Hub - Invoice ready"
+
+**Key Demo Talking Points:**
+
+* "Real-time GPS tracking - Sarah sees Mike approaching"
+* "Scan verification ensures correct parcel every time"
+* "Live status updates flow automatically to Sarah's tracking screen"
+* "Hub handoff completes the first mile - FedEx takes it from here"
+* "Mike earned $12.50 for a 15-minute job"
+* "Sarah has full transparency: booking → pickup → hub → invoice"
+
+**Quality & Safety Notes:**
+
+* Scanning prevents wrong parcel pickup (quality)
+* Photos provide proof and accountability (safety)
+* Hub verification ensures correct carrier handoff (reliability)
+* Real-time updates keep consumer informed (trust)
+
+These verification steps are critical for demonstrating Kurrier's operational quality to stakeholders.

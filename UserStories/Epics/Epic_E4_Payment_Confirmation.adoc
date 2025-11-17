@@ -1,0 +1,263 @@
+= Epic E4: Payment & Confirmation
+:toc:
+:toclevels: 2
+:sectnums:
+:doctype: article
+:icons: font
+:numbered:
+:pagenums:
+:reproducible:
+
+<<<
+== Epic Overview
+
+**Epic ID:** E4 +
+**Epic Name:** Payment & Confirmation +
+**Actor:** Consumer +
+**Brief Reference:** Section 4.1.5 (Payment & Booking) +
+**Priority:** Must Have (completes booking transaction) +
+**Story Count:** 4 (M: 3, S: 1, C: 0)
+
+**Epic Goal:**
+
+Enable consumers to securely pay for their selected shipping service and receive immediate booking confirmation with Kurrier ID and carrier tracking number so they have proof of booking and can begin tracking their shipment.
+
+**Value Proposition:**
+
+This epic closes the booking loop - converting quote selection into a confirmed, paid shipment. The payment experience must feel trustworthy and secure while being fast and frictionless. The booking confirmation provides immediate value: proof of payment, tracking information, and next steps (label generation, driver ETA). This is where the consumer's commitment is finalized, so the UX must inspire confidence.
+
+**Success Criteria:**
+
+- [ ] Consumer can select from multiple payment methods (Card, Apple Pay, Google Pay)
+- [ ] Payment processing feels secure and professional
+- [ ] Success and failure states are handled gracefully
+- [ ] Booking confirmation provides all critical information (Kurrier ID, tracking number, service details)
+- [ ] Consumer can easily access their shipping label after confirmation
+- [ ] The payment-to-confirmation flow takes <30 seconds in the demo
+
+<<<
+== Stories
+
+=== Story C-E4-01: Select Payment Method
+
+**Story ID:** C-E4-01 +
+**Priority:** Must Have (M) +
+**Size:** Small (S) +
+**Actor:** Consumer
+
+**User Story:**
+
+As a consumer,
+I want to choose my preferred payment method (credit card, Apple Pay, or Google Pay)
+so that I can pay for my shipping using the most convenient and secure option.
+
+**Acceptance Criteria:**
+
+- [ ] Given I am on the payment screen, when I view payment options, then I see available methods: Card (Visa/MC/Amex), Apple Pay (iOS), Google Pay (Android)
+- [ ] Given I select "Card", when I proceed, then I see card entry form (number, expiry, CVV, name)
+- [ ] Given I select "Apple Pay", when I tap the button, then I see Apple Pay sheet (simulated)
+- [ ] Given I select "Google Pay", when I tap the button, then I see Google Pay sheet (simulated)
+- [ ] Payment method icons are clearly displayed with familiar brand logos
+- [ ] Card form includes inline validation (card number format, expiry date, CVV length)
+- [ ] I can save my card for future bookings (optional, with consent checkbox)
+
+**Notes:**
+
+- **Brief Reference:** Section 4.1.5 - "Methods: Card / Apple Pay / Google Pay (simulated)"
+- **Technical:** All payment processing is simulated - no real payment gateway integration. Use Stripe/PayPal UI patterns for familiarity
+- **UX:** Default to Apple Pay on iOS, Google Pay on Android for fastest checkout. Card entry is fallback. Use platform-native payment sheets
+- **Dependencies:**
+  * Requires: C-E3-03 (Service selected with price)
+  * Enables: C-E4-02 (Payment processing)
+  * Integrates with: Payment method selection state
+- **Screen Count:** 1-2 screens (Payment method selector + Card entry form if needed)
+
+**Demo Notes:**
+
+For demo, show Apple Pay or Google Pay selection (platform-appropriate). These are visually impressive and faster than card entry. If demonstrating card entry, use test card number (4242 4242 4242 4242) and show validation working.
+
+---
+
+=== Story C-E4-02: Complete Payment Transaction
+
+**Story ID:** C-E4-02 +
+**Priority:** Must Have (M) +
+**Size:** Medium (M) +
+**Actor:** Consumer
+
+**User Story:**
+
+As a consumer,
+I want my payment to be processed securely and receive immediate confirmation
+so that I know my booking is complete and my shipment is scheduled for pickup.
+
+**Acceptance Criteria:**
+
+- [ ] Given I have selected a payment method and confirmed details, when I tap "Pay $XX.XX", then I see a processing/loading state
+- [ ] Given payment is processing (simulated 2-3 second delay), when it succeeds, then I proceed to booking confirmation screen
+- [ ] Given payment fails (simulated error scenario), when I see the error, then I get a clear message and can retry or change payment method
+- [ ] Given 3-D Secure is required (simulated), when I see the authentication screen, then I can complete it and continue
+- [ ] The "Pay" button shows the exact total amount to be charged
+- [ ] Loading state prevents duplicate submissions (button disabled during processing)
+- [ ] Success state shows checkmark animation before transitioning to confirmation
+
+**Notes:**
+
+- **Brief Reference:** Section 4.1.5 - "Success, 3-D Secure, and failure states"
+- **Technical:** Simulate payment processing with 2-3 second delay. Show success (95% of time) or failure (5% for error demo). 3-D Secure shown occasionally
+- **UX:** Clear loading indicator during processing. Success animation builds confidence. Error messages are actionable ("Please check your card details and try again")
+- **Dependencies:**
+  * Requires: C-E4-01 (Payment method selected)
+  * Enables: C-E4-03 (Booking confirmation), D-E8-02 (Job created in driver's list)
+  * Integrates with: Backend booking system (simulated)
+- **Screen Count:** 1-2 screens (Processing state + 3-D Secure modal if shown)
+
+**Demo Notes:**
+
+Primary flow: Show successful payment (2s processing → success animation → confirmation). Optionally demonstrate one failure scenario to show error handling. Brief mentions 3-D Secure - can show simulated authentication modal in Phase 2.
+
+---
+
+=== Story C-E4-03: View Booking Confirmation
+
+**Story ID:** C-E4-03 +
+**Priority:** Must Have (M) +
+**Size:** Medium (M) +
+**Actor:** Consumer
+
+**User Story:**
+
+As a consumer,
+I want to see my booking confirmation with Kurrier ID, carrier tracking number, and service details
+so that I have proof of my booking and can reference these numbers for tracking and support.
+
+**Acceptance Criteria:**
+
+- [ ] Given payment succeeded, when I reach the confirmation screen, then I see "Booking Confirmed!" success message with checkmark
+- [ ] I see my Kurrier ID (internal reference, human-readable, e.g., "KUR-A1B2C3")
+- [ ] I see the carrier tracking number (simulated, e.g., "1Z999AA10123456784")
+- [ ] I see a summary of my booking: pickup address, delivery address, selected service (carrier + tier), price paid, estimated pickup time
+- [ ] I can tap "View Label" to generate/download shipping label (C-E4-04)
+- [ ] I can tap "Track Shipment" to go to live tracking screen (C-E5-01)
+- [ ] I can share booking details via message/email
+- [ ] Confirmation is saved to "Past Shipments" history automatically
+
+**Notes:**
+
+- **Brief Reference:** Section 4.1.5 - "On success: generate Kurrier ID (internal parcel reference) (human-writable code) and display assigned carrier tracking number (simulated)"
+- **Technical:** Generate unique Kurrier ID (format: KUR-XXXXXX where X is alphanumeric). Carrier tracking number is simulated based on carrier format
+- **UX:** Big, celebratory success state. Kurrier ID should be easy to read and copy. Provide next action buttons prominently (View Label, Track)
+- **Dependencies:**
+  * Requires: C-E4-02 (Payment successful)
+  * Enables: C-E4-04 (Label generation), C-E5-01 (Tracking), D-E8-02 (Driver sees job)
+  * Integrates with: Booking record creation, shipment ID generation
+- **Screen Count:** 1 screen (Confirmation summary)
+
+**Demo Notes:**
+
+This is a high-energy moment in the demo - the first completed transaction. Show clear Kurrier ID (e.g., "KUR-A1B2C3") and carrier tracking prominently. Explain: "Kurrier ID for internal tracking, carrier number for end-to-end visibility". Demonstrate "Track Shipment" button to transition to next epic.
+
+---
+
+=== Story C-E4-04: Generate Shipping Label
+
+**Story ID:** C-E4-04 +
+**Priority:** Should Have (S) +
+**Size:** Medium (M) +
+**Actor:** Consumer
+
+**User Story:**
+
+As a consumer,
+I want to generate and download a printable shipping label with barcode/QR code
+so that I can attach it to my parcel before the driver arrives for pickup.
+
+**Acceptance Criteria:**
+
+- [ ] Given I am on the booking confirmation screen, when I tap "Generate Label" or "View Label", then I see a label preview
+- [ ] The label includes: Sender address, Recipient address, Kurrier ID as barcode (Code128) and QR code, Carrier logo and tracking number, Service tier, Parcel dimensions and weight
+- [ ] I can download the label as PDF (4×6" format typical for shipping labels)
+- [ ] I can print the label directly using AirPrint (iOS) or Android Print Services
+- [ ] I can share the label via email or messaging apps
+- [ ] The label preview shows it will print correctly (no truncation)
+- [ ] Alternative A4 format option is available for users without label printers
+
+**Notes:**
+
+- **Brief Reference:** Section 4.1.5 - "Label Option: Provide 'Generate Label' → printable PDF (4×6" or A4) with NFC/airprint/share actions... Include QR/Code128 containing Kurrier ID (internal parcel reference) + carrier ref"
+- **Technical:** Generate label as PDF using template. Barcodes are simulated images. No actual printing - use native share sheet for "print" action
+- **UX:** Show label preview before download/print. Provide both 4×6" (standard shipping label) and A4 options. Make sharing easy (email to self is common)
+- **Dependencies:**
+  * Requires: C-E4-03 (Booking confirmed with IDs)
+  * Enables: Physical parcel labeling for pickup
+  * Integrates with: PDF generation, native print/share services
+- **Screen Count:** 1-2 screens (Label preview + Share/Print sheet)
+
+**Demo Notes:**
+
+"Should Have" because it's practical and professional, but not required for the Golden Path tracking demo. Include in Phase 2. Show label preview with clear barcodes - explain "Driver scans this QR code to confirm pickup". Demonstrate share action (email or download).
+
+---
+
+<<<
+== Epic Summary
+
+**Golden Path Coverage:**
+
+Stories C-E4-01, C-E4-02, and C-E4-03 complete the Golden Path booking flow. After these, the consumer has successfully booked and paid for a shipment, creating a job for the driver to fulfill.
+
+**Implementation Notes:**
+
+* Payment method selection (C-E4-01) should prioritize platform-native options (Apple Pay/Google Pay)
+* Payment processing (C-E4-02) must handle success, failure, and 3-D Secure scenarios
+* Booking confirmation (C-E4-03) is the "mission accomplished" screen - make it celebratory
+* Label generation (C-E4-04) adds professionalism but isn't critical for digital-first demo
+
+**Critical Integration Point:**
+
+**Booking Confirmed → Job Created** is the key handoff between Consumer and Driver apps:
+
+* Consumer side: C-E4-03 (Booking confirmation)
+* Driver side: D-E8-02 (Job appears in available jobs list)
+* System: Booking record created, job matching logic assigns to driver pool
+
+**Development Sequence:**
+
+Sprint 2 (Core Flow - Consumer):
+
+1. C-E4-01: Payment method selection (required for booking)
+2. C-E4-02: Payment processing (required for booking)
+3. C-E4-03: Booking confirmation (required for tracking transition)
+
+Sprint 5 (Enhancement):
+
+1. C-E4-04: Label generation (professional touch)
+
+**Demo Timing:**
+
+Payment and confirmation should take ~1 minute in demo:
+
+- 15s: Select payment method (Apple Pay or card selection)
+- 5-10s: Payment processing (simulated delay)
+- 5s: Success animation
+- 20s: Review confirmation details (IDs, service summary)
+- 10s: Explain next steps (track shipment, driver assignment)
+
+Total: ~1 minute to complete booking.
+
+**Demo Transition:**
+
+After C-E4-03 (Booking Confirmation), the demo transitions to:
+
+1. **Driver App** to show job acceptance and fulfillment (Epics E8, E9)
+2. **OR** stay in Consumer App to show live tracking (Epic E5)
+
+Recommended flow: Show booking confirmation → switch to Driver app to demonstrate job acceptance → return to Consumer app for live tracking. This shows the complete integration.
+
+**Key Demo Talking Points:**
+
+* "Secure payment with familiar options - Apple Pay, Google Pay, or card"
+* "Instant confirmation with Kurrier ID for tracking"
+* "Carrier tracking number for end-to-end visibility"
+* "Your shipment is now matched to available drivers in your area"
+* Optional: "Generate printable label with QR code for easy driver scan"

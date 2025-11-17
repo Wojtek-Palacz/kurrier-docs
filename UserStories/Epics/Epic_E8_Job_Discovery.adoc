@@ -1,0 +1,277 @@
+= Epic E8: Job Discovery & Acceptance
+:toc:
+:toclevels: 2
+:sectnums:
+:doctype: article
+:icons: font
+:numbered:
+:pagenums:
+:reproducible:
+
+<<<
+== Epic Overview
+
+**Epic ID:** E8 +
+**Epic Name:** Job Discovery & Acceptance +
+**Actor:** Driver +
+**Brief Reference:** Section 4.2.2 (Availability & Job Intake) +
+**Priority:** Must Have (core driver workflow) +
+**Story Count:** 4 (M: 4, S: 0, C: 0)
+
+**Epic Goal:**
+
+Enable drivers to control their availability, view available pickup jobs with relevant details (proximity, payout, parcel size), and accept jobs they want to fulfill so they can begin earning money through the Kurrier platform.
+
+**Value Proposition:**
+
+This epic demonstrates the driver value proposition: flexible work with transparent earnings. Drivers can see exactly what each job pays, where it's located, and what's involved before committing. The job matching and acceptance flow must feel fair, transparent, and respectful of driver autonomy. This is where the consumer's booking (Epic E4) becomes the driver's opportunity.
+
+**Success Criteria:**
+
+- [ ] Driver can go online/offline to control job availability
+- [ ] Driver sees a list of available jobs sorted by proximity or payout
+- [ ] Each job listing shows critical information at a glance (location, pay, size)
+- [ ] Driver can view detailed job information before accepting
+- [ ] Job acceptance is immediate and confirms assignment to the driver
+- [ ] The flow feels empowering and respectful of driver choice
+
+<<<
+== Stories
+
+=== Story D-E8-01: Go Online/Offline Toggle
+
+**Story ID:** D-E8-01 +
+**Priority:** Must Have (M) +
+**Size:** Small (S) +
+**Actor:** Driver
+
+**User Story:**
+
+As a driver,
+I want to toggle my availability online/offline
+so that I only receive job assignments when I'm ready to work and can control my schedule.
+
+**Acceptance Criteria:**
+
+- [ ] Given I am on the driver dashboard, when I see the online/offline toggle, then I can tap it to change my status
+- [ ] Given I toggle to "Online", when my status changes, then I see available jobs list and can receive new job notifications
+- [ ] Given I toggle to "Offline", when my status changes, then I no longer see new jobs or receive assignments
+- [ ] My current status is clearly displayed (e.g., "You're Online" with green indicator or "You're Offline" with gray)
+- [ ] When going online, I see optional heatmap showing busy areas or high-demand zones (simulated)
+- [ ] I receive a notification when I go online ("You're now visible to customers in your area")
+- [ ] The toggle is prominent and easy to access from the main screen
+
+**Notes:**
+
+- **Brief Reference:** Section 4.2.2 - "Go Online/Offline; heatmap for peak zones (simulated)"
+- **Technical:** Online status controls job visibility. When online, driver appears in job matching pool. Heatmap is simulated visualization
+- **UX:** Use large, clear toggle switch. Green = online/active, Gray = offline. Show optional heat map overlay on background for visual interest
+- **Dependencies:**
+  * Requires: D-E7-01 (Driver authenticated and approved)
+  * Enables: D-E8-02 (Jobs list visible when online)
+  * Integrates with: Driver availability system, job matching engine
+- **Screen Count:** 0-1 screens (toggle on dashboard + optional heatmap view)
+
+**Demo Notes:**
+
+Show driver starting in "Offline" state, then tap toggle to go "Online". Brief animation or visual feedback (e.g., "Searching for jobs nearby..."). Optional: show heatmap with busy zones highlighted to demonstrate demand-based routing. This control demonstrates driver autonomy.
+
+---
+
+=== Story D-E8-02: View Available Jobs List
+
+**Story ID:** D-E8-02 +
+**Priority:** Must Have (M) +
+**Size:** Medium (M) +
+**Actor:** Driver
+
+**User Story:**
+
+As a driver,
+I want to see a list of available pickup jobs showing distance, payout, parcel size, and pickup ETA
+so that I can quickly evaluate which jobs are worth accepting based on my location and preferences.
+
+**Acceptance Criteria:**
+
+- [ ] Given I am online, when jobs are available in my area, then I see them listed with key information
+- [ ] Each job card shows: Distance from my current location, Payout amount ($X.XX), Pickup address (street name or neighborhood), Parcel size indicator (Small/Medium/Large), Estimated pickup time window
+- [ ] Given a new job becomes available (from consumer booking C-E4-03), when it matches my area, then it appears in my list with a notification
+- [ ] Jobs are sorted by proximity (nearest first) or can be sorted by highest payout
+- [ ] I can tap on a job card to view full details (D-E8-03)
+- [ ] If no jobs are available, I see helpful message ("No jobs nearby - try a different area" with heatmap hint)
+- [ ] Jobs list refreshes automatically as new jobs appear or are claimed by other drivers
+
+**Notes:**
+
+- **Brief Reference:** Section 4.2.2 - "Jobs List: proximity, payout, pickup ETA, parcel size/weight, special notes"
+- **Technical:** Jobs are created when consumer completes payment (C-E4-02). Job matching considers driver location, availability, and capacity
+- **UX:** Use card-based layout for easy scanning. Prominent payout display. Distance in miles/km based on driver preference. Visual size indicators
+- **Dependencies:**
+  * Requires: D-E8-01 (Driver online), C-E4-03 (Consumer booking creates job)
+  * Enables: D-E8-03 (Job details), D-E8-04 (Job acceptance)
+  * Integrates with: Job matching engine, location services
+- **Screen Count:** 1 screen (Jobs list view)
+
+**Demo Notes:**
+
+**CRITICAL INTEGRATION POINT:** This is where consumer booking (C-E4-03) creates driver opportunity. For demo, show 2-3 available jobs in list. Highlight the one created from Sarah's (consumer) booking - same pickup address she entered. Show payout ($12.50), distance (2.3 mi), and size. This demonstrates the two-sided marketplace connection.
+
+---
+
+=== Story D-E8-03: View Job Details
+
+**Story ID:** D-E8-03 +
+**Priority:** Must Have (M) +
+**Size:** Medium (M) +
+**Actor:** Driver
+
+**User Story:**
+
+As a driver,
+I want to view detailed information about a job including pickup address, parcel specifications, carrier service, assigned hub, and any special instructions
+so that I can make an informed decision about whether to accept it.
+
+**Acceptance Criteria:**
+
+- [ ] Given I tap on a job in the list, when the details screen loads, then I see all job information
+- [ ] I see: Full pickup address with map preview, Recipient delivery address (first line only for privacy), Parcel dimensions and weight, Carrier and service tier selected (e.g., "FedEx Express"), Assigned hub location and address, Payout breakdown (base + distance + incentives if any), Estimated pickup time window, Special pickup instructions/notes (from C-E2-06 if provided)
+- [ ] I can see the route preview (pickup → hub) on a map
+- [ ] I can tap to call/message customer (masked number for privacy)
+- [ ] I can view estimated time to pickup location from my current position
+- [ ] The "Accept Job" button is prominent and clearly labeled
+- [ ] I can tap "Back" to return to jobs list if I don't want this job
+
+**Notes:**
+
+- **Brief Reference:** Section 4.2.2 - "Job Detail: pickup address + map, customer contact (masked), parcel specs (dims/weight), carrier/service chosen, assigned hub"
+- **Technical:** Job details come from consumer booking (Epic E2-E4). Masked contact uses Twilio-style proxy number (simulated)
+- **UX:** Information-dense screen but well organized. Map at top, critical info (payout, time) prominent, details below. Use sections/cards for organization
+- **Dependencies:**
+  * Requires: D-E8-02 (Job listed and selected)
+  * Enables: D-E8-04 (Job acceptance decision)
+  * Integrates with: Booking data, routing services, masked contact system
+- **Screen Count:** 1 screen (Job detail view)
+
+**Demo Notes:**
+
+Show job details for Sarah's booking. Point out: "This is the package Sarah just booked. Pickup at [her address], delivering via FedEx Express to [recipient city]. Mike can see it's worth $12.50 and only 2.3 miles away." Show any pickup notes ("Ring doorbell"). Demonstrate masked contact capability but don't actually call in demo.
+
+---
+
+=== Story D-E8-04: Accept Job
+
+**Story ID:** D-E8-04 +
+**Priority:** Must Have (M) +
+**Size:** Small (S) +
+**Actor:** Driver
+
+**User Story:**
+
+As a driver,
+I want to accept a job with a single tap
+so that I can claim it before other drivers and begin navigation to the pickup location.
+
+**Acceptance Criteria:**
+
+- [ ] Given I am viewing job details, when I tap "Accept Job", then the job is immediately assigned to me
+- [ ] Given the job is accepted, when assignment confirms, then I see success confirmation and transition to active job view
+- [ ] Given another driver accepts the job first, when I try to accept, then I see "Job no longer available" message and return to jobs list
+- [ ] The job disappears from other drivers' lists once I accept it
+- [ ] I receive confirmation notification ("Job accepted! Head to pickup location")
+- [ ] I am automatically taken to navigation view (D-E9-01) after acceptance
+- [ ] My status changes from "Online" to "On Job" (can't accept new jobs until this one is complete)
+
+**Notes:**
+
+- **Brief Reference:** Section 4.2.2 - Implied from job acceptance flow
+- **Technical:** Job acceptance is first-come, first-served. Race condition handling if two drivers accept simultaneously. Job state changes from "Available" to "Assigned"
+- **UX:** Immediate feedback on tap. Success animation. Prevent duplicate accepts. Clear transition to next step (navigation)
+- **Dependencies:**
+  * Requires: D-E8-03 (Job details reviewed)
+  * Enables: D-E9-01 (Navigation to pickup), C-E5-02 (Consumer sees driver assigned and location)
+  * Integrates with: Job assignment system, navigation, consumer app tracking
+- **Screen Count:** 0-1 screens (confirmation toast + auto-transition)
+
+**Demo Notes:**
+
+**CRITICAL INTEGRATION POINT:** When driver accepts job, consumer's tracking activates. Tap "Accept Job" → brief success animation → transition to navigation. Then switch to Consumer app to show: "Driver Mike has been assigned!" with his photo/car info appearing and live location starting to show. This demonstrates the real-time integration between both apps.
+
+---
+
+<<<
+== Epic Summary
+
+**Golden Path Coverage:**
+
+All 4 stories in Epic E8 are Must-Have for the Golden Path. This epic is the bridge between consumer booking and driver fulfillment - it must be shown completely to demonstrate the two-sided marketplace.
+
+**Implementation Notes:**
+
+* Online/Offline toggle (D-E8-01) gives drivers control and shows autonomy
+* Jobs list (D-E8-02) must dynamically show jobs created from consumer bookings
+* Job details (D-E8-03) provides transparency before commitment
+* Job acceptance (D-E8-04) triggers critical integrations with consumer tracking
+
+**Critical Integration Points:**
+
+**Integration Point #1: Booking → Job Creation**
+
+* Consumer: C-E4-03 (Booking confirmed)
+* Driver: D-E8-02 (Job appears in list)
+* System: Create job record with pickup location, parcel details, payout
+
+**Integration Point #2: Job Acceptance → Driver Assignment**
+
+* Driver: D-E8-04 (Accept job)
+* Consumer: C-E5-02 (Driver info appears, location tracking starts)
+* System: Assign job, initiate location sharing, update statuses
+
+**Development Sequence:**
+
+Sprint 3 (Core Flow - Driver):
+
+1. D-E8-01: Online/offline toggle (availability control)
+2. D-E8-02: Jobs list (view opportunities)
+3. D-E8-03: Job details (informed decision)
+4. D-E8-04: Job acceptance (commit to job)
+
+All must be implemented together - they form a complete flow.
+
+**Demo Timing:**
+
+Job discovery and acceptance should take ~1 minute:
+
+- 10s: Go online (D-E8-01)
+- 20s: View jobs list, show Sarah's job appearing (D-E8-02)
+- 20s: View job details, explain info (D-E8-03)
+- 10s: Accept job, show confirmation (D-E8-04)
+- Transition: Switch to consumer app to show driver assignment
+
+**Demo Choreography:**
+
+**Act 1 (Consumer booking) - 5 minutes:**
+- Sarah books shipment, pays, sees confirmation (Epics E1-E4)
+
+**Act 2 (Driver acceptance) - 1 minute:**
+- Mike is online → Sarah's job appears → Mike reviews details → Mike accepts
+- Switch to consumer app: Show "Driver Mike assigned!" with live map
+
+**Act 3 (Fulfillment & tracking) - 4 minutes:**
+- Continue with Epic E9 (Pickup) and E5 (Tracking)
+
+**Key Demo Talking Points:**
+
+* "When Sarah books, drivers nearby instantly see the opportunity"
+* "Mike can evaluate: Is it worth it? Is it on his route?"
+* "Transparent earnings - Mike knows exactly what he'll make"
+* "One tap to accept, and Sarah immediately sees her driver"
+* "Real-time coordination between both apps"
+
+**Note for Developers:**
+
+Epic E8 requires careful state management and real-time updates:
+
+- Job availability must refresh as jobs are claimed
+- Race conditions when multiple drivers attempt to accept same job
+- Location tracking begins immediately upon acceptance
+- Status updates must sync between consumer and driver apps

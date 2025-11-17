@@ -1,0 +1,216 @@
+= Epic E7: Driver Onboarding & Verification
+:toc:
+:toclevels: 2
+:sectnums:
+:doctype: article
+:icons: font
+:numbered:
+:pagenums:
+:reproducible:
+
+<<<
+== Epic Overview
+
+**Epic ID:** E7 +
+**Epic Name:** Driver Onboarding & Verification +
+**Actor:** Driver +
+**Brief Reference:** Section 4.2.1 (Onboarding & Verification) +
+**Priority:** Must Have (entry point for driver experience) +
+**Story Count:** 3 (M: 1, S: 1, C: 1)
+
+**Epic Goal:**
+
+Enable drivers to authenticate, upload verification documents (license, vehicle, insurance), and understand their onboarding status so they can begin accepting jobs once approved.
+
+**Value Proposition:**
+
+This epic establishes trust and compliance for the driver network. While full KYC verification is out of scope for the demo, the UI must show a professional onboarding flow that would give drivers confidence in the platform and demonstrate to stakeholders that proper vetting is in place. The demo focuses on authentication and document upload placeholders rather than real verification processes.
+
+**Success Criteria:**
+
+- [ ] Driver can sign in using phone/email with OTP verification
+- [ ] Driver can upload required documents (license, vehicle registration, insurance proof)
+- [ ] Driver understands their verification status and what's needed to get approved
+- [ ] Contract acceptance is clearly presented and captured
+- [ ] The flow feels professional and trustworthy, not amateur
+- [ ] Placeholders for background checks and compliance are evident
+
+<<<
+== Stories
+
+=== Story D-E7-01: Driver Sign-In with OTP
+
+**Story ID:** D-E7-01 +
+**Priority:** Must Have (M) +
+**Size:** Small (S) +
+**Actor:** Driver
+
+**User Story:**
+
+As a driver,
+I want to sign in using my phone number with OTP verification
+so that I can securely access the Kurrier driver platform and begin my onboarding process.
+
+**Acceptance Criteria:**
+
+- [ ] Given I am on the driver app sign-in screen, when I enter my phone number, then I receive an OTP code (simulated)
+- [ ] Given I enter the correct OTP, when I verify, then I am authenticated and proceed to onboarding status or main app
+- [ ] Given I enter an incorrect OTP, when I verify, then I see a clear error message and can retry
+- [ ] I must accept Driver Terms of Service and Independent Contractor Agreement before proceeding
+- [ ] The OTP input provides numeric keyboard for easy entry
+- [ ] I can request a new OTP if needed
+- [ ] Loading states are shown during code sending and verification
+
+**Notes:**
+
+- **Brief Reference:** Section 4.2.1 - "Phone + OTP"
+- **Technical:** OTP delivery is simulated. Use fixed code or auto-fill for demo smoothness. Driver ToS includes independent contractor language (not employee)
+- **UX:** Similar to consumer sign-in (C-E1-01) but with driver-specific branding and contract language. Use driver-focused colors/imagery
+- **Dependencies:**
+  * Requires: None (entry point to driver app)
+  * Enables: D-E7-02 (Document upload), D-E8-01 (Go online/offline toggle)
+  * Integrates with: Driver authentication system
+- **Screen Count:** 2 screens (Phone entry + OTP verification)
+
+**Demo Notes:**
+
+For demo, use pre-configured test phone number. Auto-fill OTP to keep flow moving. Show ToS/contract acceptance screen with key terms highlighted (independent contractor status, earnings model, safety requirements). Transition quickly to show driver is "onboarding" or "approved" state.
+
+---
+
+=== Story D-E7-02: Upload Verification Documents
+
+**Story ID:** D-E7-02 +
+**Priority:** Should Have (S) +
+**Size:** Medium (M) +
+**Actor:** Driver
+
+**User Story:**
+
+As a driver,
+I want to upload my driver's license, vehicle registration, and insurance proof
+so that Kurrier can verify my eligibility and approve me to accept jobs.
+
+**Acceptance Criteria:**
+
+- [ ] Given I am in the onboarding flow, when I reach document upload, then I see clear instructions for each required document (license, vehicle registration, insurance)
+- [ ] Given I tap "Upload License", when I select photo/camera, then I can capture or select an image of my driver's license
+- [ ] Given I upload a document, when it's submitted, then I see a confirmation checkmark and can proceed to the next document
+- [ ] Each document type has specific guidance (e.g., "Make sure all text is clearly visible", "Upload front and back")
+- [ ] I can skip document upload and return later (documents stay in "pending" status)
+- [ ] Once all documents are uploaded, I see "Under Review" status
+- [ ] I can replace or re-upload documents if initial submission is rejected (simulated)
+
+**Notes:**
+
+- **Brief Reference:** Section 4.2.1 - "upload license, vehicle, insurance (simulated)"
+- **Technical:** Document upload is simulated - images don't actually upload or get verified. Show file selection and simulated upload progress bar
+- **UX:** Use checklist pattern (✓ License uploaded, ○ Vehicle pending, ○ Insurance pending). Provide image quality tips. Show example of good vs. poor image quality
+- **Dependencies:**
+  * Requires: D-E7-01 (Driver authenticated)
+  * Enables: D-E7-03 (Background check status), D-E8-01 (Go online once approved)
+  * Integrates with: Document verification system (simulated)
+- **Screen Count:** 3-4 screens (Upload intro + Document capture for each type + Status summary)
+
+**Demo Notes:**
+
+"Should Have" because it shows the platform takes verification seriously, but not required for Golden Path functionality. Include in Phase 2. For demo, pre-populate documents as "uploaded" or show simulated upload of one document (e.g., license) with smooth progress animation. Show "Under Review" or "Approved" status to proceed.
+
+---
+
+=== Story D-E7-03: View Background Check Status
+
+**Story ID:** D-E7-03 +
+**Priority:** Could Have (C) +
+**Size:** Small (S) +
+**Actor:** Driver
+
+**User Story:**
+
+As a driver,
+I want to see the status of my background check and verification process
+so that I know when I'll be approved to start accepting jobs and what (if anything) is blocking my approval.
+
+**Acceptance Criteria:**
+
+- [ ] Given I am in onboarding, when I view my status dashboard, then I see verification progress: Documents (Uploaded/Reviewing/Approved), Background Check (Pending/In Progress/Complete), Contract (Signed/Pending)
+- [ ] Given my background check is in progress, when I check status, then I see estimated completion time (simulated: "2-3 business days")
+- [ ] Given my background check is complete and approved, when I view status, then I see "Approved - You can start accepting jobs"
+- [ ] Given there's an issue (simulated rejection), when I check status, then I see what needs attention and how to resolve it
+- [ ] I receive a notification when my verification status changes
+- [ ] I can access support/help if I have questions about my status
+
+**Notes:**
+
+- **Brief Reference:** Section 4.2.1 - "background check status (simulated)"
+- **Technical:** Background check is fully simulated. For demo, show "Complete" or "Approved" status to allow driver to go online
+- **UX:** Use progress indicators and status badges. Green checkmarks for approved items. Clear messaging about what happens next
+- **Dependencies:**
+  * Requires: D-E7-01 (Authentication), D-E7-02 (Documents uploaded helpful but not required)
+  * Enables: D-E8-01 (Driver can go online once fully approved)
+  * Integrates with: Verification status management system
+- **Screen Count:** 1 screen (Status dashboard)
+
+**Demo Notes:**
+
+"Could Have" - adds realism but not essential for demo flow. For Phase 1-2, can simply show driver as "Approved" without detailed status breakdown. For Phase 3, show verification dashboard with all checks passed. This demonstrates platform's compliance mindset to stakeholders.
+
+---
+
+<<<
+== Epic Summary
+
+**Golden Path Coverage:**
+
+Story D-E7-01 is the only essential story for Golden Path - driver authentication. For demo purposes, drivers should be pre-approved to avoid delays in showing job acceptance flow.
+
+**Implementation Notes:**
+
+* Driver sign-in (D-E7-01) is quick and similar to consumer auth
+* Document upload (D-E7-02) demonstrates compliance but is time-consuming to show in demo
+* Background check status (D-E7-03) is primarily informational - can be a simple approved state
+
+**Demo Strategy:**
+
+For the Golden Path demo, minimize time spent on driver onboarding. The focus should be on job fulfillment (Epics E8-E9), not verification paperwork.
+
+**Recommended demo approach:**
+
+1. Show driver sign-in (D-E7-01) quickly with auto-filled OTP
+2. Skip or fast-forward through document upload - show driver as "Approved" already
+3. Jump directly to main driver dashboard with "Go Online" toggle available
+
+**Development Sequence:**
+
+Sprint 3 (Core Flow - Driver):
+
+1. D-E7-01: Driver authentication (required to access app)
+
+Sprint 5 (Enhancement):
+
+1. D-E7-02: Document upload (shows professionalism)
+
+Phase 3 (Optional):
+
+1. D-E7-03: Background check status (compliance messaging)
+
+**Demo Timing:**
+
+Driver onboarding should take <30 seconds in demo:
+
+- 15s: Show sign-in with phone + OTP (auto-fill)
+- 10s: Show "Approved Driver" status or skip directly to dashboard
+- 5s: Explain "Background checks and verification complete"
+
+Transition immediately to D-E8-01 (Go Online) to begin job fulfillment demonstration.
+
+**Key Demo Talking Points:**
+
+* "Drivers undergo thorough verification including license, vehicle, and insurance checks"
+* "Background checks ensure safety and trust"
+* "Independent contractor model with clear terms"
+* Brief mention, move quickly: "Mike is already approved, so let's see how he accepts and fulfills jobs"
+
+**Note on Compliance:**
+
+While KYC/background checks are simulated, the UX should demonstrate awareness of compliance requirements. This is important for stakeholder confidence, even if not implemented in the mockup.

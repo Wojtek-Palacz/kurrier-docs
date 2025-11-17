@@ -1,0 +1,213 @@
+= Kurrier User Stories - Epic Overview
+:toc: left
+:toclevels: 2
+:doctype: article
+:icons: font
+:source-highlighter: rouge
+:reproducible:
+
+[.lead]
+*Kurrier Inc.* - First-Mile Parcel Pickup Platform
+
+This documentation provides comprehensive user stories organized into epics for the Kurrier platform, a mobile app connecting consumers who need parcel shipping with gig-economy drivers who provide first-mile pickup to carrier hubs.
+
+== Project Overview
+
+**Project:** Kurrier Inc. Mobile Application +
+**Purpose:** First-mile parcel pickup platform +
+**Target Users:** Consumers (shippers) and Drivers (gig workers) +
+**Key Differentiator:** On-demand pickup with real-time tracking and competitive carrier quotes
+
+== Epic Structure
+
+The Kurrier platform is organized into 10 major epics, split between Consumer and Driver experiences.
+
+=== Consumer Epics (E1-E6)
+
+[cols="1,3,2,1", options="header"]
+|===
+|Epic ID|Epic Name|Priority|Stories
+
+|link:epics/Epic_E1_Consumer_Onboarding.html[E1]
+|Consumer Onboarding & Authentication
+|Must Have (contains Golden Path blockers) +
+|4 (M: 2, S: 1, C: 1)
+
+|link:epics/Epic_E2_Shipment_Creation.html[E2]
+|Shipment Creation & Booking
+|Must Have (core booking flow) +
+|8 (M: 4, S: 2, C: 2)
+
+|link:epics/Epic_E3_Service_Selection.html[E3]
+|Service Selection & Quotation
+|Must Have (core value proposition) +
+|5 (M: 3, S: 1, C: 1)
+
+|link:epics/Epic_E4_Payment_Confirmation.html[E4]
+|Payment & Confirmation
+|Must Have (completes booking transaction) +
+|4 (M: 3, S: 1, C: 0)
+
+|link:epics/Epic_E5_Live_Tracking.html[E5]
+|Live Tracking & Driver Interaction
+|Must Have (core customer experience) +
+|5 (M: 3, S: 2, C: 0)
+
+|link:epics/Epic_E6_History_Rewards.html[E6]
+|Shipment Management & History
+|Should Have (enhances user experience) +
+|3 (M: 0, S: 2, C: 1)
+
+|===
+
+=== Driver Epics (E7-E10)
+
+[cols="1,3,2,1", options="header"]
+|===
+|Epic ID|Epic Name|Priority|Stories
+
+|link:epics/Epic_E7_Driver_Onboarding.html[E7]
+|Driver Onboarding & Verification
+|Must Have (entry point for driver experience) +
+|3 (M: 1, S: 1, C: 1)
+
+|link:epics/Epic_E8_Job_Discovery.html[E8]
+|Job Discovery & Acceptance
+|Must Have (core driver workflow) +
+|4 (M: 4, S: 0, C: 0)
+
+|link:epics/Epic_E9_Pickup_Fulfillment.html[E9]
+|Pickup & Hub Fulfillment
+|Must Have (core fulfillment workflow) +
+|6 (M: 5, S: 1, C: 0)
+
+|link:epics/Epic_E10_Driver_Earnings.html[E10]
+|Driver Earnings & Performance
+|Should Have (driver retention and transparency) +
+|2 (M: 0, S: 1, C: 1)
+
+|===
+
+== Epic Summaries
+
+=== E1: Consumer Onboarding & Authentication
+
+link:epics/Epic_E1_Consumer_Onboarding.html[View Full Epic →]
+
+**Actor:** Consumer | **Priority:** Must Have (contains Golden Path blockers) + | **Stories:** 4 (M: 2, S: 1, C: 1)
+
+Enable consumers to securely authenticate, grant necessary permissions, and set up their profile so they can begin booking shipments through the Kurrier platform.
+
+'''
+
+=== E2: Shipment Creation & Booking
+
+link:epics/Epic_E2_Shipment_Creation.html[View Full Epic →]
+
+**Actor:** Consumer | **Priority:** Must Have (core booking flow) + | **Stories:** 8 (M: 4, S: 2, C: 2)
+
+Enable consumers to create a shipment by specifying pickup and delivery addresses, providing parcel dimensions and weight, so that the system can generate accurate shipping quotes from multiple carrie
+
+'''
+
+=== E3: Service Selection & Quotation
+
+link:epics/Epic_E3_Service_Selection.html[View Full Epic →]
+
+**Actor:** Consumer | **Priority:** Must Have (core value proposition) + | **Stories:** 5 (M: 3, S: 1, C: 1)
+
+Enable consumers to view multi-carrier shipping quotes, compare service options by price and delivery time, and select their preferred carrier and service tier so they can make informed decisions befo
+
+'''
+
+=== E4: Payment & Confirmation
+
+link:epics/Epic_E4_Payment_Confirmation.html[View Full Epic →]
+
+**Actor:** Consumer | **Priority:** Must Have (completes booking transaction) + | **Stories:** 4 (M: 3, S: 1, C: 0)
+
+Enable consumers to securely pay for their selected shipping service and receive immediate booking confirmation with Kurrier ID and carrier tracking number so they have proof of booking and can begin 
+
+'''
+
+=== E5: Live Tracking & Driver Interaction
+
+link:epics/Epic_E5_Live_Tracking.html[View Full Epic →]
+
+**Actor:** Consumer | **Priority:** Must Have (core customer experience) + | **Stories:** 5 (M: 3, S: 2, C: 0)
+
+Enable consumers to track their shipment in real-time with live driver location, view shipment status timeline, see driver details, and contact the driver if needed so they have full visibility and co
+
+'''
+
+=== E6: Shipment Management & History
+
+link:epics/Epic_E6_History_Rewards.html[View Full Epic →]
+
+**Actor:** Consumer | **Priority:** Should Have (enhances user experience) + | **Stories:** 3 (M: 0, S: 2, C: 1)
+
+Enable consumers to view their past shipments, access invoices/receipts, and optionally view loyalty rewards so they have a complete record of their Kurrier usage and can manage their shipping history
+
+'''
+
+=== E7: Driver Onboarding & Verification
+
+link:epics/Epic_E7_Driver_Onboarding.html[View Full Epic →]
+
+**Actor:** Driver | **Priority:** Must Have (entry point for driver experience) + | **Stories:** 3 (M: 1, S: 1, C: 1)
+
+Enable drivers to authenticate, upload verification documents (license, vehicle, insurance), and understand their onboarding status so they can begin accepting jobs once approved.
+
+'''
+
+=== E8: Job Discovery & Acceptance
+
+link:epics/Epic_E8_Job_Discovery.html[View Full Epic →]
+
+**Actor:** Driver | **Priority:** Must Have (core driver workflow) + | **Stories:** 4 (M: 4, S: 0, C: 0)
+
+Enable drivers to control their availability, view available pickup jobs with relevant details (proximity, payout, parcel size), and accept jobs they want to fulfill so they can begin earning money th
+
+'''
+
+=== E9: Pickup & Hub Fulfillment
+
+link:epics/Epic_E9_Pickup_Fulfillment.html[View Full Epic →]
+
+**Actor:** Driver | **Priority:** Must Have (core fulfillment workflow) + | **Stories:** 6 (M: 5, S: 1, C: 0)
+
+Enable drivers to navigate to pickup locations, collect parcels with proper verification (scan/photo), navigate to assigned carrier hubs, and complete drop-off so that parcels enter the carrier networ
+
+'''
+
+=== E10: Driver Earnings & Performance
+
+link:epics/Epic_E10_Driver_Earnings.html[View Full Epic →]
+
+**Actor:** Driver | **Priority:** Should Have (driver retention and transparency) + | **Stories:** 2 (M: 0, S: 1, C: 1)
+
+Enable drivers to view their earnings (daily, weekly, total), see payout schedules, and understand their performance metrics (ratings, quality scores) so they can track their income and improve their 
+
+'''
+
+== Priority Legend
+
+[cols="1,3", options="header"]
+|===
+|Priority|Description
+
+|**Must Have (M)**
+|Core functionality required for MVP/demo
+
+|**Should Have (S)**
+|Important features that enhance value
+
+|**Could Have pass:[(C)]**
+|Nice-to-have features for future phases
+
+|===
+
+---
+
+_Generated from Kurrier User Stories Master Documentation_ +
+_Last Updated: 2025-11-02_

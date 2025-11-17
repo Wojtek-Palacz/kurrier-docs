@@ -1,0 +1,684 @@
+= Kurrier User Stories: Prioritization Summary (MoSCoW)
+:toc:
+:toclevels: 2
+:sectnums:
+:doctype: article
+:icons: font
+
+<<<
+== Overview
+
+This document provides a comprehensive view of all user stories organized by MoSCoW prioritization (Must Have, Should Have, Could Have, Won't Have). This enables clear scope management for the three demo phases:
+
+* **Phase 1 (MVP Demo):** Must-Have stories only (25 stories) - 4 weeks
+* **Phase 2 (Enhanced Demo):** Must + Should-Have stories (37 stories) - 5 weeks
+* **Phase 3 (Complete Demo):** All in-scope stories (44 stories) - as needed
+
+<<<
+== Prioritization Summary by Numbers
+
+.Overall Priority Distribution
+[%header, cols="<2,^1,^1"]
+|===
+^| Priority ^| Story Count ^| Percentage
+
+| Must Have (M)
+| 25
+| 57%
+
+| Should Have (S)
+| 12
+| 27%
+
+| Could Have (C)
+| 7
+| 16%
+
+| **TOTAL**
+| **44**
+| **100%**
+|===
+
+.Priority Distribution by Actor
+[%header, cols="<2,^1,^1,^1,^1"]
+|===
+^| Actor ^| Must ^| Should ^| Could ^| Total
+
+| Consumer
+| 15
+| 9
+| 5
+| 29
+
+| Driver
+| 10
+| 3
+| 2
+| 15
+
+| **TOTAL**
+| **25**
+| **12**
+| **7**
+| **44**
+|===
+
+<<<
+== Must-Have Stories (25 stories) - Phase 1: MVP Demo
+
+**Definition:** Required for Golden Path narrative completion. Without these, the demo story doesn't make sense, and core value proposition is invisible.
+
+=== Consumer Must-Have Stories (15 stories)
+
+**Epic E1: Consumer Onboarding (2 stories)**
+
+.Epic E1 Must-Have Stories
+[%header, cols="^2,<4,<3"]
+|===
+^| Story ID ^| Story Name ^| Rationale
+
+| C-E1-01
+| Sign in with Phone/Email + OTP
+| Entry point - cannot access app without auth
+
+| C-E1-02
+| Location permission request
+| Enables address suggestions and live tracking
+|===
+
+**Epic E2: Shipment Creation (4 stories)**
+
+.Epic E2 Must-Have Stories
+[%header, cols="^2,<4,<3"]
+|===
+^| Story ID ^| Story Name ^| Rationale
+
+| C-E2-01
+| Enter pickup address
+| Required data for quote generation
+
+| C-E2-02
+| Enter recipient address
+| Required data for quote generation
+
+| C-E2-03
+| Enter parcel dimensions (manual)
+| Required for accurate quotes and pricing
+
+| C-E2-04
+| Enter parcel weight
+| Required for accurate quotes and pricing
+|===
+
+**Epic E3: Service Selection (3 stories)**
+
+.Epic E3 Must-Have Stories
+[%header, cols="^2,<4,<3"]
+|===
+^| Story ID ^| Story Name ^| Rationale
+
+| C-E3-01
+| View multi-carrier service options
+| Core value proposition - multi-carrier quotes
+
+| C-E3-02
+| View price breakdown
+| Transparency builds trust
+
+| C-E3-03
+| Select service
+| Required to proceed to payment
+|===
+
+**Epic E4: Payment & Confirmation (3 stories)**
+
+.Epic E4 Must-Have Stories
+[%header, cols="^2,<4,<3"]
+|===
+^| Story ID ^| Story Name ^| Rationale
+
+| C-E4-01
+| Select payment method
+| Payment required to create booking
+
+| C-E4-02
+| Complete payment transaction
+| Completes booking transaction
+
+| C-E4-03
+| View booking confirmation
+| Proof of booking, transitions to tracking
+|===
+
+**Epic E5: Live Tracking (3 stories)**
+
+.Epic E5 Must-Have Stories
+[%header, cols="^2,<4,<3"]
+|===
+^| Story ID ^| Story Name ^| Rationale
+
+| C-E5-01
+| View shipment timeline with status
+| Shows all status updates from driver actions
+
+| C-E5-02
+| View live driver location on map
+| Key differentiator - real-time GPS tracking
+
+| C-E5-03
+| View driver card with details
+| Trust and safety - who is handling my parcel
+|===
+
+---
+
+=== Driver Must-Have Stories (10 stories)
+
+**Epic E7: Driver Onboarding (1 story)**
+
+.Epic E7 Must-Have Stories
+[%header, cols="^2,<4,<3"]
+|===
+^| Story ID ^| Story Name ^| Rationale
+
+| D-E7-01
+| Driver sign in with OTP
+| Entry point - cannot access driver app without auth
+|===
+
+**Epic E8: Job Discovery (4 stories)**
+
+.Epic E8 Must-Have Stories
+[%header, cols="^2,<4,<3"]
+|===
+^| Story ID ^| Story Name ^| Rationale
+
+| D-E8-01
+| Go online/offline toggle
+| Controls availability for jobs
+
+| D-E8-02
+| View available jobs list
+| Driver needs to see job opportunities
+
+| D-E8-03
+| View job details
+| Informed decision before accepting
+
+| D-E8-04
+| Accept job
+| Commits driver to fulfillment, triggers consumer integration
+|===
+
+**Epic E9: Pickup & Fulfillment (5 stories)**
+
+.Epic E9 Must-Have Stories
+[%header, cols="^2,<4,<3"]
+|===
+^| Story ID ^| Story Name ^| Rationale
+
+| D-E9-01
+| Navigate to pickup location
+| Driver must reach customer address
+
+| D-E9-02
+| Mark arrived at pickup
+| Triggers consumer notification
+
+| D-E9-03
+| Scan Kurrier ID at pickup
+| Verification prevents errors, updates consumer timeline
+
+| D-E9-04
+| Navigate to hub
+| Driver must reach hub to complete job
+
+| D-E9-05
+| Scan at hub and mark complete
+| Completes job, triggers final status and invoice
+|===
+
+<<<
+== Should-Have Stories (12 stories) - Phase 2: Enhanced Demo
+
+**Definition:** Significantly improve demo believability and show important features, but not Golden Path critical. Add depth to user experience understanding.
+
+=== Consumer Should-Have Stories (9 stories)
+
+.Consumer Should-Have Stories
+[%header, cols="^2,^1,<3,<3"]
+|===
+^| Story ID ^| Epic ^| Story Name ^| Value Added
+
+| C-E1-03
+| E1
+| Profile setup
+| Convenience - saved addresses for future bookings
+
+| C-E2-05
+| E2
+| AR dimension measurement
+| Innovation showcase - differentiating feature
+
+| C-E2-06
+| E2
+| Add pickup notes
+| Usability - helps driver find location
+
+| C-E3-04
+| E3
+| Add insurance toggle
+| Monetization and risk mitigation
+
+| C-E4-04
+| E4
+| Generate shipping label
+| Professional touch - printable QR code label
+
+| C-E5-04
+| E5
+| Contact driver (masked)
+| Customer service - communication channel
+
+| C-E5-05
+| E5
+| Refresh tracking status
+| User control - manual refresh option
+
+| C-E6-01
+| E6
+| View past shipments list
+| User retention - complete shipping history
+
+| C-E6-02
+| E6
+| View and download invoice
+| Business users - expense reporting
+|===
+
+---
+
+=== Driver Should-Have Stories (3 stories)
+
+.Driver Should-Have Stories
+[%header, cols="^2,^1,<3,<3"]
+|===
+^| Story ID ^| Epic ^| Story Name ^| Value Added
+
+| D-E7-02
+| E7
+| Upload verification documents
+| Compliance and trust - shows verification process
+
+| D-E9-06
+| E9
+| Capture pickup/drop-off photos
+| Quality and accountability - proof of service
+
+| D-E10-01
+| E10
+| View earnings dashboard
+| Driver transparency - income tracking
+|===
+
+<<<
+== Could-Have Stories (7 stories) - Phase 3: Complete Demo
+
+**Definition:** Further enhancements if time permits. Secondary features that add realism and demonstrate scalability.
+
+=== Consumer Could-Have Stories (5 stories)
+
+.Consumer Could-Have Stories
+[%header, cols="^2,^1,<3,<3"]
+|===
+^| Story ID ^| Epic ^| Story Name ^| Why Could Have
+
+| C-E1-04
+| E1
+| Business profile toggle
+| Useful but not required for demo flow
+
+| C-E2-07
+| E2
+| Capture parcel photos
+| Nice but adds complexity, brief says "optional to limit scale"
+
+| C-E2-08
+| E2
+| Select delivery type
+| Can default to "Home" in simpler demos
+
+| C-E3-05
+| E3
+| Filter and sort quotes
+| Power user feature, not essential for basic comparison
+
+| C-E6-03
+| E6
+| View rewards balance
+| Engagement feature, not core functionality
+|===
+
+---
+
+=== Driver Could-Have Stories (2 stories)
+
+.Driver Could-Have Stories
+[%header, cols="^2,^1,<3,<3"]
+|===
+^| Story ID ^| Epic ^| Story Name ^| Why Could Have
+
+| D-E7-03
+| E7
+| View background check status
+| Informational, demo can show "Approved" without detail
+
+| D-E10-02
+| E10
+| View quality metrics and ratings
+| Quality management, not essential for MVP demo
+|===
+
+<<<
+== Won't-Have Features (Not in Story Backlog)
+
+**Definition:** Explicitly deferred features that are out of scope for the interactive demo but may be included in production MVP or future versions.
+
+=== Consumer Web Dashboard
+
+**Why Won't Have:**
+- Demo focuses on mobile apps (primary use case)
+- Web dashboard is secondary channel
+- Mobile-first strategy for initial launch
+
+**Future Consideration:**
+- Phase 2 product after mobile app validation
+- B2B customers may require web access for bulk shipping
+
+---
+
+=== Full Admin Dashboard (Epic E11)
+
+**Why Won't Have:**
+- Operations management is not customer-facing
+- Demo audience is customers and drivers, not operations staff
+- Admin features don't demonstrate core value proposition
+
+**Future Consideration:**
+- Required for production launch
+- Monitoring, support, dispute resolution, driver management
+- Can be shown separately to operations-focused stakeholders
+
+---
+
+=== Help/FAQ/Support Content
+
+**Why Won't Have:**
+- Content creation is out of scope for mockup phase
+- Can be represented with placeholder "Help Center" buttons
+- Actual content developed during PRD phase
+
+**Future Consideration:**
+- Required for production - customer support and education
+- FAQ based on common questions during beta testing
+
+---
+
+=== Complex Edge Cases
+
+**Why Won't Have:**
+- Payment retry flows
+- Detailed surcharge handling (volumetric weight adjustments)
+- Change/cancel flows with time-based windows
+- Dispute resolution workflows
+- Multi-parcel bookings
+
+**Why:**
+- Add complexity without improving value proposition demonstration
+- Edge cases don't help stakeholders understand core product
+- Better addressed in production implementation
+
+**Future Consideration:**
+- All required for production
+- Documented in PRD for development team
+
+<<<
+== Phase Definitions
+
+=== Phase 1: MVP Demo (Golden Path Only)
+
+**Timeline:** 4 weeks (Sprints 1-4)
+
+**Story Count:** 25 Must-Have stories
+
+**Characteristics:**
+- Complete end-to-end journey (consumer booking → driver fulfillment)
+- Believable but minimal feature set
+- All critical integration points working
+- Real-time status updates demonstrated
+
+**Use Cases:**
+- Initial stakeholder validation
+- Proof of concept for investors
+- Technical feasibility demonstration
+- Early user research
+
+**Demo Duration:** 8-10 minutes
+
+---
+
+=== Phase 2: Enhanced Demo (Polished & Realistic)
+
+**Timeline:** +1 week (Sprint 5)
+
+**Story Count:** 37 stories (Must-Have + Should-Have)
+
+**Added Features:**
+- Profile setup and saved addresses
+- AR measurement showcase
+- Pickup notes and photos
+- Insurance toggle
+- Printable shipping labels
+- Masked driver contact
+- Shipment history and invoices
+- Driver earnings transparency
+
+**Characteristics:**
+- Production-quality mockup
+- Feature-complete for core use cases
+- Professional polish and attention to detail
+
+**Use Cases:**
+- Investor presentations
+- Customer usability testing
+- B2B customer demonstrations
+- Pre-launch marketing materials
+
+**Demo Duration:** 10-12 minutes
+
+---
+
+=== Phase 3: Complete Demo (Comprehensive Showcase)
+
+**Timeline:** As needed for optional features
+
+**Story Count:** 44 stories (all in-scope)
+
+**Added Features:**
+- Business profile configuration
+- Delivery type selection
+- Parcel photos
+- Quote filtering/sorting
+- Rewards program
+- Background check status
+- Driver quality metrics
+
+**Characteristics:**
+- Demonstrates full feature scope
+- Shows scalability and edge case handling
+- Complete platform vision
+
+**Use Cases:**
+- Developer handoff
+- Comprehensive validation with stakeholders
+- Feature prioritization discussions for MVP
+- Demonstrating platform potential
+
+**Demo Duration:** 12-15 minutes
+
+<<<
+== Prioritization Decision Framework
+
+Use this framework when evaluating new feature requests or re-prioritizing existing stories:
+
+=== Must-Have Criteria
+
+A story is Must-Have if it meets ALL of these conditions:
+
+1. **Golden Path:** Required for the end-to-end demo narrative
+2. **Value Visibility:** Without it, core value proposition is not demonstrated
+3. **Integration Critical:** Needed for critical consumer-driver integration points
+4. **User Blocker:** User cannot proceed without this functionality
+
+**Example:** C-E2-01 (Enter pickup address)
+- ✓ Part of Golden Path (booking flow)
+- ✓ Without it, cannot get quotes (value invisible)
+- ✓ Required for creating job (integration)
+- ✓ User blocked from proceeding
+
+---
+
+=== Should-Have Criteria
+
+A story is Should-Have if it meets ANY of these conditions:
+
+1. **Significant Enhancement:** Dramatically improves believability or professionalism
+2. **Differentiator:** Shows innovative feature that sets Kurrier apart
+3. **Business Critical:** Important for specific customer segment (e.g., B2B)
+4. **Trust Builder:** Significantly improves confidence in platform quality
+
+**Example:** C-E2-05 (AR measurement)
+- ✓ Differentiator: Innovative feature competitors don't have
+- ✓ Significantly enhances perceived quality
+- Not required for basic booking flow (manual entry works)
+
+---
+
+=== Could-Have Criteria
+
+A story is Could-Have if:
+
+1. **Nice to Have:** Adds realism or completeness but not critical
+2. **Secondary Use Case:** Supports less common scenarios
+3. **Engagement Feature:** Improves retention but not core functionality
+4. **Already Implied:** Can default or skip without breaking demo narrative
+
+**Example:** C-E6-03 (View rewards balance)
+- Engagement/retention feature
+- Not needed to demonstrate core value
+- Can be mentioned without full implementation
+
+---
+
+=== Won't-Have Criteria
+
+A feature is Won't-Have if:
+
+1. **Out of Demo Scope:** Doesn't demonstrate customer-facing value
+2. **Content Heavy:** Requires content creation beyond mockup scope
+3. **Edge Case:** Complex scenario not needed for understanding
+4. **Secondary Channel:** Web dashboard when mobile is primary
+
+**Example:** Admin Dashboard
+- Not customer-facing (demo audience is customers/drivers)
+- Doesn't demonstrate value proposition
+- Can be addressed separately if needed
+
+<<<
+== Re-Prioritization Guidelines
+
+If scope needs to be reduced or expanded:
+
+=== Scope Reduction (Urgent Timeline)
+
+**First:** Remove all Could-Have stories (7 stories removed)
+- Impact: Demo still comprehensive, loses some polish
+- Time saved: ~1 week
+
+**Second:** Remove non-critical Should-Have stories
+- Remove C-E2-05 (AR measurement - complex)
+- Remove C-E5-04 (Contact driver - not essential)
+- Remove D-E9-06 (Photos - optional)
+- Impact: Demo still solid, less innovative
+- Additional time saved: 3-4 days
+
+**Last Resort:** Simplify Must-Have stories
+- Remove C-E5-02 (Live map) - show timeline only
+- Combine address entry screens
+- Simplify quote display
+- Impact: Demo still works but less impressive
+- Additional time saved: ~1 week
+
+---
+
+=== Scope Expansion (Extra Time)
+
+**Priority 1:** Promote critical Should-Have to Must-Have
+- C-E6-02 (Invoices) - important for B2B
+- C-E2-05 (AR measurement) - strong differentiator
+- D-E10-01 (Earnings) - driver value proposition
+
+**Priority 2:** Add selected Could-Have features
+- C-E1-04 (Business profile) - if B2B focused
+- C-E3-05 (Filter/sort) - if emphasizing choice
+- D-E10-02 (Quality metrics) - if emphasizing platform quality
+
+**Priority 3:** Add Won't-Have features selectively
+- Admin dashboard overview (1-2 screens)
+- Consumer web dashboard mockup
+- Additional edge case flows
+
+<<<
+== Appendix: Quick Reference Tables
+
+=== Must-Have Stories by Epic
+
+.Must-Have Story Count by Epic
+[%header, cols="^1,<3,^1"]
+|===
+^| Epic ^| Epic Name ^| Must-Have Count
+
+| E1 | Consumer Onboarding | 2
+| E2 | Shipment Creation | 4
+| E3 | Service Selection | 3
+| E4 | Payment & Confirmation | 3
+| E5 | Live Tracking | 3
+| E6 | History & Rewards | 0
+| E7 | Driver Onboarding | 1
+| E8 | Job Discovery | 4
+| E9 | Pickup & Fulfillment | 5
+| E10 | Driver Earnings | 0
+| **TOTAL** | | **25**
+|===
+
+---
+
+=== Story Count by Phase
+
+.Story Count by Demo Phase
+[%header, cols="<2,^1,^1,^1"]
+|===
+^| Epic ^| Phase 1 (M) ^| Phase 2 (M+S) ^| Phase 3 (All)
+
+| E1: Consumer Onboarding | 2 | 3 | 4
+| E2: Shipment Creation | 4 | 6 | 8
+| E3: Service Selection | 3 | 4 | 5
+| E4: Payment & Confirmation | 3 | 4 | 4
+| E5: Live Tracking | 3 | 5 | 5
+| E6: History & Rewards | 0 | 2 | 3
+| E7: Driver Onboarding | 1 | 2 | 3
+| E8: Job Discovery | 4 | 4 | 4
+| E9: Pickup & Fulfillment | 5 | 6 | 6
+| E10: Driver Earnings | 0 | 1 | 2
+| **TOTAL** | **25** | **37** | **44**
+|===

@@ -1,0 +1,265 @@
+= Epic E10: Driver Earnings & Performance
+:toc:
+:toclevels: 2
+:sectnums:
+:doctype: article
+:icons: font
+:numbered:
+:pagenums:
+:reproducible:
+
+<<<
+== Epic Overview
+
+**Epic ID:** E10 +
+**Epic Name:** Driver Earnings & Performance +
+**Actor:** Driver +
+**Brief Reference:** Section 4.2.5 (Earnings & Quality) +
+**Priority:** Should Have (driver retention and transparency) +
+**Story Count:** 2 (M: 0, S: 1, C: 1)
+
+**Epic Goal:**
+
+Enable drivers to view their earnings (daily, weekly, total), see payout schedules, and understand their performance metrics (ratings, quality scores) so they can track their income and improve their service quality.
+
+**Value Proposition:**
+
+This epic addresses the driver's primary motivation: earnings. Transparency in earnings builds trust and helps drivers optimize their work. Performance metrics (ratings, quality tips) help drivers improve and earn more through better service. While not required for the Golden Path demo, this epic demonstrates that Kurrier respects drivers as independent business owners by providing them with the data they need to succeed.
+
+**Success Criteria:**
+
+- [ ] Driver can see current earnings (today, this week, all time)
+- [ ] Driver understands when they'll receive payouts
+- [ ] Driver can see earnings breakdown by job
+- [ ] Driver can view their performance ratings and quality scores
+- [ ] Driver receives actionable feedback to improve quality
+- [ ] The earnings display builds confidence and motivation
+
+<<<
+== Stories
+
+=== Story D-E10-01: View Earnings Dashboard
+
+**Story ID:** D-E10-01 +
+**Priority:** Should Have (S) +
+**Size:** Medium (M) +
+**Actor:** Driver
+
+**User Story:**
+
+As a driver,
+I want to see my earnings summary with daily, weekly, and total amounts plus next payout date
+so that I can track my income and understand when I'll be paid.
+
+**Acceptance Criteria:**
+
+- [ ] Given I navigate to Earnings, when the screen loads, then I see: Today's earnings, This week's earnings, Total all-time earnings, Next payout date and amount
+- [ ] I see earnings broken down by: Base pay (distance + parcel size), Incentives/bonuses (if any), Tips (future feature, optional)
+- [ ] I can view a list of completed jobs with earnings per job
+- [ ] Each job entry shows: Kurrier ID, Pickup address, Date/time, Earnings amount
+- [ ] I can tap on a job to see detailed breakdown (base + distance + incentive calculation)
+- [ ] The payout schedule is clearly explained (e.g., "Weekly payouts every Friday")
+- [ ] I see my preferred payout method (bank transfer, debit card - simulated)
+
+**Notes:**
+
+- **Brief Reference:** Section 4.2.5 - "Daily/weekly totals, next payout schedule (simulated)"
+- **Technical:** Earnings calculated from completed jobs (D-E9-05). Simulated payout schedule. For demo, show realistic earnings ($85 today, $340 this week)
+- **UX:** Clear, prominent display of earnings. Use large numbers for impact. Green color for earned amounts. Calendar view showing payout dates
+- **Dependencies:**
+  * Requires: D-E9-05 (Completed jobs generate earnings)
+  * Enables: Driver income transparency, financial planning
+  * Integrates with: Job completion, payout system (simulated)
+- **Screen Count:** 1-2 screens (Earnings dashboard + Job history detail)
+
+**Demo Notes:**
+
+"Should Have" - demonstrates driver value proposition and platform transparency. Include in Phase 2 demo. After Mike completes his job (D-E9-05), switch to earnings screen. Show: "Today: $52.50 (4 jobs), This Week: $340.25 (28 jobs), Next payout: Friday $340.25". Point out: "Mike can see exactly what he's earned. Clear, transparent payouts every Friday. This job added $12.50 to his daily total."
+
+---
+
+=== Story D-E10-02: View Quality Metrics and Ratings
+
+**Story ID:** D-E10-02 +
+**Priority:** Could Have (C) +
+**Size:** Medium (M) +
+**Actor:** Driver
+
+**User Story:**
+
+As a driver,
+I want to see my performance ratings, quality scores, and tips for improvement
+so that I can maintain high service quality and maximize my earning potential through better ratings.
+
+**Acceptance Criteria:**
+
+- [ ] Given I navigate to Performance or Quality, when the screen loads, then I see: Overall star rating (out of 5), Total number of completed jobs, Ratings breakdown (5-star: X%, 4-star: Y%, etc.), Recent customer feedback (anonymized)
+- [ ] I see quality metrics such as: Photo quality score (if photos enabled), Scan accuracy, On-time pickup rate, Customer satisfaction rate
+- [ ] I receive actionable quality tips (e.g., "Take clear, well-lit photos", "Confirm parcel dimensions carefully")
+- [ ] Given my rating is high (4.7+), when I view it, then I see acknowledgment or badge ("Top-rated driver")
+- [ ] Given my rating drops below threshold (e.g., <4.5), when I view it, then I see guidance on how to improve
+- [ ] I can view individual job ratings (if customer rated the experience)
+- [ ] I have access to support resources for improving quality
+
+**Notes:**
+
+- **Brief Reference:** Section 4.2.5 - "Ratings, quality tips (e.g., photo clarity, ID match, safe handling), support/safety hub"
+- **Technical:** Ratings collected from consumers after delivery (out of scope for demo, simulated). Quality metrics calculated from job data (photos, scans, timing)
+- **UX:** Encouraging, positive tone. Focus on improvement, not punishment. Use visual indicators (progress bars, star displays). Gamification elements (badges, achievements)
+- **Dependencies:**
+  * Requires: Completed jobs, customer ratings (simulated)
+  * Enables: Driver improvement, quality assurance, platform trust
+  * Integrates with: Rating system, quality monitoring
+- **Screen Count:** 1-2 screens (Performance dashboard + Tips/resources)
+
+**Demo Notes:**
+
+"Could Have" - nice for showing platform quality focus but not essential for MVP demo. Include only in Phase 3. If shown, display Mike's stats: "4.8 stars (523 jobs), 98% on-time, Top-rated driver badge". Point out quality tips section: "Platform provides coaching to help drivers succeed". Spend <30 seconds on this feature.
+
+---
+
+<<<
+== Epic Summary
+
+**Golden Path Coverage:**
+
+No stories in Epic E10 are required for the Golden Path. This entire epic is enhancement content for Phase 2-3 demos.
+
+**Implementation Notes:**
+
+* Earnings dashboard (D-E10-01) is important for driver satisfaction and retention
+* Quality metrics (D-E10-02) support platform quality but are less urgent than earnings transparency
+
+**Business Value:**
+
+Epic E10 has strategic value for driver retention:
+
+* **Earnings transparency:** Builds trust, helps drivers optimize work schedules
+* **Performance feedback:** Improves overall platform quality
+* **Quality coaching:** Reduces poor service incidents
+
+These features are critical for driver-side product-market fit.
+
+**Development Sequence:**
+
+Sprint 5 (Enhancement):
+
+1. D-E10-01: Earnings dashboard (critical for driver satisfaction)
+
+Phase 3 (Optional):
+
+1. D-E10-02: Quality metrics (quality assurance)
+
+**Demo Timing:**
+
+If including in Phase 2 demo, dedicate 1 minute:
+
+- 45s: Show earnings dashboard with today/week/payout details
+- Optional 15s: Point out quality rating briefly
+
+**Demo Positioning:**
+
+For Phase 1 (MVP Demo): Skip or mention in passing after job completion ("Mike earned $12.50 - he can track all earnings in his dashboard")
+
+For Phase 2 (Enhanced Demo): Include D-E10-01 to show driver value proposition
+
+For Phase 3 (Complete Demo): Add D-E10-02 to demonstrate quality management
+
+**Key Demo Talking Points:**
+
+* "Complete earnings transparency - Mike knows exactly what he's earned"
+* "Clear payout schedule - weekly deposits every Friday"
+* "Drivers are independent contractors - they're running their own business"
+* "Platform provides tools to track income and optimize work"
+* Optional: "Performance metrics and coaching help drivers improve and earn more"
+
+**Driver Value Proposition:**
+
+Use Epic E10 to demonstrate to investors that Kurrier:
+1. Treats drivers fairly with transparent earnings
+2. Respects drivers as independent business owners
+3. Provides tools for drivers to succeed
+4. Maintains quality through feedback, not punishment
+
+This is important for driver acquisition and retention strategy discussions.
+
+**Comparison to Competitors:**
+
+If relevant for investor pitch:
+
+- "Unlike traditional courier services, drivers see real-time earnings"
+- "No hidden fees or deductions - complete transparency"
+- "Drivers control their schedule - work when they want"
+
+**Integration with Job Completion:**
+
+When Mike completes a job (D-E9-05):
+1. Show "Job Complete!" with earnings ($12.50)
+2. Transition to earnings dashboard showing updated totals
+3. Point out next payout date
+
+This creates a satisfying closure to the driver's journey.
+
+**Payout Simulation Note:**
+
+For demo, use realistic payout schedule:
+
+- "Weekly payouts every Friday"
+- "Direct deposit to bank account"
+- "No minimum threshold - get paid for all completed jobs"
+- Current balance: $340.25
+- Next payout: Friday (3 days away)
+
+**Quality Metrics Details (if including D-E10-02):**
+
+Show realistic metrics:
+
+- Overall rating: 4.8 ⭐ (523 completed jobs)
+- 5-star: 85%, 4-star: 12%, 3-star: 2%, 2-star: 1%, 1-star: 0%
+- On-time pickup: 98%
+- Photo quality: Excellent
+- Customer feedback: "Professional", "Careful with package", "On time"
+- Badge: "Top-rated driver" or "Rising star"
+
+Keep the tone positive and encouraging.
+
+**Support Resources (mentioned but not implemented):**
+
+If asked about low ratings or quality issues:
+
+- "Drivers have access to support team"
+- "Platform provides coaching and resources"
+- "Focus on improvement, not punishment"
+- "Fair appeal process for disputed ratings"
+
+These are out of scope for mockup but good to mention for stakeholder confidence.
+
+<<<
+== Epic E10 Summary for Planning
+
+**When to Include in Demo:**
+
+* **Phase 1 (MVP):** Skip or brief mention only
+* **Phase 2 (Enhanced):** Include D-E10-01 for driver value proposition
+* **Phase 3 (Complete):** Add D-E10-02 for comprehensive feature showcase
+
+**Strategic Importance:**
+
+While not in Golden Path, Epic E10 is critical for:
+
+- Driver acquisition (earnings transparency attracts drivers)
+- Driver retention (quality feedback helps them improve)
+- Platform quality (metrics enable quality management)
+- Investor confidence (shows thoughtful driver experience)
+
+**Recommended Demo Approach:**
+
+After showing Mike's complete job fulfillment (D-E9-05):
+
+1. Show earnings update: "$12.50 added to today's total"
+2. Navigate to earnings dashboard: "Today: $52.50, This week: $340.25"
+3. Point out payout info: "Weekly payouts every Friday"
+4. Optionally mention: "Mike has 4.8-star rating as a top-rated driver"
+5. Total time: 45-60 seconds
+
+This provides satisfying closure to Mike's story while demonstrating driver-centric design.
